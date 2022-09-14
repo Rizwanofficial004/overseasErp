@@ -1,3 +1,7 @@
+
+import companyLogo from './logos/comLogo.jpeg'
+
+
 export { default as DocIllustration } from './illustration_doc';
 export { default as SeoIllustration } from './illustration_seo';
 export { default as UploadIllustration } from './illustration_upload';
@@ -15,3 +19,11 @@ export { default as SentIcon } from './icon_sent';
 export { default as PlanFreeIcon } from './icon_plan_free';
 export { default as PlanStarterIcon } from './icon_plan_starter';
 export { default as PlanPremiumIcon } from './icon_plan_premium';
+
+// ------------ logos -----------
+
+
+const LOGOS = {
+    companyLogo
+}
+export default LOGOS

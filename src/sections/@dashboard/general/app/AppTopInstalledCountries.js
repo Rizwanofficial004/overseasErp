@@ -30,7 +30,7 @@ const ItemIconStyle = styled(Iconify)(({ theme }) => ({
 export default function AppTopInstalledCountries() {
   return (
     <Card>
-      <CardHeader title="Top Installed Countries" />
+      <CardHeader title="Top Rated Brands" />
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3 }}>
           {_appInstalled.map((country) => (
@@ -61,17 +61,17 @@ function CountryItem({ country }) {
         <Typography variant="subtitle2">{country.name}</Typography>
       </ItemBlockStyle>
       <ItemBlockStyle>
-        <ItemIconStyle icon={'ant-design:android-filled'} />
+        <ItemIconStyle icon={'el:shopping-cart'} />
         <Typography variant="body2">{fShortenNumber(country.android)}</Typography>
       </ItemBlockStyle>
-      <ItemBlockStyle>
+     {/* <ItemBlockStyle>
         <ItemIconStyle icon={'ant-design:windows-filled'} />
         <Typography variant="body2">{fShortenNumber(country.windows)}</Typography>
       </ItemBlockStyle>
       <ItemBlockStyle sx={{ minWidth: 88 }}>
         <ItemIconStyle icon={'ant-design:apple-filled'} />
         <Typography variant="body2">{fShortenNumber(country.windows)}</Typography>
-      </ItemBlockStyle>
+     </ItemBlockStyle> */}
     </Stack>
   );
 }

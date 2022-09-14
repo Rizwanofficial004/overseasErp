@@ -49,11 +49,11 @@ const navConfig = [
         icon: ICONS.user,
         children: [
           { title: 'Profile', path: PATH_DASHBOARD.user.profile },
-          { title: 'Cards', path: PATH_DASHBOARD.user.cards },
+          // { title: 'Cards', path: PATH_DASHBOARD.user.cards },
           { title: 'List', path: PATH_DASHBOARD.user.list },
           { title: 'Create', path: PATH_DASHBOARD.user.newUser },
           { title: 'Edit', path: PATH_DASHBOARD.user.editById },
-          { title: 'Account', path: PATH_DASHBOARD.user.account },
+          // { title: 'Account', path: PATH_DASHBOARD.user.account },
         ],
       },
       {

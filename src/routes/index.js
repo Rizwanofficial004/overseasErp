@@ -114,26 +114,26 @@ export default function Router() {
         //     { path: 'new-post', element: <BlogNewPost /> },
         //   ],
         // },
-        // {
-        //   path: 'mail',
-        //   children: [
-        //     { element: <Navigate to="/dashboard/mail/all" replace />, index: true },
-        //     { path: 'label/:customLabel', element: <Mail /> },
-        //     { path: 'label/:customLabel/:mailId', element: <Mail /> },
-        //     { path: ':systemLabel', element: <Mail /> },
-        //     { path: ':systemLabel/:mailId', element: <Mail /> },
-        //   ],
-        // },
-        // {
-        //   path: 'chat',
-        //   children: [
-        //     { element: <Chat />, index: true },
-        //     { path: 'new', element: <Chat /> },
-        //     { path: ':conversationKey', element: <Chat /> },
-        //   ],
-        // },
-        // { path: 'calendar', element: <Calendar /> },
-        // { path: 'kanban', element: <Kanban /> },
+        {
+          path: 'mail',
+          children: [
+            { element: <Navigate to="/dashboard/mail/all" replace />, index: true },
+            { path: 'label/:customLabel', element: <Mail /> },
+            { path: 'label/:customLabel/:mailId', element: <Mail /> },
+            { path: ':systemLabel', element: <Mail /> },
+            { path: ':systemLabel/:mailId', element: <Mail /> },
+          ],
+        },
+        {
+          path: 'chat',
+          children: [
+            { element: <Chat />, index: true },
+            { path: 'new', element: <Chat /> },
+            { path: ':conversationKey', element: <Chat /> },
+          ],
+        },
+        { path: 'calendar', element: <Calendar /> },
+        { path: 'kanban', element: <Kanban /> },
       ],
     },
 

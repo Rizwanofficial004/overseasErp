@@ -133,3 +133,15 @@ export const _userList = [...Array(24)].map((_, index) => ({
   status: randomInArray(['active', 'banned']),
   role: _mock.role(index),
 }));
+
+export const _quotationItems = [...Array(3)].map((_, index) => ({
+  id: _mock.id(index),
+  itemCode: '#8888',
+  itemDescription: 'senser',
+  longDescription: 'senser is availa',
+  quantity: 10,
+  unit: 'pc.',
+  priceBeforeText: 100000,
+  discount: '10%',
+  total: 1000000,
+}));

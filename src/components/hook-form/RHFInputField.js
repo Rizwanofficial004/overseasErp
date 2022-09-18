@@ -2,24 +2,22 @@ import PropTypes from 'prop-types';
 // form
 import { useFormContext, Controller } from 'react-hook-form';
 // @mui
-import { TextField } from '@mui/material';
+import { OutlinedInput } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-RHFTextField.propTypes = {
+RHFInputField.propTypes = {
   name: PropTypes.string,
 };
 
-export default function RHFTextField({ name, ...other }) {
+export default function RHFInputField({ name, ...other }) {
   const { control } = useFormContext();
-console.log('====================================');
-console.log(other);
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <TextField  {...field} fullWidth error={!!error} helperText={error?.message} {...other} />
+        <OutlinedInput  {...field} fullWidth error={!!error} helperText={error?.message} {...other} />
       )}
     />
   );

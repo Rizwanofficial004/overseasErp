@@ -20,19 +20,20 @@ import {
   AccountNotifications,
   AccountChangePassword,
 } from 'src/sections/@dashboard/user/account';
+import {Quotations} from '../components/customers/transactions';
 
 // ----------------------------------------------------------------------
 
 export default function Transactions() {
   const { themeStretch } = useSettings();
 
-  const [currentTab, setCurrentTab] = useState('general');
+  const [currentTab, setCurrentTab] = useState('Quotations');
 
   const ACCOUNT_TABS = [
     {
       value: 'Quotations',
       icon: <Iconify icon={'ic:round-account-box'} width={20} height={20} />,
-      component: <AccountGeneral />,
+      component: <Quotations />,
     },
     {
       value: 'Sales Orders (S.O)',
@@ -96,9 +97,12 @@ export default function Transactions() {
           ))}
         </Tabs>
 
-        <Box sx={{ mb: 5 }} />
+        <Box sx={{ mb: 3 }} />
 
-       
+        {ACCOUNT_TABS.map((tab) => {
+          const isMatched = tab.value === currentTab;
+          return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+        })}
       </Container>
     </Page>
   );

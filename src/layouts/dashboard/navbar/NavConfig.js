@@ -49,11 +49,11 @@ const navConfig = [
         icon: ICONS.user,
         children: [
           { title: 'Profile', path: PATH_DASHBOARD.user.profile },
-          // { title: 'Cards', path: PATH_DASHBOARD.user.cards },
+          { title: 'Cards', path: PATH_DASHBOARD.user.cards },
           { title: 'List', path: PATH_DASHBOARD.user.list },
           { title: 'Create', path: PATH_DASHBOARD.user.newUser },
           { title: 'Edit', path: PATH_DASHBOARD.user.editById },
-          // { title: 'Account', path: PATH_DASHBOARD.user.account },
+          { title: 'Account', path: PATH_DASHBOARD.user.account },
         ],
       },
       {
@@ -99,28 +99,28 @@ const navConfig = [
 
   // APP
   // ----------------------------------------------------------------------
-  // {
-  //   subheader: 'app',
-  //   items: [
-  //     {
-  //       title: 'mail',
-  //       path: PATH_DASHBOARD.mail.root,
-  //       icon: ICONS.mail,
-  //       info: (
-  //         <Label variant="outlined" color="error">
-  //           +32
-  //         </Label>
-  //       ),
-  //     },
-  //     { title: 'chat', path: PATH_DASHBOARD.chat.root, icon: ICONS.chat },
-  //     { title: 'calendar', path: PATH_DASHBOARD.calendar, icon: ICONS.calendar },
-  //     {
-  //       title: 'kanban',
-  //       path: PATH_DASHBOARD.kanban,
-  //       icon: ICONS.kanban,
-  //     },
-  //   ],
-  // },
+  {
+    subheader: 'app',
+    items: [
+      {
+        title: 'mail',
+        path: PATH_DASHBOARD.mail.root,
+        icon: ICONS.mail,
+        info: (
+          <Label variant="outlined" color="error">
+            +32
+          </Label>
+        ),
+      },
+      { title: 'chat', path: PATH_DASHBOARD.chat.root, icon: ICONS.chat },
+      { title: 'calendar', path: PATH_DASHBOARD.calendar, icon: ICONS.calendar },
+      {
+        title: 'kanban',
+        path: PATH_DASHBOARD.kanban,
+        icon: ICONS.kanban,
+      },
+    ],
+  },
 ];
 
 export default navConfig;

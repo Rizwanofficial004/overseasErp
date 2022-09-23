@@ -16,6 +16,8 @@ import {
     Typography,
     TableContainer,
     TablePagination,
+
+    DialogTitle
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
@@ -33,31 +35,13 @@ import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
 import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/sections/@dashboard/user/list';
 
-// ----------------------------------------------------------------------
-const AddButton = () => {
-    return (
-        <Button
-            variant="contained"
-            component={RouterLink}
-            to={PATH_DASHBOARD.user.newUser}
-            startIcon={<Iconify icon={'eva:plus-fill'} />}
-            size='small'
-        >
-            Add
-        </Button>
-    )
-}
-const TABLE_HEAD = [
-    { id: 'name', label: 'Item Code', alignRight: false },
-    { id: 'company', label: 'Item Description', alignRight: false },
-    { id: 'role', label: 'Long Description', alignRight: false },
-    { id: 'isVerified', label: 'Quantity', alignRight: false },
-    { id: 'status', label: 'Unit', alignRight: false },
-    { id: 'status', label: 'Price Before Tex', alignRight: false },
-    { id: 'status', label: 'Discount %', alignRight: false },
-    { id: 'status', label: 'Total', alignRight: false },
-    { id: '', label: <AddButton />, alignRight: false },
-];
+
+import { DialogAnimate } from 'src/components/animate';
+import { CalendarForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
+import { useDispatch, useSelector } from 'react-redux';
+import useResponsive from 'src/hooks/useResponsive';
+import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
+
 
 
 
@@ -75,6 +59,48 @@ export default function SalesQuotaionsItems() {
     const [orderBy, setOrderBy] = useState('name');
     const [filterName, setFilterName] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(5);
+
+
+    // ----------------------------------------------------------------------
+const AddButton = () => {
+    return (
+        <Button
+            variant="contained"
+            // component={RouterLink}
+            // to={PATH_DASHBOARD.user.newUser}
+            startIcon={<Iconify icon={'eva:plus-fill'} />}
+            size='small'
+            onClick={handleAddEvent}
+        >
+            Add
+        </Button>
+    )
+}
+const TABLE_HEAD = [
+    { id: 'name', label: 'Item Code', alignRight: false },
+    { id: 'company', label: 'Item Description', alignRight: false },
+    { id: 'role', label: 'Long Description', alignRight: false },
+    { id: 'isVerified', label: 'Quantity', alignRight: false },
+    { id: 'status', label: 'Unit', alignRight: false },
+    { id: 'status', label: 'Price Before Tex', alignRight: false },
+    { id: 'status', label: 'Discount %', alignRight: false },
+    { id: 'status', label: 'Total', alignRight: false },
+    { id: '', label: <AddButton />, alignRight: false },
+];
+
+    const selectedEventSelector = (state) => {
+        const { events, selectedEventId } = state.calendar;
+        if (selectedEventId) {
+            return events.find((_event) => _event.id === selectedEventId);
+        }
+        return null;
+        };
+    const dispatch = useDispatch();
+    const isDesktop = useResponsive('up', 'sm');
+    const [date, setDate] = useState(new Date());
+    const [view, setView] = useState(isDesktop ? 'dayGridMonth' : 'listWeek');
+    const selectedEvent = useSelector(selectedEventSelector);
+    const { events, isOpenModal, selectedRange } = useSelector((state) => state.calendar);
 
     const handleRequestSort = (property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -127,6 +153,15 @@ export default function SalesQuotaionsItems() {
         setSelected([]);
         setUserList(deleteUsers);
     };
+
+    const handleAddEvent = () => {
+        dispatch(openModal());
+      };
+    
+    const handleCloseModal = () => {
+        dispatch(closeModal());
+      };
+    
 
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userList.length) : 0;
 
@@ -216,7 +251,15 @@ export default function SalesQuotaionsItems() {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />*/}
                 </Card>
+
+                <DialogAnimate open={isOpenModal} onClose={handleCloseModal}>
+                    <DialogTitle>{selectedEvent ? 'Edit Event' : 'Add Event'}</DialogTitle>
+
+                    <CalendarForm event={selectedEvent || {}} range={selectedRange} onCancel={handleCloseModal} />
+                </DialogAnimate>
+
             </Container>
+
         </Page>
     );
 }

@@ -22,7 +22,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _quotationItems } from 'src/_mock';
+import { _userList, _salesReturns } from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -38,29 +38,29 @@ import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange
 // ----------------------------------------------------------------------
 let data = [
     {   id: '2332',
-        priceBeforeText: 'Shiping Charge', 
+        priceBeforeText: 'Sub-Total', 
         discount: '0.00',
         total: '' , bold: true
     },
     {   id: '3434',
-    priceBeforeText: 'Sub Total', 
+    priceBeforeText: 'Shipping', 
     discount: '0.00',
     total: ''  ,bold: true
     },
     {   
     id: '2354',
-    priceBeforeText: 'Amount Total', 
+    priceBeforeText: 'Credit Note Total', 
     discount: '0.00',
     total: 'update' , bold: true
     },
   ]
-  let QItem = [..._quotationItems, ...data]
-export default function SalesQuotaionsItems() {
+  let QItem = [..._salesReturns, ...data]
+export default function SalesReturnItems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems, ...data]);
+    const [salesReturns, setsalesReturns] = useState([..._salesReturns, ...data]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
@@ -88,7 +88,7 @@ export default function SalesQuotaionsItems() {
             { id: 'role', label: 'Long Description', alignRight: false },
             { id: 'isVerified', label: 'Quantity', alignRight: false },
             { id: 'status', label: 'Unit', alignRight: false },
-            { id: 'status', label: 'Price Before Tex', alignRight: false },
+            { id: 'status', label: 'Price ', alignRight: false },
             { id: 'status', label: 'Discount %', alignRight: false },
             { id: 'status', label: 'Total', alignRight: false },
             { id: '', label: <AddButton />, alignRight: false },
@@ -187,7 +187,7 @@ export default function SalesQuotaionsItems() {
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
                         <h4
-                        style={{ textAlign:'center', color:'black'}}>Sales Quotation Items </h4>
+                        style={{ textAlign:'center', color:'black'}}>Sales Returns Items </h4>
                         
                             <Table>
                                 
@@ -202,7 +202,7 @@ export default function SalesQuotaionsItems() {
                                 />
                                 
                                 <TableBody >
-                                    {quotationItems.map((row) => {
+                                    {salesReturns.map((row) => {
                                         const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeText, discount, total } = row;
                                         const isItemSelected = selected.indexOf(itemCode) !== -1;
 

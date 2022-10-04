@@ -29,17 +29,20 @@ const COLOR_OPTIONS = [
   '#7A0C2E', // theme.palette.error.darker
 ];
 
-const getInitialValues = (event, range) => {
+const getInitialValues = (event) => {
   const _event = {
-    title: '',
-    description: '',
+    itemCode: '',
+    itemDescription: '',
+    longDescription: '',
+    quantity: 0,
+    unit: '',
+    priceBeforeTex: 0,
+    discount: 0,
+    total: 0,
     textColor: '#1890FF',
-    allDay: false,
-    start: range ? new Date(range.start) : new Date(),
-    end: range ? new Date(range.end) : new Date(),
   };
 
-  if (event || range) {
+  if (event) {
     return merge({}, _event, event);
   }
 
@@ -50,16 +53,15 @@ const getInitialValues = (event, range) => {
 
 CalendarForm.propTypes = {
   event: PropTypes.object,
-  range: PropTypes.object,
+  // range: PropTypes.object,
   onCancel: PropTypes.func,
 };
 
-export default function CalendarForm({ event, range, onCancel }) {
+export default function CalendarForm({ event, onCancel }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const dispatch = useDispatch();
 
-  const isCreating = Object.keys(event).length === 0;
 
   const EventSchema = Yup.object().shape({
     title: Yup.string().max(255).required('Title is required'),
@@ -68,7 +70,7 @@ export default function CalendarForm({ event, range, onCancel }) {
 
   const methods = useForm({
     resolver: yupResolver(EventSchema),
-    defaultValues: getInitialValues(event, range),
+    defaultValues: getInitialValues(event),
   });
 
   const {
@@ -103,80 +105,23 @@ export default function CalendarForm({ event, range, onCancel }) {
     }
   };
 
-  const handleDelete = async () => {
-    if (!event.id) return;
-    try {
-      onCancel();
-      dispatch(deleteEvent(event.id));
-      enqueueSnackbar('Delete success!');
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const values = watch();
-
-  const isDateError = isBefore(new Date(values.end), new Date(values.start));
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} sx={{ p: 3 }}>
-        <RHFTextField name="title" label="Title" />
+        <RHFTextField name="itemcode" label="Sales Person Name " />
+        <RHFTextField name="itemDescription" label="Telephone Number" />
+        <RHFTextField name="longDescription" label="Fax Number" />
+        <RHFTextField name="itemcode" label="E-mail" />
+        <RHFTextField name="itemDescription" label="Pervision" />
+        <RHFTextField name="longDescription" label="Break Pt.." />
+        <RHFTextField name="longDescription" label="Pervision 2" />
+        
 
-        <RHFTextField name="description" label="Description" multiline rows={4} />
 
-        <RHFSwitch name="allDay" label="All day" />
-
-        <Controller
-          name="start"
-          control={control}
-          render={({ field }) => (
-            <MobileDateTimePicker
-              {...field}
-              label="Start date"
-              inputFormat="dd/MM/yyyy hh:mm a"
-              renderInput={(params) => <TextField {...params} fullWidth />}
-            />
-          )}
-        />
-
-        <Controller
-          name="end"
-          control={control}
-          render={({ field }) => (
-            <MobileDateTimePicker
-              {...field}
-              label="End date"
-              inputFormat="dd/MM/yyyy hh:mm a"
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  error={!!isDateError}
-                  helperText={isDateError && 'End date must be later than start date'}
-                />
-              )}
-            />
-          )}
-        />
-
-        <Controller
-          name="textColor"
-          control={control}
-          render={({ field }) => (
-            <ColorSinglePicker value={field.value} onChange={field.onChange} colors={COLOR_OPTIONS} />
-          )}
-        />
       </Stack>
 
       <DialogActions>
-        {!isCreating && (
-          <Tooltip title="Delete Event">
-            <IconButton onClick={handleDelete}>
-              <Iconify icon="eva:trash-2-outline" width={20} height={20} />
-            </IconButton>
-          </Tooltip>
-        )}
         <Box sx={{ flexGrow: 1 }} />
 
         <Button variant="outlined" color="inherit" onClick={onCancel}>

@@ -54,13 +54,13 @@ let data = [
     total: 'update' , bold: true
     },
   ]
-  let QItem = [..._quotationItems, ...data]
-export default function SalesQuotaionsItems() {
+  let QItem = [..._quotationItems]
+export default function Salestypeitems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems, ...data]);
+    const [quotationItems, setQuotationItems] = useState([..._quotationItems]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
@@ -83,14 +83,10 @@ export default function SalesQuotaionsItems() {
             )
         }
         const TABLE_HEAD = [
-            { id: 'name', label: 'Item Code', alignRight: false },
-            { id: 'company', label: 'Item Description', alignRight: false },
-            { id: 'role', label: 'Long Description', alignRight: false },
-            { id: 'isVerified', label: 'Quantity', alignRight: false },
-            { id: 'status', label: 'Unit', alignRight: false },
-            { id: 'status', label: 'Price Before Tex', alignRight: false },
-            { id: 'status', label: 'Discount %', alignRight: false },
-            { id: 'status', label: 'Total', alignRight: false },
+            { id: 'name', label: 'Sales Type Name', alignRight: false },
+            { id: 'company', label: 'Calculator Factor', alignRight: false },
+            { id: 'role', label: 'Tex Included', alignRight: false },
+          
             { id: '', label: <AddButton />, alignRight: false },
         ];
         
@@ -187,7 +183,7 @@ export default function SalesQuotaionsItems() {
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
                         <h4
-                        style={{ textAlign:'center', color:'black'}}>Sales Quotation Items </h4>
+                        style={{ textAlign:'center', color:'black'}}>Sale Types </h4>
                         
                             <Table>
                                 
@@ -226,13 +222,9 @@ export default function SalesQuotaionsItems() {
                                                 </TableCell>
                                                 <TableCell align="left">{itemDescription}</TableCell>
                                                 <TableCell align="left">{longDescription}</TableCell>
-                                                <TableCell align="left">{quantity}</TableCell>
-                                                <TableCell align="left">{unit}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{priceBeforeText}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{discount}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{total}</TableCell>
+                                               
                                                 <TableCell align="right">
-                                                { bold ? null :  <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={itemCode} />}
+                                                <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={itemCode} />
                                                 </TableCell>
                                             </TableRow>
                                         );

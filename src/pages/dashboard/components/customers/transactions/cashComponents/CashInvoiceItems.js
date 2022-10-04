@@ -22,7 +22,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _quotationItems } from 'src/_mock';
+import { _userList, _cashInvoiceItems } from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -54,13 +54,13 @@ let data = [
     total: 'update' , bold: true
     },
   ]
-  let QItem = [..._quotationItems, ...data]
-export default function SalesQuotaionsItems() {
+  let QItem = [..._cashInvoiceItems, ...data]
+export default function CashInvoiceItems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems, ...data]);
+    const [cashInvoiceItems, setcashInvoiceItems] = useState([..._cashInvoiceItems, ...data]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
@@ -187,7 +187,7 @@ export default function SalesQuotaionsItems() {
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
                         <h4
-                        style={{ textAlign:'center', color:'black'}}>Sales Quotation Items </h4>
+                        style={{ textAlign:'center', color:'black'}}>Cash Invoice Items </h4>
                         
                             <Table>
                                 
@@ -202,7 +202,7 @@ export default function SalesQuotaionsItems() {
                                 />
                                 
                                 <TableBody >
-                                    {quotationItems.map((row) => {
+                                    {cashInvoiceItems.map((row) => {
                                         const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeText, discount, total } = row;
                                         const isItemSelected = selected.indexOf(itemCode) !== -1;
 

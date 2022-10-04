@@ -22,7 +22,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _quotationItems } from 'src/_mock';
+import { _userList, _quoteItems } from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -36,31 +36,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
 // ----------------------------------------------------------------------
-let data = [
-    {   id: '2332',
-        priceBeforeText: 'Shiping Charge', 
-        discount: '0.00',
-        total: '' , bold: true
-    },
-    {   id: '3434',
-    priceBeforeText: 'Sub Total', 
-    discount: '0.00',
-    total: ''  ,bold: true
-    },
-    {   
-    id: '2354',
-    priceBeforeText: 'Amount Total', 
-    discount: '0.00',
-    total: 'update' , bold: true
-    },
-  ]
-  let QItem = [..._quotationItems, ...data]
-export default function SalesQuotaionsItems() {
+
+  let QItem = [..._quoteItems]
+export default function QuotationDashItems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems, ...data]);
+    const [quoteItems, setquoteItems] = useState([..._quoteItems]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
@@ -68,32 +51,21 @@ export default function SalesQuotaionsItems() {
     const [filterName, setFilterName] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [selectedQuotation, setSelectedQuotation ] = useState(null)
-    const AddButton = () => {
-            return (
-                <Button
-                    variant="contained"
-                    // component={RouterLink}
-                    // to={PATH_DASHBOARD.user.newUser}
-                    startIcon={<Iconify icon={'eva:plus-fill'} />}
-                    size='medium'
-                    onClick={handleAddEvent}
-                >
-                    Add
-                </Button>
-            )
-        }
+  
         const TABLE_HEAD = [
-            { id: 'name', label: 'Item Code', alignRight: false },
-            { id: 'company', label: 'Item Description', alignRight: false },
-            { id: 'role', label: 'Long Description', alignRight: false },
-            { id: 'isVerified', label: 'Quantity', alignRight: false },
-            { id: 'status', label: 'Unit', alignRight: false },
-            { id: 'status', label: 'Price Before Tex', alignRight: false },
-            { id: 'status', label: 'Discount %', alignRight: false },
-            { id: 'status', label: 'Total', alignRight: false },
-            { id: '', label: <AddButton />, alignRight: false },
+            { id: 'quote', label: 'Quote NO. #', alignRight: false },
+            { id: 'Reference', label: 'Reference', alignRight: false },
+            { id: 'purchaseorder', label: 'Puchase Order', alignRight: false },
+            { id: 'customer', label: 'Customer', alignRight: false },
+            { id: 'branch', label: 'Branch', alignRight: false },
+            { id: 'customerorderreference', label: 'Customer Order Reference', alignRight: false },
+            { id: 'quotedate', label: 'Quote Date', alignRight: false },
+            { id: 'validuntil', label: 'Valid Until', alignRight: false },
+            { id: 'deliveryto', label: 'Delivery To', alignRight: false },
+            { id: 'quotetotal', label: 'Quote Total', alignRight: false },
+            { id: 'currency', label: 'Currency', alignRight: false },
+            
         ];
-        
             const selectedEventSelector = (state) => {
                 const { events, selectedEventId } = state.calendar;
                 if (selectedEventId) {
@@ -187,7 +159,7 @@ export default function SalesQuotaionsItems() {
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
                         <h4
-                        style={{ textAlign:'center', color:'black'}}>Sales Quotation Items </h4>
+                        style={{ textAlign:'center', color:'black'}}>QUOTATION DASHBOARD</h4>
                         
                             <Table>
                                 
@@ -202,9 +174,9 @@ export default function SalesQuotaionsItems() {
                                 />
                                 
                                 <TableBody >
-                                    {quotationItems.map((row) => {
-                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeText, discount, total } = row;
-                                        const isItemSelected = selected.indexOf(itemCode) !== -1;
+                                    {quoteItems.map((row) => {
+                                        const { id, bold, quote,Reference ,purchaseorder, customerorderreference,validuntil,quotedate, customer,branch, deliveryto,quotetotal,currency } = row;
+                                        const isItemSelected = selected.indexOf(quote) !== -1;
 
                                         return (
                                             <TableRow
@@ -221,18 +193,22 @@ export default function SalesQuotaionsItems() {
                                                 <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
                                                     {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
                                                     <Typography variant="subtitle2" noWrap>
-                                                        {itemCode}
+                                                        {quote}
                                                     </Typography>
                                                 </TableCell>
-                                                <TableCell align="left">{itemDescription}</TableCell>
-                                                <TableCell align="left">{longDescription}</TableCell>
-                                                <TableCell align="left">{quantity}</TableCell>
-                                                <TableCell align="left">{unit}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{priceBeforeText}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{discount}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{total}</TableCell>
+                                                <TableCell align="left">{Reference}</TableCell>
+                                                <TableCell align="left">{purchaseorder}</TableCell>
+                                                <TableCell align="left">{customer}</TableCell>
+                                                <TableCell align="left">{branch}</TableCell>
+                                                <TableCell align="left">{customerorderreference}</TableCell>
+                                                <TableCell align="left">{quotedate}</TableCell>
+                                                <TableCell align="left">{validuntil}</TableCell>
+                                                <TableCell align="left">{deliveryto}</TableCell>
+                                                <TableCell align="left">{quotetotal}</TableCell>
+                                                <TableCell align="left">{currency}</TableCell>
+                                                
                                                 <TableCell align="right">
-                                                { bold ? null :  <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={itemCode} />}
+                                                { bold ? null :  <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={quote} />}
                                                 </TableCell>
                                             </TableRow>
                                         );

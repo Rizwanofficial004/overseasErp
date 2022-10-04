@@ -55,8 +55,7 @@ let data = [
     },
   ]
   let QItem = [..._quotationItems, ...data]
-export default function SalesQuotaionsItems() {
-    
+export default function SampleOrderItems() {
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
@@ -187,7 +186,7 @@ export default function SalesQuotaionsItems() {
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
                         <h4
-                        style={{ textAlign:'center', color:'black'}}>Sales Quotation Items </h4>
+                        style={{ textAlign:'center', color:'black'}}>Sample Order Items </h4>
                         
                             <Table>
                                 

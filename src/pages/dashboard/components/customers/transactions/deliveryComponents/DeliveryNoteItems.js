@@ -22,7 +22,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _quotationItems } from 'src/_mock';
+import { _userList, _deliveryitems} from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -36,31 +36,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
 // ----------------------------------------------------------------------
-let data = [
-    {   id: '2332',
-        priceBeforeText: 'Shiping Charge', 
-        discount: '0.00',
-        total: '' , bold: true
-    },
-    {   id: '3434',
-    priceBeforeText: 'Sub Total', 
-    discount: '0.00',
-    total: ''  ,bold: true
-    },
-    {   
-    id: '2354',
-    priceBeforeText: 'Amount Total', 
-    discount: '0.00',
-    total: 'update' , bold: true
-    },
-  ]
-  let QItem = [..._quotationItems, ...data]
-export default function SalesQuotaionsItems() {
+
+export default function DeliveryNoteItems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems, ...data]);
+    const [deliveryitems, setDeliveryItems] = useState([..._deliveryitems]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
@@ -83,15 +65,18 @@ export default function SalesQuotaionsItems() {
             )
         }
         const TABLE_HEAD = [
-            { id: 'name', label: 'Item Code', alignRight: false },
-            { id: 'company', label: 'Item Description', alignRight: false },
-            { id: 'role', label: 'Long Description', alignRight: false },
-            { id: 'isVerified', label: 'Quantity', alignRight: false },
-            { id: 'status', label: 'Unit', alignRight: false },
-            { id: 'status', label: 'Price Before Tex', alignRight: false },
-            { id: 'status', label: 'Discount %', alignRight: false },
-            { id: 'status', label: 'Total', alignRight: false },
-            { id: '', label: <AddButton />, alignRight: false },
+            { id: 'order', label: 'Order #', alignRight: false },
+            { id: 'Reference', label: 'Reference', alignRight: false },
+            { id: 'purchaseorder', label: 'Purchase Order(P.O)', alignRight: false },
+            { id: 'customer', label: 'Customer', alignRight: false },
+            { id: 'branch', label: 'Branch', alignRight: false },
+            { id: 'customerorderreference', label: 'Customer Order Reference', alignRight: false },
+            { id: 'orderdate', label: 'Order Date', alignRight: false },
+            { id: 'requiredby', label: 'Required By', alignRight: false },
+            { id: 'deliveryto', label: 'Delivery To', alignRight: false },
+            { id: 'ordertotal', label: 'Order Total', alignRight: false },
+            { id: 'currency', label: 'Currency', alignRight: false },
+            { id: '', label: '', alignRight: false },
         ];
         
             const selectedEventSelector = (state) => {
@@ -185,9 +170,9 @@ export default function SalesQuotaionsItems() {
             <Container  maxWidth={themeStretch ? false : 'lg'}>
                 <Card>
                     <Scrollbar>
-                        <TableContainer sx={{ minWidth: 800 }}>
+                        <TableContainer sx={{ minWidth: 700 }}>
                         <h4
-                        style={{ textAlign:'center', color:'black'}}>Sales Quotation Items </h4>
+                        style={{ textAlign:'center', color:'black'}}>Delivery Notes Details </h4>
                         
                             <Table>
                                 
@@ -202,9 +187,9 @@ export default function SalesQuotaionsItems() {
                                 />
                                 
                                 <TableBody >
-                                    {quotationItems.map((row) => {
-                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeText, discount, total } = row;
-                                        const isItemSelected = selected.indexOf(itemCode) !== -1;
+                                    {deliveryitems.map((row) => {
+                                        const { id,order,Reference,purchaseorder, customer,branch,ordertotal,currency, customerorderreference,orderdate,deliveryto,requiredby } = row;
+                                        const isItemSelected = selected.indexOf(order) !== -1;
 
                                         return (
                                             <TableRow
@@ -216,23 +201,28 @@ export default function SalesQuotaionsItems() {
                                                 aria-checked={isItemSelected}
                                             >
                                                 {/* <TableCell padding="checkbox" >
-                                                    <Checkbox checked={isItemSelected} onClick={() => handleClick(itemCode)} />
+                                                    <Checkbox checked={isItemSelected} onClick={() => handleClick(order)} />
                                                 </TableCell> */}
                                                 <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
                                                     {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
                                                     <Typography variant="subtitle2" noWrap>
-                                                        {itemCode}
+                                                        {order}
                                                     </Typography>
                                                 </TableCell>
-                                                <TableCell align="left">{itemDescription}</TableCell>
-                                                <TableCell align="left">{longDescription}</TableCell>
-                                                <TableCell align="left">{quantity}</TableCell>
-                                                <TableCell align="left">{unit}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{priceBeforeText}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{discount}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{total}</TableCell>
-                                                <TableCell align="right">
-                                                { bold ? null :  <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={itemCode} />}
+                                                <TableCell align="left" >{order}</TableCell>
+                                                <TableCell align="left">{Reference}</TableCell>
+                                                <TableCell align="left">{purchaseorder}</TableCell>
+                                                <TableCell align="left">{customer}</TableCell>
+                                                <TableCell align="left">{branch}</TableCell>
+                                                <TableCell align="left">{customerorderreference}</TableCell>
+                                                <TableCell align="left">{orderdate}</TableCell>
+                                                <TableCell align="left">{deliveryto}</TableCell>
+                                                <TableCell align="left">{requiredby}</TableCell>
+                                                <TableCell align="left">{ordertotal}</TableCell>
+                                                <TableCell align="left">{currency}</TableCell>
+                                                <TableCell align="right"><UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={order} />
+
+                                                
                                                 </TableCell>
                                             </TableRow>
                                         );

@@ -26,13 +26,13 @@ import { fData } from 'src/utils/formatNumber';
 import { countries } from 'src/_mock';
 // components
 import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from 'src/components/hook-form';
-import SalesQuotaionsItems from './quotationsComponents/SalesQuotaionsItems';
+import AllocationsItems from './allocationComponents/AllocationsItems';
 import { whitespace } from 'stylis';
 import { red } from '@mui/material/colors';
 
 // ----------------------------------------------------------------------
 
-export default function Quotations() {
+export default function Allocation() {
     const { enqueueSnackbar } = useSnackbar();
     const [date, setDate] = useState(new Date());
     const { user } = useAuth();
@@ -93,7 +93,7 @@ export default function Quotations() {
 
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
-            <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
+            <Grid  px={1} py={1}  container spacing={1}  sx={{ borderColor:'grey',borderRadius:1}} >
                 <Grid item xs={3} md={3} >
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
@@ -189,7 +189,7 @@ export default function Quotations() {
                                 </Stack>
                             </LocalizationProvider>
 
-                         {/*   <RHFSelect name="price List" label="Price List" placeholder="Price List" size='small' sx={{ background: 'white'}}>
+                        {/*   <RHFSelect name="price List" label="Price List" placeholder="Price List" size='small' sx={{ background: 'white'}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -202,146 +202,13 @@ export default function Quotations() {
                     </Card>
                 </Grid>
 
-              
+            
 
             </Grid>
 {/*----------------SALES TABLE CALLING-------------------------------------------*/}
-            <SalesQuotaionsItems  />
+            <AllocationsItems  />
 {/*----------------3rd portion Detailing Code-------------------------------------------*/}
-            <Grid mt={3} container spacing={1}>
-                <Grid item xs={12} md={12}>
-                    
-                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                    <h4
-                        style={{  textAlign:'center',color:'black',borderRadius:10}}>Quotation Delivery Details </h4>
-                        <Box
-                            sx={{
-                                display: 'grid',
-                                rowGap: 2,
-                                columnGap: 2,
-                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(3, 1fr)' },
-                            }}
-                        >
-    <Grid mt={3} container spacing={1}>
-        <Grid item xs={12} md={12}>
-            <Card sx={{ p: 3 }}>
-                <Grid>
-                            <RHFSelect name="deliverFromLocation" label="Deliver from Location" placeholder="Deliver from Location" size='small' sx={{ mt: 1}}>
-                                <option value=""/>
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFTextField name="ShippingTerms" label="Shipping Terms" size="small" sx={{ mt: 1 }}/>
-                            {/* <RHFTextField name="carrierReceiptNo" label="Carrier Receipt No" size="small" sx={{ mt: 1 }}/> */}
-                            <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                <Stack spacing={3} sx={{ mt: 1 }}>
-                                    <DesktopDatePicker
-                                        label=" Quotation Date"
-                                        value={date}
-                                        // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size="small" />}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>
-                            </Grid>
-            </Card>
-        </Grid>
-    </Grid>
-    <Grid mt={3} container spacing={1}>
-        <Grid item xs={12} md={12}>
-            <Card  sx={{ p: 3 }}>
-                            <RHFTextField name="delivery" label="Delivery"   htmlFor="input-with-icon-adornment" size="small" sx={{ mt: 1}} />
-                            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <Stack spacing={3} sx={{ mt: 1}}>
-                                    <DesktopDatePicker
-                                        label="T.R Date"
-                                        value={date}
-                                        // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size='small' />}
-                                    />
-                                </Stack>
-                            </LocalizationProvider> */}
-                            <RHFTextField  name="deliveryTo" label="Delivery To" size="small" sx={{ mt: 1}}/>
-                            <RHFTextField name="contactPhoneNumber" label="Contact Phone Number"size='small' sx={{ mt: 1}} />
-            </Card>
-        </Grid>
-    </Grid>
- <Grid mt={3} container spacing={1}>
-    <Grid item xs={12} md={12}>
-        <Card sx={{ p: 3 }}>
-                            {/* <RHFTextField name="quantity" label="Quantity" size='small' sx={{ mt: 1}}/> */}
-                            <RHFTextField name="address" label="Address" size='small' sx={{ mt: 1}}/>
-                            <RHFTextField name="customerReference" placeholderTextColor={'green'} label="Customer Reference" size='small' sx={{ mt: 1}} />
-                            <RHFSelect name="shippingCompany" label="Shipping Company" placeholder="Deliver from Location" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            {/* <RHFTextField name="typeOfPacking" label="Type Of Packing" size='small' sx={{ mt: 1}}/> */}
-            </Card>
-        </Grid>
-    </Grid>
-                            <RHFTextField name="purchaseOrder" label="Purchase Order" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}/>
-                            <RHFTextField name="comments" label="Comments" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}/>
-                            <RHFTextField name="attn" label="ATTN" size='small' sx={{ mt: 1 , background:'white',borderRadius: 1}}/>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <Stack spacing={3} sx={{ mt: 1}}>
-                                    <DesktopDatePicker
-                                        label="Purchase Order Date"
-                                        value={date}
-                                        // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{ background:'white',borderRadius: 1}}/>}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>
-                           
-                            {/* <RHFTextField name="grn" label="GRN" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}/> */}
-                            <RHFTextField name="deliveryTerms" label="Delivery Terms"size='small' sx={{ mt: 1, background:'white',borderRadius: 1}} />
-                            {/* <RHFTextField name="gridNo" label="Grid No" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}/> */}
-                            <RHFSelect name="currency" label="Currency"  size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                        </Box>
-
-                        <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
-                         <Box display={'flex'} >
-                          <Box m={1}>
-                           <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                             Save
-                           </LoadingButton>
-                          </Box>
-                          <Box m={1}>
-                          <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                             Cancel
-                          </LoadingButton>
-                          </Box>
-                         </Box>
-                        </Stack>
-                        
-                    </Card>
-                </Grid>
-
-            </Grid>
+           
         </FormProvider> 
     );
 }

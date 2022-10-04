@@ -101,10 +101,11 @@ export default function Router() {
           children: [
             { element: <Navigate to="/dashboard/customers/transactions" replace />, index: true },
             { path: 'transactions', element: <Transactions /> },
-            { path: 'reports', element: <Setup /> },
+            { path: 'reports', element: <Reports /> },
             { path: 'setup', element: <Setup /> },
           ],
         },
+       
         // {
         //   path: 'blog',
         //   children: [
@@ -198,7 +199,7 @@ const Calendar = Loadable(lazy(() => import('../pages/dashboard/Calendar')));
 const Kanban = Loadable(lazy(() => import('../pages/dashboard/Kanban')));
 // --------------------- customers -----------------------
 const Transactions = Loadable(lazy(() => import('../pages/dashboard/Customers/Transactions')));
-// const Reports = Loadable(lazy(() => import('../pages/dashboard/Customers/reports')));
+const Reports = Loadable(lazy(() => import('../pages/dashboard/Customers/Reports')));
 const Setup = Loadable(lazy(() => import('../pages/dashboard/Customers/Setup')));
 
 // Main

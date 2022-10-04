@@ -15,13 +15,13 @@ DialogAnimate.propTypes = {
   variants: PropTypes.object
 };
 
-export default function DialogAnimate({ open = false, variants, onClose, children, sx, ...other }) {
+export default function DialogAnimate({modalWidth= 'xs', open = false, variants, onClose, children, sx, ...other }) {
   return (
     <AnimatePresence>
       {open && (
         <Dialog
           fullWidth
-          maxWidth="xs"
+          maxWidth= {modalWidth}
           open={open}
           onClose={onClose}
           PaperComponent={(props) => (

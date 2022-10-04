@@ -20,7 +20,11 @@ import {
   AccountNotifications,
   AccountChangePassword,
 } from 'src/sections/@dashboard/user/account';
-import {Quotations} from '../components/customers/transactions';
+import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
+import {SalesOrder} from '../components/customers/transactions';
+import {DeliveryNote} from '../components/customers/transactions';
+
+
 
 // ----------------------------------------------------------------------
 
@@ -32,43 +36,48 @@ export default function Transactions() {
   const ACCOUNT_TABS = [
     {
       value: 'Quotations',
-      icon: <Iconify icon={'ic:round-account-box'} width={20} height={20} />,
+      icon: <Iconify icon={'ic:round-receipt'} color='#F2740B' width={23} height={40} />,
       component: <Quotations />,
     },
     {
       value: 'Sales Orders (S.O)',
-      icon: <Iconify icon={'ic:round-receipt'} width={20} height={20} />,
-      component: <AccountBilling cards={_userPayment} addressBook={_userAddressBook} invoices={_userInvoices} />,
+      icon: <Iconify icon={'ic:round-receipt'} color='#F2740B' width={23} height={40} />,
+      component: <SalesOrder /> 
+    },
+    {
+      value: 'Sample Orders (S.O)',
+      icon: <Iconify icon={'ic:round-receipt'} color='#F2740B' width={23} height={40} />,
+      component: <SampleOrder /> 
     },
     {
       value: 'Delivery Note (D.N)',
-      icon: <Iconify icon={'eva:bell-fill'} width={20} height={20} />,
-      component: <AccountNotifications />,
+      icon: <Iconify icon={'ic:baseline-manage-search'} color='#F2740B' width={25} height={40} />,
+      component: <DeliveryNote />,
     },
     {
       value: 'Credit Invoice',
-      icon: <Iconify icon={'eva:share-fill'} width={20} height={20} />,
-      component: <AccountSocialLinks myProfile={_userAbout} />,
+      icon: <Iconify icon={'bxs:credit-card'} color='#F2740B' width={23} height={40} />,
+      component: <CreditInvoice />,
     },
     {
       value: 'Cash Invoice',
-      icon: <Iconify icon={'ic:round-vpn-key'} width={20} height={20} />,
-      component: <AccountChangePassword />,
+      icon: <Iconify icon={'bi:cash'} color='#F2740B' width={23} height={40} />,
+      component: <CashInvoice />,
     },
     {
       value: 'Receive Payments',
-      icon: <Iconify icon={'ic:round-vpn-key'} width={20} height={20} />,
-      component: <AccountChangePassword />,
+      icon: <Iconify icon={'material-symbols:payments-sharp'} color='#F2740B' width={23} height={40} />,
+      component: <ReceivePayment />,
     },
     {
       value: 'Sale Return',
-      icon: <Iconify icon={'ic:round-vpn-key'} width={20} height={20} />,
-      component: <AccountChangePassword />,
+      icon: <Iconify icon={'fluent:group-return-24-regular'} color='#F2740B' width={23} height={40} />,
+      component: <SalesReturn/>,
     },
     {
       value: 'Allocation',
-      icon: <Iconify icon={'ic:round-vpn-key'} width={20} height={20} />,
-      component: <AccountChangePassword />,
+      icon: <Iconify icon={'ooui:articles-rtl'} color='#F2740B' width={23} height={20} />,
+      component: <Allocation />,
     },
 
   ];
@@ -96,7 +105,6 @@ export default function Transactions() {
             <Tab disableRipple key={tab.value} label={tab.value} icon={tab.icon} value={tab.value} />
           ))}
         </Tabs>
-
         <Box sx={{ mb: 3 }} />
 
         {ACCOUNT_TABS.map((tab) => {

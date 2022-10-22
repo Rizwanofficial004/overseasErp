@@ -48,7 +48,6 @@ export default function GeneralApp() {
               chartData={[5, 18, 12, 51, 68, 11, 39, 37, 27, 20]}
             />
           </Grid>
-
           <Grid item xs={12} md={4}>
             <AppWidgetSummary
               title="Total Installed"
@@ -58,7 +57,6 @@ export default function GeneralApp() {
               chartData={[20, 41, 63, 33, 28, 35, 50, 46, 11, 26]}
             />
           </Grid>
-
           <Grid item xs={12} md={4}>
             <AppWidgetSummary
               title="Total Downloads"

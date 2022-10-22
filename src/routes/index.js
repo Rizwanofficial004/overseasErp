@@ -12,13 +12,10 @@ import AuthGuard from '../guards/AuthGuard';
 import { PATH_AFTER_LOGIN } from '../config';
 // components
 import LoadingScreen from '../components/LoadingScreen';
-
 // ----------------------------------------------------------------------
-
 const Loadable = (Component) => (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { pathname } = useLocation();
-
   return (
     <Suspense fallback={<LoadingScreen isDashboard={pathname.includes('/dashboard')} />}>
       <Component {...props} />
@@ -83,7 +80,6 @@ export default function Router() {
         //     { path: 'invoice', element: <EcommerceInvoice /> },
         //   ],
         // },
-
         {
           path: 'user',
           children: [
@@ -105,7 +101,15 @@ export default function Router() {
             { path: 'setup', element: <Setup /> },
           ],
         },
-       
+        {
+          path: 'suppliers',
+          children: [
+            { element: <Navigate to="/dashboard/Suppliers/Transaction" replace />, index: true },
+            { path: 'transaction', element: <Transaction /> },
+            // { path: 'report', element: <Report /> },
+            // { path: 'setup', element: <Setup /> },
+          ],
+        },
         // {
         //   path: 'blog',
         //   children: [
@@ -201,8 +205,12 @@ const Kanban = Loadable(lazy(() => import('../pages/dashboard/Kanban')));
 const Transactions = Loadable(lazy(() => import('../pages/dashboard/Customers/Transactions')));
 const Reports = Loadable(lazy(() => import('../pages/dashboard/Customers/Reports')));
 const Setup = Loadable(lazy(() => import('../pages/dashboard/Customers/Setup')));
+//----------------------Suppliers-------------------------
+const Transaction = Loadable(lazy(() => import('../pages/dashboard/Suppliers/Transaction')));
+// const Report = Loadable(lazy(() => import('../pages/dashboard/Supplires/Report')));
+// const Setup = Loadable(lazy(() => import('../pages/dashboard/Supplires/Setup')));
+// Main 
 
-// Main
 const HomePage = Loadable(lazy(() => import('../pages/Home')));
 const About = Loadable(lazy(() => import('../pages/About')));
 const Contact = Loadable(lazy(() => import('../pages/Contact')));

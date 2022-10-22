@@ -25,45 +25,39 @@ import { CustomerAllocationDashboard, QuotationDashboard, SalesOrderDashboard, S
 import CustomerTransDashboard from '../components/customers/Reports/CustomerTransDashboard';
 // import {SalesOrder} from '../components/customers/reports';
 // import {DeliveryNote} from '../components/customers/reports';
-
-
-
 // ----------------------------------------------------------------------
-
 export default function Reports() {
   const { themeStretch } = useSettings();
-
   const [currentTab, setCurrentTab] = useState('QuotationDashboard');
-
   const ACCOUNT_TABS = [
     {
       value: 'QuotationDashboard',
-      icon: <Iconify icon={'mdi:view-dashboard-variant'} color='#DE3163' width={20} height={40} />,
+      icon: <Iconify icon={'mdi:tablet-dashboard'} color='#F2740B' width={25} height={40} />,
       component: <QuotationDashboard />,
     },
     {
       value: 'Sales Order Dashboard',
-      icon: <Iconify icon={'mdi:view-dashboard-variant'} color='#DE3163' width={20} height={40} />,
+      icon: <Iconify icon={'akar-icons:dashboard'} color='#F2740B' width={20} height={40} />,
       component: <SalesOrderDashboard /> 
     },
     {
       value: 'Sample Dashboard (S.D)',
-      icon: <Iconify icon={'mdi:view-dashboard-variant'} color='#DE3163' width={20} height={40} />,
+      icon: <Iconify icon={'carbon:dashboard-reference'} color='#F2740B' width={20} height={40} />,
       component: <SampleDashboard /> 
     },
     {
       value: 'Customer Transaction Dashboard',
-      icon: <Iconify icon={'mdi:view-dashboard-variant'} color='#DE3163' width={20} height={40} />,
+      icon: <Iconify icon={'mdi:monitor-dashboard'} color='#F2740B' width={20} height={40} />,
       component: <CustomerTransDashboard />,
     },
     {
       value: 'Customer Allocation Dashboard',
-      icon: <Iconify icon={'mdi:view-dashboard-variant'} color='#DE3163' width={20} height={40} />,
+      icon: <Iconify icon={'mdi:view-dashboard-variant'} color='#F2740B' width={20} height={40} />,
       component: <CustomerAllocationDashboard />,
     },
     {
       value: 'Print Reports',
-      icon: <Iconify icon={'flat-color-icons:print'} color='#DE3163' width={20} height={40} />,
+      icon: <Iconify icon={'flat-color-icons:print'} color='#F2740B' width={20} height={40} />,
       component: <PrintReport/>,
     },
     // {
@@ -83,7 +77,6 @@ export default function Reports() {
     // },
 
   ];
-
   return (
     <Page title="Customers: Reports">
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -95,7 +88,6 @@ export default function Reports() {
             { name: 'Account Settings' },
           ]}
         />
-
         <Tabs
           value={currentTab}
           scrollButtons="auto"

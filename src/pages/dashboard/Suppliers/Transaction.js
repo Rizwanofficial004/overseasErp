@@ -20,73 +20,73 @@ import {
   AccountNotifications,
   AccountChangePassword,
 } from 'src/sections/@dashboard/user/account';
-import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
-import {SalesOrder} from '../components/customers/transactions';
-import {DeliveryNote} from '../components/customers/transactions';
+//import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
+//import {SalesOrder} from '../components/customers/transactions';
+import {PurchaseOrder} from '../components/suppliers/transaction';
 
 
 
 // ----------------------------------------------------------------------
 
-export default function Transactions() {
+export default function Transaction() {
   const { themeStretch } = useSettings();
 
-  const [currentTab, setCurrentTab] = useState('Quotations');
+  const [currentTab, setCurrentTab] = useState('Purchase Order');
 
   const ACCOUNT_TABS = [
     {
-      value: 'Quotations',
+      value: 'Purchase Order',
       icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
-      component: <Quotations />,
+      component: <PurchaseOrder />,
     },
     {
       value: 'Sales Orders (S.O)',
       icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
-      component: <SalesOrder /> 
+    //   component: <SalesOrder /> 
     },
     {
       value: 'Sample Orders (S.O)',
       icon: <Iconify icon={'iconoir:notes'} color='#F2740B' width={23} height={40} />,
-      component: <SampleOrder /> 
+    //   component: <SampleOrder /> 
     },
     {
       value: 'Delivery Note (D.N)',
       icon: <Iconify icon={'ic:baseline-manage-search'} color='#F2740B' width={25} height={40} />,
-      component: <DeliveryNote />,
+    //   component: <DeliveryNote />,
     },
     {
       value: 'Credit Invoice',
       icon: <Iconify icon={'bxs:credit-card'} color='#F2740B' width={23} height={40} />,
-      component: <CreditInvoice />,
+    //   component: <CreditInvoice />,
     },
     {
       value: 'Cash Invoice',
       icon: <Iconify icon={'bi:cash'} color='#F2740B' width={23} height={40} />,
-      component: <CashInvoice />,
+    //   component: <CashInvoice />,
     },
     {
       value: 'Receive Payments',
       icon: <Iconify icon={'material-symbols:payments-sharp'} color='#F2740B' width={23} height={40} />,
-      component: <ReceivePayment />,
+    //   component: <ReceivePayment />,
     },
     {
       value: 'Sale Return',
       icon: <Iconify icon={'fluent:group-return-24-regular'} color='#F2740B' width={25} height={40} />,
-      component: <SalesReturn/>,
+    //   component: <SalesReturn/>,
     },
     {
       value: 'Allocation',
       icon: <Iconify icon={'ooui:articles-rtl'} color='#F2740B' width={23} height={20} />,
-      component: <Allocation />,
+    //   component: <Allocation />,
     },
 
   ];
 
   return (
-    <Page title="Customers: Transactions">
+    <Page title="Customers: Transaction">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading="Transactions"
+          heading="Transaction"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
             { name: 'User', href: PATH_DASHBOARD.user.root },

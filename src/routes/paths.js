@@ -67,6 +67,12 @@ export const PATH_DASHBOARD = {
     reports: path(ROOTS_DASHBOARD, '/customers/reports'),
     setup: path(ROOTS_DASHBOARD, '/customers/setup'),
   },
+  suppliers: {
+    root: path(ROOTS_DASHBOARD, '/suppliers'),
+    transaction: path(ROOTS_DASHBOARD, '/suppliers/transaction'),
+    // report: path(ROOTS_DASHBOARD, '/suppliers/report'),
+    // setup: path(ROOTS_DASHBOARD, '/suppliers/setup'),
+  },
   eCommerce: {
     root: path(ROOTS_DASHBOARD, '/e-commerce'),
     shop: path(ROOTS_DASHBOARD, '/e-commerce/shop'),
@@ -86,5 +92,4 @@ export const PATH_DASHBOARD = {
     newPost: path(ROOTS_DASHBOARD, '/blog/new-post')
   }
 };
-
 export const PATH_DOCS = 'https://docs-minimals.vercel.app/introduction';

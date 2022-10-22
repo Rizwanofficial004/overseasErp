@@ -21,79 +21,47 @@ import {
   AccountChangePassword,
 } from 'src/sections/@dashboard/user/account';
 import {AddCustomer,AddBranch,SalesType,SalesPersons} from '../components/customers/setup';
-// import {SalesOrder} from '../components/customers/transactions';
-// import {DeliveryNote} from '../components/customers/transactions';
-
-
 
 // ----------------------------------------------------------------------
 
 export default function Setup() {
   const { themeStretch } = useSettings();
 
-  const [currentTab, setCurrentTab] = useState('AddCustomer');
+  const [currentTab, setCurrentTab] = useState('New Customer');
 
   const ACCOUNT_TABS = [
     {
-      value: 'New Customer ',
-      icon: <Iconify icon={'ic:round-account-box'} color='#F98000' width={20} height={20} />,
-      component: <AddCustomer />,
+      value:  'New Customer',
+      icon: <Iconify icon={'la:industry'} color='#F2740B' width={25} height={40} />,
+      component: <AddCustomer />
     },
     {
       value: 'New Branch',
-      icon: <Iconify icon={'ic:round-receipt'} color='#6495ED' width={20} height={20} />,
+      icon: <Iconify icon={'mdi:source-branch-plus'} color='#F2740B' width={25} height={40} />,
       component: <AddBranch /> 
     },
     {
       value: 'Sales Person',
-      icon: <Iconify icon={'ic:round-receipt'} color='#6495ED' width={20} height={20} />,
+      icon: <Iconify icon={'akar-icons:person-add'} color='#F2740B' width={25} height={40} />,
       component: <SalesPersons /> 
     },
     {
       value: 'Sales Type',
-      icon: <Iconify icon={'eva:bell-fill'} color='#DE3163' width={20} height={20} />,
+      icon: <Iconify icon={'lucide:file-type'} color='#F2740B' width={25} height={40} />,
       component: <SalesType />,
     },
-    // {
-    //   value: 'Credit Invoice',
-    //   icon: <Iconify icon={'eva:share-fill'} color='#FFBF00' width={20} height={20} />,
-    //   component: <CreditInvoice />,
-    // },
-    // {
-    //   value: 'Cash Invoice',
-    //   icon: <Iconify icon={'ic:round-vpn-key'} color='#DFFF00' width={20} height={20} />,
-    //   component: <CashInvoice />,
-    // },
-    // {
-    //   value: 'Receive Payments',
-    //   icon: <Iconify icon={'ooui:articles-search-ltr'} color='#9FE2BF' width={20} height={20} />,
-    //   component: <ReceivePayment />,
-    // },
-    // {
-    //   value: 'Sale Return',
-    //   icon: <Iconify icon={'mdi:home'} color='#40E0D0' width={20} height={20} />,
-    //   component: <SalesReturn/>,
-    // },
-    // {
-    //   value: 'Allocation',
-    //   icon: <Iconify icon={'ooui:articles-rtl'} color='#6495ED' width={20} height={20} />,
-    //   component: <Allocation />,
-    // },
-
   ];
-
   return (
-    <Page title="Customers: Transactions">
+    <Page title="Customers: Setup">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading="Transactions"
+          heading="Setup"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
+            { name: 'User', href: PATH_DASHBOARD.user.root },  
             { name: 'Account Settings' },
           ]}
         />
-
         <Tabs
           value={currentTab}
           scrollButtons="auto"
@@ -106,7 +74,6 @@ export default function Setup() {
           ))}
         </Tabs>
         <Box sx={{ mb: 3 }} />
-
         {ACCOUNT_TABS.map((tab) => {
           const isMatched = tab.value === currentTab;
           return isMatched && <Box key={tab.value}>{tab.component}</Box>;

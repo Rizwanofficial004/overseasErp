@@ -4,13 +4,11 @@ import { useSnackbar } from 'notistack';
 import { useCallback } from 'react';
 // form
 import Avatar from '@mui/material/Avatar';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Box, Grid, Card, Stack, Typography } from '@mui/material';
 import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
-
 import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -26,14 +24,13 @@ import { fData } from 'src/utils/formatNumber';
 import { countries } from 'src/_mock';
 // components
 import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from 'src/components/hook-form';
-import SalesQuotaionsItems from './quotationsComponents/SalesQuotaionsItems';
 import { whitespace } from 'stylis';
 import { red } from '@mui/material/colors';
 import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 
 // ----------------------------------------------------------------------
 
-export default function Quotations() {
+export default function PurchaseOrder() {
     const { enqueueSnackbar } = useSnackbar();
     const [date, setDate] = useState(new Date());
     const { user } = useAuth();
@@ -207,7 +204,7 @@ export default function Quotations() {
 
             </Grid>
 {/*----------------SALES TABLE CALLING-------------------------------------------*/}
-            <SalesQuotaionsItems  />
+            
 {/*----------------3rd portion Detailing Code-------------------------------------------*/}
             <Grid mt={3} container spacing={1}>
                 <Grid item xs={12} md={12}>

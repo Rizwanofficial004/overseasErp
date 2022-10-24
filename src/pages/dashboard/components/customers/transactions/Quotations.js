@@ -35,29 +35,47 @@ import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 
 export default function Quotations() {
     const { enqueueSnackbar } = useSnackbar();
-    const [date, setDate] = useState(new Date());
+    const [quotationDate, setQuotationDate] = useState(new Date());
+    const [quotationDeliveryDate, setQuotationDeliveryDate] = useState(new Date());
+    const [purchaseOrderDate, setPurchaseOrderDate] = useState(new Date());
     const { user } = useAuth();
 
     const UpdateUserSchema = Yup.object().shape({
-        displayName: Yup.string().required('Name is required'),
+        purchaseOrder: Yup.string().required('purchase order is required'),
     });
 
     const defaultValues = {
-        displayName: user?.displayName || '',
-        email: user?.email || '',
-        photoURL: user?.photoURL || '',
-        phoneNumber: user?.phoneNumber || '',
-        country: user?.country || '',
-        address: user?.address || '',
-        state: user?.state || '',
-        city: user?.city || '',
-        zipCode: user?.zipCode || '',
-        about: user?.about || '',
-        isPublic: user?.isPublic || '',
+        customers: '',
+        branch: '',
+        reference: '',
+        customerDiscount: '',
+        exchangeRate: '',
+        currentCredit: '',
+        payment: '',
+        salesPerson: '',
+        quotationDate: '',
+        // <SalesQuotaionsItems  />
+        deliverFromLocation: '',
+        shippingTerms: '',
+        quotationDeliveryDate: '',
+        deliveryTo: '',
+        contactPhoneNumber: '',
+        address: '',
+        customerReference: '',
+        shippingCompany: '',
+        purchaseOrder: '',
+        comments: '',
+        attn: '',
+        purchaseOrderDate: '',
+        deliveryTerms: '',
+        currency: '',
+        attn: '',
+
+        // isPublic: user?.isPublic || '',
     };
     
     const methods = useForm({
-        resolver: yupResolver(UpdateUserSchema),
+        // resolver: yupResolver(UpdateUserSchema),
         defaultValues,
     });
 
@@ -67,7 +85,11 @@ export default function Quotations() {
         formState: { isSubmitting },
     } = methods;
 
-    const onSubmit = async () => {
+    const onSubmit = async (data) => {
+        data.quotationDate = quotationDate
+        data.quotationDeliveryDate = quotationDeliveryDate
+        data.purchaseOrderDate = purchaseOrderDate
+        console.log("=======:::", data);
         try {
             await new Promise((resolve) => setTimeout(resolve, 500));
             enqueueSnackbar('Update success!');
@@ -122,7 +144,6 @@ export default function Quotations() {
                                 ))}
                             </RHFSelect>
                             <RHFTextField name="reference" label="Reference"  size='small' sx={{ background:'white', borderRadius:1,}}/>
-
                         </Box>
                     </Card>
                 </Grid>
@@ -140,7 +161,7 @@ export default function Quotations() {
                                 
                                 }}
                         >
-                            <RHFTextField name="customerdiscount" label="Customer Discount %" size='small' sx={{ background: 'white',borderRadius:1 }}  />
+                            <RHFTextField name="customerDiscount" label="Customer Discount %" size='small' sx={{ background: 'white',borderRadius:1 }}  />
                             <RHFTextField name="exchangeRate" label="Exchange Rate" size='small' sx={{ background: 'white',borderRadius:1}}/>
                             <RHFTextField name="currentCredit" label="Current Credit" size='small' sx={{ background: 'white',borderRadius:1}}/>
                             
@@ -180,10 +201,10 @@ export default function Quotations() {
                                     <DesktopDatePicker
                                     container
                                         label="Quotation Date"
-                                        value={date}
+                                        value={quotationDate}
                                         // minDate={dayjs('2017-01-01')}
                                         onChange={(newValue) => {
-                                            setDate(newValue);
+                                            setQuotationDate(newValue);
                                         }}
                                         renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
                                     />
@@ -206,16 +227,13 @@ export default function Quotations() {
               
 
             </Grid>
-{/*----------------SALES TABLE CALLING-------------------------------------------*/}
+            {/*----------------SALES TABLE CALLING-------------------------------------------*/}
             <SalesQuotaionsItems  />
-{/*----------------3rd portion Detailing Code-------------------------------------------*/}
+            {/*----------------3rd portion Detailing Code-------------------------------------------*/}
             <Grid mt={3} container spacing={1}>
                 <Grid item xs={12} md={12}>
-                    
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                        
-                    <h2
-                        style={{  textAlign:'center',color:'black',borderRadius:10}}>Quotation Delivery Details </h2>
+                        <h2 style={{  textAlign:'center',color:'black',borderRadius:10}}>Quotation Delivery Details </h2>
                         <Box
                             sx={{
                                 display: 'grid',
@@ -224,61 +242,62 @@ export default function Quotations() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(3, 1fr)' },
                             }}
                         >
-    <Grid mt={3} container spacing={1}>
-        <Grid item xs={12} md={12}>
-            <Card sx={{ p: 3 }}>
-                <Grid>
-                            <RHFSelect name="deliverFromLocation" label="Deliver from Location" placeholder="Deliver from Location" size='small' sx={{ mt: 1}}>
-                                <option value=""/>
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFTextField name="ShippingTerms" label="Shipping Terms" size="small" sx={{ mt: 1 }}/>
-                            {/* <RHFTextField name="carrierReceiptNo" label="Carrier Receipt No" size="small" sx={{ mt: 1 }}/> */}
-                            <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                <Stack spacing={3} sx={{ mt: 1 }}>
-                                    <DesktopDatePicker
-                                        label=" Quotation Date"
-                                        value={date}
-                                        // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size="small" />}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>
+                            <Grid mt={3} container spacing={1}>
+                                <Grid item xs={12} md={12}>
+                                    <Card sx={{ p: 3 }}>
+                                        <Grid>
+                                            <RHFSelect name="deliverFromLocation" label="Deliver from Location" placeholder="Deliver from Location" size='small' sx={{ mt: 1}}>
+                                                <option value=""/>
+                                                {countries.map((option) => (
+                                                    <option key={option.code} value={option.label}>
+                                                        {option.label}
+                                                    </option>
+                                                ))}
+                                            </RHFSelect>
+                                            <RHFTextField name="shippingTerms" label="Shipping Terms" size="small" sx={{ mt: 1 }}/>
+                                            {/* <RHFTextField name="carrierReceiptNo" label="Carrier Receipt No" size="small" sx={{ mt: 1 }}/> */}
+                                            <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                                <Stack spacing={3} sx={{ mt: 1 }}>
+                                                    <DesktopDatePicker
+                                                        label="Quotation Delivery Date"
+                                                        value={quotationDeliveryDate}
+                                                        // minDate={dayjs('2017-01-01')}
+                                                        onChange={(newValue) => {
+                                                            setQuotationDeliveryDate(newValue);
+                                                        }}
+                                                        renderInput={(params) => <TextField {...params} size="small" />}
+                                                    />
+                                                </Stack>
+                                            </LocalizationProvider>
+                                        </Grid>
+                                    </Card>
+                                </Grid>
                             </Grid>
-            </Card>
-        </Grid>
-    </Grid>
-            <Grid mt={3} container spacing={1}>
-                <Grid item xs={12} md={12}>
-                    <Card  sx={{ p: 3 }}>
-                        <RHFTextField  name="deliveryTo" label="Delivery To" size="small" sx={{ mt: 1}}/>
-                        <RHFTextField name="contactPhoneNumber" label="Contact Phone Number"size='small' sx={{ mt: 1}} />
-                    </Card>
-                </Grid>
-            </Grid>
- <Grid mt={3} container spacing={1}>
-    <Grid item xs={12} md={12}>
-        <Card sx={{ p: 3 }}>
-                            <RHFTextField name="address" label="Address" size='small' sx={{ mt: 1}}/>
-                            <RHFTextField name="customerReference" placeholderTextColor={'green'} label="Customer Reference" size='small' sx={{ mt: 1}} />
-                            <RHFSelect name="shippingCompany" label="Shipping Company" placeholder="Deliver from Location" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-             </Card>
-        </Grid>
-    </Grid>
+                        
+                            <Grid mt={3} container spacing={1}>
+                                <Grid item xs={12} md={12}>
+                                    <Card  sx={{ p: 3 }}>
+                                        <RHFTextField  name="deliveryTo" label="Delivery To" size="small" sx={{ mt: 1}}/>
+                                        <RHFTextField name="contactPhoneNumber" label="Contact Phone Number"size='small' sx={{ mt: 1}} />
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                            <Grid mt={3} container spacing={1}>
+                                <Grid item xs={12} md={12}>
+                                    <Card sx={{ p: 3 }}>
+                                        <RHFTextField name="address" label="Address" size='small' sx={{ mt: 1}}/>
+                                        <RHFTextField name="customerReference" placeholderTextColor={'green'} label="Customer Reference" size='small' sx={{ mt: 1}} />
+                                        <RHFSelect name="shippingCompany" label="Shipping Company" placeholder="Deliver from Location" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}>
+                                            <option value="" />
+                                            {countries.map((option) => (
+                                                <option key={option.code} value={option.label}>
+                                                    {option.label}
+                                                </option>
+                                            ))}
+                                        </RHFSelect>
+                                    </Card>
+                                </Grid>
+                            </Grid>
                             <RHFTextField name="purchaseOrder" label="Purchase Order" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}/>
                             <RHFTextField name="comments" label="Comments" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}/>
                             <RHFTextField name="attn" label="ATTN" size='small' sx={{ mt: 1 , background:'white',borderRadius: 1}}/>
@@ -286,10 +305,10 @@ export default function Quotations() {
                                 <Stack spacing={3} sx={{ mt: 1}}>
                                     <DesktopDatePicker
                                         label="Purchase Order Date"
-                                        value={date}
+                                        value={purchaseOrderDate}
                                         // minDate={dayjs('2017-01-01')}
                                         onChange={(newValue) => {
-                                            setDate(newValue);
+                                            setPurchaseOrderDate(newValue);
                                         }}
                                         renderInput={(params) => <TextField {...params} size='small' sx={{ background:'white',borderRadius: 1}}/>}
                                     />
@@ -306,19 +325,19 @@ export default function Quotations() {
                             </RHFSelect>
                         </Box>
                         <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
-                         <Box display={'flex'} >
-                          <Box m={1}>
-                           <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                             Save
-                           </LoadingButton>
-                          </Box>
-                          <Box m={1}>
-                          <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                             Cancel
-                          </LoadingButton>
-                          </Box>
-                         </Box>
-                        </Stack>                        
+                        <Box display={'flex'} >
+                        <Box m={1}>
+                        <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                            Save
+                        </LoadingButton>
+                        </Box>
+                        <Box m={1}>
+                        <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                            Cancel
+                        </LoadingButton>
+                        </Box>
+                        </Box>
+                        </Stack>       
                     </Card>
                 </Grid>
             </Grid>

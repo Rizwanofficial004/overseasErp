@@ -31,7 +31,7 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [12244, 53345, 44313, 78343];
+const CHART_DATA = [12244, 53345, 44313, 78343,23232];
 
 export default function AppCurrentDownload() {
   const theme = useTheme();
@@ -43,7 +43,7 @@ export default function AppCurrentDownload() {
       theme.palette.primary.main,
       theme.palette.primary.dark,
     ],
-    labels: ['Mac', 'Window', 'iOS', 'Android'],
+    labels: ['RDI', 'MAYO AREA', 'RYK PROJECT', 'LOTTE KOLSON','CORONET FOOD'],
     stroke: { colors: [theme.palette.background.paper] },
     legend: { floating: true, horizontalAlign: 'center' },
     tooltip: {
@@ -77,7 +77,7 @@ export default function AppCurrentDownload() {
 
   return (
     <Card>
-      <CardHeader title="Current Download" />
+      <CardHeader title="Current Project" />
       <ChartWrapperStyle dir="ltr">
         <ReactApexChart type="donut" series={CHART_DATA} options={chartOptions} height={280} />
       </ChartWrapperStyle>

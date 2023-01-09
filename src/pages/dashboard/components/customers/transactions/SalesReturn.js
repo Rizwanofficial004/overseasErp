@@ -4,13 +4,11 @@
     import { useCallback } from 'react';
     // form
     import Avatar from '@mui/material/Avatar';
-
     import { useForm } from 'react-hook-form';
     import { yupResolver } from '@hookform/resolvers/yup';
     // @mui
     import { Box, Grid, Card, Stack, Typography } from '@mui/material';
     import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
-
     import dayjs from 'dayjs';
     import TextField from '@mui/material/TextField';
     import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -34,7 +32,7 @@
 
     export default function SalesReturn() {
         const { enqueueSnackbar } = useSnackbar();
-        const [date, setDate] = useState(new Date());
+        const [salesreturndate, setsalesReturnDate] = useState(new Date());
         const { user } = useAuth();
 
         const UpdateUserSchema = Yup.object().shape({
@@ -42,17 +40,19 @@
         });
 
         const defaultValues = {
-            displayName: user?.displayName || '',
-            email: user?.email || '',
-            photoURL: user?.photoURL || '',
-            phoneNumber: user?.phoneNumber || '',
-            country: user?.country || '',
-            address: user?.address || '',
-            state: user?.state || '',
-            city: user?.city || '',
-            zipCode: user?.zipCode || '',
-            about: user?.about || '',
-            isPublic: user?.isPublic || '',
+            customers: '',
+            branch: '',
+            reference: '',
+            currentCredit: '',
+            exchangeRate: '',
+            InvoiceNumber: '',
+            payment: '',
+            salesPerson: '',
+            salesreturndate: '',
+            CreditNoteType: '',
+            ItemsReturned: '',
+            memo: '',
+    
         };
         
         const methods = useForm({
@@ -66,7 +66,9 @@
             formState: { isSubmitting },
         } = methods;
 
-        const onSubmit = async () => {
+        const onSubmit = async (data) => {
+            data.salesreturndate = salesreturndate
+            console.log("=======:::", data);
             try {
                 await new Promise((resolve) => setTimeout(resolve, 500));
                 enqueueSnackbar('Update success!');
@@ -179,10 +181,10 @@
                                         <DesktopDatePicker
                                         container
                                             label="Date"
-                                            value={date}
+                                            value={salesreturndate}
                                             // minDate={dayjs('2017-01-01')}
                                             onChange={(newValue) => {
-                                                setDate(newValue);
+                                                setsalesReturnDate(newValue);
                                             }}
                                             renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
                                         />
@@ -219,7 +221,7 @@
                                         </option>
                                     ))}
                                 </RHFSelect>
-                                <RHFSelect name="CreditNoteType" label="Items Returned To Location"  size='small' sx={{mt: 1, background: 'white',borderRadius:1}}>
+                                <RHFSelect name="ItemsReturned" label="Items Returned To Location"  size='small' sx={{mt: 1, background: 'white',borderRadius:1}}>
                                     <option value=""/>
                                     {countries.map((option) => (
                                         <option key={option.code} value={option.label}>

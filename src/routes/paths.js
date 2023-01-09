@@ -27,7 +27,7 @@ export const PATH_PAGE = {
   about: '/about-us',
   contact: '/contact-us',
   faqs: '/faqs',
-  page404: '/404',
+  page404: '/dashboard',
   page500: '/500',
   components: '/components'
 };
@@ -70,8 +70,26 @@ export const PATH_DASHBOARD = {
   suppliers: {
     root: path(ROOTS_DASHBOARD, '/suppliers'),
     transaction: path(ROOTS_DASHBOARD, '/suppliers/transaction'),
-    // report: path(ROOTS_DASHBOARD, '/suppliers/report'),
-    // setup: path(ROOTS_DASHBOARD, '/suppliers/setup'),
+    report: path(ROOTS_DASHBOARD, '/suppliers/report'),
+    setup: path(ROOTS_DASHBOARD, '/suppliers/suppliersetup'),
+  },
+  inventory: {
+    root: path(ROOTS_DASHBOARD, '/inventory'),
+    inventorytransaction: path(ROOTS_DASHBOARD, '/inventory/inventorytransaction'),
+    inventoryreport: path(ROOTS_DASHBOARD, '/inventory/inventoryreport'),
+    inventorysetup: path(ROOTS_DASHBOARD, '/inventory/inventorysetup'),
+  },
+  generalledger: {
+    root: path(ROOTS_DASHBOARD, '/generalledger'),
+    generaltransactions: path(ROOTS_DASHBOARD, '/generalledger/generaltransactions'),
+    generalreport: path(ROOTS_DASHBOARD, '/generalledger/generalreport'),
+    generalsetup: path(ROOTS_DASHBOARD, '/generalledger/generalsetup'),
+  },
+  settings: {
+    root: path(ROOTS_DASHBOARD, '/settings'),
+    companysetup: path(ROOTS_DASHBOARD, '/settings/companysetup'),
+    miscellaneous: path(ROOTS_DASHBOARD, '/settings/miscellaneous'),
+    settingmaintenance: path(ROOTS_DASHBOARD, '/settings/settingmaintenance'),
   },
   eCommerce: {
     root: path(ROOTS_DASHBOARD, '/e-commerce'),

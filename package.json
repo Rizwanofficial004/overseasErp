@@ -129,5 +129,8 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.5.1",
     "typescript": "^4.4.4"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/Rizwanofficial004/overseasErp.git",
+  "license": "MIT"
 }

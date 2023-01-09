@@ -22,12 +22,9 @@ import {
 } from 'src/sections/@dashboard/user/account';
 //import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
 //import {SalesOrder} from '../components/customers/transactions';
-import {PurchaseOrder} from '../components/suppliers/transaction';
-
-
+import {GoodReceivedNote, PurchaseOrder,CreditBill,CashBill, Payment, PurchaseReturn,Allocations} from '../components/suppliers/transaction';
 
 // ----------------------------------------------------------------------
-
 export default function Transaction() {
   const { themeStretch } = useSettings();
 
@@ -40,48 +37,47 @@ export default function Transaction() {
       component: <PurchaseOrder />,
     },
     {
-      value: 'Sales Orders (S.O)',
+      value: 'Good Received Note (GRN)',
       icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
-    //   component: <SalesOrder /> 
+      component: <GoodReceivedNote /> 
     },
     {
-      value: 'Sample Orders (S.O)',
+      value: 'Credit Bill',
       icon: <Iconify icon={'iconoir:notes'} color='#F2740B' width={23} height={40} />,
-    //   component: <SampleOrder /> 
+      component: <CreditBill /> 
     },
     {
-      value: 'Delivery Note (D.N)',
+      value: 'Cash Bill',
       icon: <Iconify icon={'ic:baseline-manage-search'} color='#F2740B' width={25} height={40} />,
-    //   component: <DeliveryNote />,
+      component: <CashBill />,
     },
     {
-      value: 'Credit Invoice',
+      value: 'Payments',
       icon: <Iconify icon={'bxs:credit-card'} color='#F2740B' width={23} height={40} />,
-    //   component: <CreditInvoice />,
+      component: <Payment />,
     },
     {
-      value: 'Cash Invoice',
+      value: 'Purchase Return',
       icon: <Iconify icon={'bi:cash'} color='#F2740B' width={23} height={40} />,
-    //   component: <CashInvoice />,
-    },
+      component: <PurchaseReturn />,
+    },  
     {
-      value: 'Receive Payments',
+      value: 'Allocations',
       icon: <Iconify icon={'material-symbols:payments-sharp'} color='#F2740B' width={23} height={40} />,
-    //   component: <ReceivePayment />,
+      component: <Allocations />,
     },
     {
-      value: 'Sale Return',
+      value: 'Requisitions Entries',
       icon: <Iconify icon={'fluent:group-return-24-regular'} color='#F2740B' width={25} height={40} />,
     //   component: <SalesReturn/>,
     },
     {
-      value: 'Allocation',
+      value: 'Requisitions Allocation',
       icon: <Iconify icon={'ooui:articles-rtl'} color='#F2740B' width={23} height={20} />,
     //   component: <Allocation />,
-    },
-
+    }
+    
   ];
-
   return (
     <Page title="Customers: Transaction">
       <Container maxWidth={themeStretch ? false : 'lg'}>

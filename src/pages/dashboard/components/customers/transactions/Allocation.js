@@ -34,7 +34,7 @@ import { red } from '@mui/material/colors';
 
 export default function Allocation() {
     const { enqueueSnackbar } = useSnackbar();
-    const [date, setDate] = useState(new Date());
+    const [qutationdate, setqutationDate] = useState(new Date());
     const { user } = useAuth();
 
     const UpdateUserSchema = Yup.object().shape({
@@ -42,17 +42,15 @@ export default function Allocation() {
     });
 
     const defaultValues = {
-        displayName: user?.displayName || '',
-        email: user?.email || '',
-        photoURL: user?.photoURL || '',
-        phoneNumber: user?.phoneNumber || '',
-        country: user?.country || '',
-        address: user?.address || '',
-        state: user?.state || '',
-        city: user?.city || '',
-        zipCode: user?.zipCode || '',
-        about: user?.about || '',
-        isPublic: user?.isPublic || '',
+            Customers:'',
+            branch:'',
+            reference:'',
+            customerdiscount:'',
+            exchangeRate:'',
+            currentCredit:'',
+            payment:'',
+            salesPerson:'',
+            qutationdate:'',
     };
     
     const methods = useForm({
@@ -63,7 +61,7 @@ export default function Allocation() {
     const {
         setValue,
         handleSubmit,
-        formState: { isSubmitting },
+        formState: {isSubmitting},
     } = methods;
 
     const onSubmit = async () => {
@@ -74,11 +72,9 @@ export default function Allocation() {
             console.error(error);
         }
     };
-
     const handleDrop = useCallback(
         (acceptedFiles) => {
             const file = acceptedFiles[0];
-
             if (file) {
                 setValue(
                     'photoURL',
@@ -90,7 +86,6 @@ export default function Allocation() {
         },
         [setValue]
     );
-
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ borderColor:'grey',borderRadius:1}} >
@@ -121,16 +116,13 @@ export default function Allocation() {
                                 ))}
                             </RHFSelect>
                             <RHFTextField name="reference" label="Reference"  size='small' sx={{ background:'white', borderRadius:1,}}/>
-
                         </Box>
                     </Card>
                 </Grid>
-
-
                 <Grid item xs={3} md={3}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
-                            sx={{
+                            sx={{   
                                 display: 'grid',
                                 rowGap: 2,
                                 columnGap: 1,
@@ -138,16 +130,13 @@ export default function Allocation() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                                 
                                 }}
-                        >
+                        > 
                             <RHFTextField name="customerdiscount" label="Customer Discount %" size='small' sx={{ background: 'white',borderRadius:1 }}  />
                             <RHFTextField name="exchangeRate" label="Exchange Rate" size='small' sx={{ background: 'white',borderRadius:1}}/>
                             <RHFTextField name="currentCredit" label="Current Credit" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            
-
                         </Box>
                     </Card>
                 </Grid>             
-
                 <Grid item xs={6} md={6}>
                     <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
@@ -179,36 +168,22 @@ export default function Allocation() {
                                     <DesktopDatePicker
                                     container
                                         label="Quotation Date"
-                                        value={date}
+                                        value={qutationdate}
                                         // minDate={dayjs('2017-01-01')}
                                         onChange={(newValue) => {
-                                            setDate(newValue);
+                                            setqutationDate(newValue);
                                         }}
                                         renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>
-
-                        {/*   <RHFSelect name="price List" label="Price List" placeholder="Price List" size='small' sx={{ background: 'white'}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>*/}
-
                         </Box>
                     </Card>
                 </Grid>
-
-            
-
             </Grid>
 {/*----------------SALES TABLE CALLING-------------------------------------------*/}
             <AllocationsItems  />
-{/*----------------3rd portion Detailing Code-------------------------------------------*/}
-           
+{/*----------------3rd portion Detailing Code-------------------------------------------*/}    
         </FormProvider> 
     );
 }

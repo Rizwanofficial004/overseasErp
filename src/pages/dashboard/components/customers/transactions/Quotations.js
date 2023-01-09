@@ -38,12 +38,17 @@ export default function Quotations() {
     const [quotationDate, setQuotationDate] = useState(new Date());
     const [quotationDeliveryDate, setQuotationDeliveryDate] = useState(new Date());
     const [purchaseOrderDate, setPurchaseOrderDate] = useState(new Date());
-    const { user } = useAuth();
-
+    const {user} = useAuth();
     const UpdateUserSchema = Yup.object().shape({
         purchaseOrder: Yup.string().required('purchase order is required'),
+        customers: Yup.string().required('purchase order is required'),
+        branch: Yup.string().required('purchase order is required'),
+        exchangeRate: Yup.string().required('purchase order is required'),
+        quotationDate: Yup.string().required('purchase order is required'),
+        deliverFromLocation: Yup.string().required('purchase order is required'),
+        quotationDeliveryDate: Yup.string().required('purchase order is required'),
+        deliveryTo: Yup.string().required('purchase order is required'),
     });
-
     const defaultValues = {
         customers: '',
         branch: '',
@@ -54,7 +59,6 @@ export default function Quotations() {
         payment: '',
         salesPerson: '',
         quotationDate: '',
-        // <SalesQuotaionsItems  />
         deliverFromLocation: '',
         shippingTerms: '',
         quotationDeliveryDate: '',
@@ -70,21 +74,16 @@ export default function Quotations() {
         deliveryTerms: '',
         currency: '',
         attn: '',
-
-        // isPublic: user?.isPublic || '',
     };
-    
     const methods = useForm({
-        // resolver: yupResolver(UpdateUserSchema),
+        resolver: yupResolver(UpdateUserSchema),
         defaultValues,
     });
-
     const {
         setValue,
         handleSubmit,
         formState: { isSubmitting },
     } = methods;
-
     const onSubmit = async (data) => {
         data.quotationDate = quotationDate
         data.quotationDeliveryDate = quotationDeliveryDate
@@ -97,11 +96,9 @@ export default function Quotations() {
             console.error(error);
         }
     };
-
     const handleDrop = useCallback(
         (acceptedFiles) => {
             const file = acceptedFiles[0];
-
             if (file) {
                 setValue(
                     'photoURL',
@@ -113,7 +110,6 @@ export default function Quotations() {
         },
         [setValue]
     );
-
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
@@ -146,9 +142,7 @@ export default function Quotations() {
                             <RHFTextField name="reference" label="Reference"  size='small' sx={{ background:'white', borderRadius:1,}}/>
                         </Box>
                     </Card>
-                </Grid>
-
-
+                </Grid> 
                 <Grid item xs={3} md={3}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
@@ -162,14 +156,14 @@ export default function Quotations() {
                                 }}
                         >
                             <RHFTextField name="customerDiscount" label="Customer Discount %" size='small' sx={{ background: 'white',borderRadius:1 }}  />
+                            {/* {
+                                errors.customerDiscount && touched.customerDiscount && <text>{errors.customerDiscount}</text>
+                            } */}
                             <RHFTextField name="exchangeRate" label="Exchange Rate" size='small' sx={{ background: 'white',borderRadius:1}}/>
                             <RHFTextField name="currentCredit" label="Current Credit" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            
-
                         </Box>
                     </Card>
                 </Grid>             
-
                 <Grid item xs={6} md={6}>
                     <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
@@ -210,22 +204,9 @@ export default function Quotations() {
                                     />
                                 </Stack>
                             </LocalizationProvider>
-
-                         {/*   <RHFSelect name="price List" label="Price List" placeholder="Price List" size='small' sx={{ background: 'white'}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>*/}
-
                         </Box>
                     </Card>
                 </Grid>
-
-              
-
             </Grid>
             {/*----------------SALES TABLE CALLING-------------------------------------------*/}
             <SalesQuotaionsItems  />
@@ -255,7 +236,6 @@ export default function Quotations() {
                                                 ))}
                                             </RHFSelect>
                                             <RHFTextField name="shippingTerms" label="Shipping Terms" size="small" sx={{ mt: 1 }}/>
-                                            {/* <RHFTextField name="carrierReceiptNo" label="Carrier Receipt No" size="small" sx={{ mt: 1 }}/> */}
                                             <LocalizationProvider dateAdapter={AdapterDayjs} >
                                                 <Stack spacing={3} sx={{ mt: 1 }}>
                                                     <DesktopDatePicker
@@ -273,7 +253,6 @@ export default function Quotations() {
                                     </Card>
                                 </Grid>
                             </Grid>
-                        
                             <Grid mt={3} container spacing={1}>
                                 <Grid item xs={12} md={12}>
                                     <Card  sx={{ p: 3 }}>

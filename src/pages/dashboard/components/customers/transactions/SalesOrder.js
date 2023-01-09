@@ -34,40 +34,68 @@ import { red } from '@mui/material/colors';
 
 export default function SalesOrder() {
     const { enqueueSnackbar } = useSnackbar();
-    const [date, setDate] = useState(new Date());
+    const [orderdate, setOrderDate] = useState(new Date());
+    const [requireddeliverydate, setRequiredDeliveryDate] = useState(new Date());
+    const [trdate, setTRDate] = useState(new Date());
+    const [purchaseOrderDate, setPurchaseOrderDate] = useState(new Date());
     const { user } = useAuth();
 
     const UpdateUserSchema = Yup.object().shape({
-        displayName: Yup.string().required('Name is required'),
+        customers: Yup.string().required('Name is required'),
+        branch: Yup.string().required('Branch Name is required'),
+        orderdate: Yup.string().required('Order Date is required'),
+        address: Yup.string().required('Address is required'),
+        typeOfPacking: Yup.string().required('Type of Packing is required'),
+        attn: Yup.string().required('Attention person is required'),
+        currency: Yup.string().required('Currency is required'),
     });
-
     const defaultValues = {
-        displayName: user?.displayName || '',
-        email: user?.email || '',
-        photoURL: user?.photoURL || '',
-        phoneNumber: user?.phoneNumber || '',
-        country: user?.country || '',
-        address: user?.address || '',
-        state: user?.state || '',
-        city: user?.city || '',
-        zipCode: user?.zipCode || '',
-        about: user?.about || '',
-        isPublic: user?.isPublic || '',
-    };
-    
 
+        customers: '',
+        branch: '',
+        reference: '',
+        customerdiscount: '',
+        currentCredit: '',
+        pricelist: '',
+        salesPerson: '',
+        payment: '',
+        orderdate: '',
+        requireddeliverydate: '',
+        trdate: '',
+        purchaseOrderDate: '',
+        deliverFromLocation: '',
+        shippingTerms: '',
+        carrierReceiptNo: '',
+        delivery: '',
+        deliveryTo: '',
+        quantity: '',
+        address: '',
+        customerReference: '',
+        typeOfPacking: '',
+        purchaseOrder: '',
+        comments: '',
+        attn: '',
+        shippingCompany: '',
+        grn: '',
+        deliveryTerms: '',
+        gridNo: '',
+        currency: '',
+    };
     const methods = useForm({
-        resolver: yupResolver(UpdateUserSchema),
+       // resolver: yupResolver(UpdateUserSchema),
         defaultValues,
     });
-
     const {
         setValue,
         handleSubmit,
         formState: { isSubmitting },
     } = methods;
-
-    const onSubmit = async () => {
+    const onSubmit = async (data) => {
+        data.orderdate = orderdate
+        data.requireddeliverydate = requireddeliverydate
+        data.trdate = trdate
+        data.purchaseOrderDate = purchaseOrderDate
+        console.log("=======:::", data);
         try {
             await new Promise((resolve) => setTimeout(resolve, 500));
             enqueueSnackbar('Update success!');
@@ -75,11 +103,9 @@ export default function SalesOrder() {
             console.error(error);
         }
     };
-
     const handleDrop = useCallback(
         (acceptedFiles) => {
             const file = acceptedFiles[0];
-
             if (file) {
                 setValue(
                     'photoURL',
@@ -91,7 +117,6 @@ export default function SalesOrder() {
         },
         [setValue]
     );
-
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
@@ -122,12 +147,9 @@ export default function SalesOrder() {
                                 ))}
                             </RHFSelect>
                             <RHFTextField name="reference" label="Reference" size='small' sx={{ background:'white', borderRadius:1,}}/>
-
                         </Box>
                     </Card>
                 </Grid>
-
-
                 <Grid item xs={3} md={3}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
@@ -155,7 +177,6 @@ export default function SalesOrder() {
                         </Box>
                     </Card>
                 </Grid>             
-
                 <Grid item xs={6} md={6}>
                     <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
@@ -187,10 +208,10 @@ export default function SalesOrder() {
                                     <DesktopDatePicker
                                     container
                                         label="Order Date"
-                                        value={date}
+                                        value={orderdate}
                                         // minDate={dayjs('2017-01-01')}
                                         onChange={(newValue) => {
-                                            setDate(newValue);
+                                            setOrderDate(newValue);
                                         }}
                                         renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
                                     />
@@ -204,11 +225,9 @@ export default function SalesOrder() {
             <SalesOrderItems />
 {/*----------------3rd portion Detailing Code-------------------------------------------*/}
             <Grid mt={3} container spacing={1}>
-                <Grid item xs={12} md={12}>
-                    
+                <Grid item xs={12} md={12}>                 
                     <Card sx={{ p: 3, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                    <h4
-                        style={{ textAlign:'center'}}>Order Delivery Details </h4>
+                    <h4 style={{ textAlign:'center'}}>Order Delivery Details </h4>
                         <Box
                             sx={{
                                 display: 'grid',
@@ -235,10 +254,10 @@ export default function SalesOrder() {
                                 <Stack spacing={3} sx={{ mt: 1 }}>
                                     <DesktopDatePicker
                                         label=" Required Delivery Date"
-                                        value={date}
+                                        value={requireddeliverydate}
                                         // minDate={dayjs('2017-01-01')}
                                         onChange={(newValue) => {
-                                            setDate(newValue);
+                                            setRequiredDeliveryDate(newValue);
                                         }}
                                         renderInput={(params) => <TextField {...params} size="small" />}
                                     />
@@ -256,10 +275,10 @@ export default function SalesOrder() {
                                     <Stack spacing={3} sx={{ mt: 1}}>
                                     <DesktopDatePicker
                                         label="T.R Date"
-                                        value={date}
+                                        value={trdate}
                                         // minDate={dayjs('2017-01-01')}
                                         onChange={(newValue) => {
-                                            setDate(newValue);
+                                            setTRDate(newValue);
                                         }}
                                         renderInput={(params) => <TextField {...params} size='small' />}
                                     />
@@ -287,10 +306,10 @@ export default function SalesOrder() {
                                 <Stack spacing={3} sx={{ mt: 1}}>
                                     <DesktopDatePicker
                                         label="Purchase Order Date"
-                                        value={date}
+                                        value={purchaseOrderDate}
                                         // minDate={dayjs('2017-01-01')}
                                         onChange={(newValue) => {
-                                            setDate(newValue);
+                                            setPurchaseOrderDate(newValue);
                                         }}
                                         renderInput={(params) => <TextField {...params} size='small' sx={{ background:'white',borderRadius: 1}}/>}
                                     />
@@ -317,25 +336,22 @@ export default function SalesOrder() {
                                 ))}
                             </RHFSelect>
                         </Box>
-
                         <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
-                         <Box display={'flex'} >
-                          <Box m={1}>
-                           <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                             Save
-                           </LoadingButton>
-                          </Box>
-                          <Box m={1}>
-                          <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                             Cancel
-                          </LoadingButton>
-                          </Box>
-                         </Box>
-                        </Stack>
-                        
-                                          </Card>
+                            <Box display={'flex'} >
+                                <Box m={1}>
+                                    <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                                        Save
+                                    </LoadingButton>
+                                </Box>
+                                <Box m={1}>
+                                    <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                                        Cancel
+                                    </LoadingButton>
+                                </Box>
+                            </Box>
+                        </Stack> 
+                    </Card>
                 </Grid>
-
             </Grid>
         </FormProvider> 
     );

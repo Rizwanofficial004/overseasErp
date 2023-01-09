@@ -104,10 +104,37 @@ export default function Router() {
         {
           path: 'suppliers',
           children: [
-            { element: <Navigate to="/dashboard/Suppliers/Transaction" replace />, index: true },
+            { element: <Navigate to="/dashboard/suppliers/transaction" replace />, index: true },
             { path: 'transaction', element: <Transaction /> },
-            // { path: 'report', element: <Report /> },
-            // { path: 'setup', element: <Setup /> },
+            { path: 'report', element: <Report /> },
+            { path: 'suppliersetup', element: <SupplierSetup /> },
+          ],
+        },
+        {
+          path: 'Inventory',
+          children: [
+            { element: <Navigate to="/dashboard/Inventory/Inventorytransaction" replace />, index: true },
+            { path: 'Inventorytransaction', element: <InventoryTransaction /> },
+            { path: 'Inventoryreport', element: <InventoryReport /> },
+            { path: 'Inventorysetup', element: <InventorySetup /> },
+          ],
+        },
+        {
+          path: 'GeneralLedger',
+          children: [
+            { element: <Navigate to="/dashboard/GeneralLedger/Generaltransactions" replace />, index: true },
+            { path: 'Generaltransactions', element: <GeneralTransactions /> },
+            { path: 'Generalreport', element: <GeneralReport /> },
+            { path: 'Generalsetup', element: <GeneralSetup /> },
+          ],
+        },
+        {
+          path: 'Settings',
+          children: [
+            { element: <Navigate to="/dashboard/Settings/CompanySetup" replace />, index: true },
+            { path: 'CompanySetup', element: <CompanySetup/> },
+            { path: 'Miscellaneous', element: <Miscellaneous /> },
+            { path: 'SettingMaintenance', element: <SettingMaintenance /> },
           ],
         },
         // {
@@ -145,7 +172,7 @@ export default function Router() {
     // Main Routes
     // {
     //   path: '*',
-    //   element: <LogoOnlyLayout />,
+    //   element:  <LogoOnlyLayout />,
     //   children: [
     //     { path: 'coming-soon', element: <ComingSoon /> },
     //     { path: 'maintenance', element: <Maintenance /> },
@@ -207,8 +234,20 @@ const Reports = Loadable(lazy(() => import('../pages/dashboard/Customers/Reports
 const Setup = Loadable(lazy(() => import('../pages/dashboard/Customers/Setup')));
 //----------------------Suppliers-------------------------
 const Transaction = Loadable(lazy(() => import('../pages/dashboard/Suppliers/Transaction')));
-// const Report = Loadable(lazy(() => import('../pages/dashboard/Supplires/Report')));
-// const Setup = Loadable(lazy(() => import('../pages/dashboard/Supplires/Setup')));
+const Report = Loadable(lazy(() => import('../pages/dashboard/Suppliers/Report')));
+const SupplierSetup = Loadable(lazy(() => import('../pages/dashboard/Suppliers/SupplierSetup')));
+ //......................Inventory------------------------
+const InventoryTransaction = Loadable(lazy(() => import('../pages/dashboard/Inventory/InventoryTransaction')));
+const InventoryReport = Loadable(lazy(() => import('../pages/dashboard/Inventory/InventoryReport')));
+const InventorySetup = Loadable(lazy(() => import('../pages/dashboard/Inventory/InventorySetup')));
+ //......................General Ledger------------------------
+const GeneralTransactions = Loadable(lazy(() => import('../pages/dashboard/GeneralLedger/GeneralTransactions')));
+const GeneralReport = Loadable(lazy(() => import('../pages/dashboard/GeneralLedger/GeneralReport')));
+const GeneralSetup = Loadable(lazy(() => import('../pages/dashboard/GeneralLedger/GeneralSetup')));
+ //--------------------------Settings------------------------
+ const CompanySetup = Loadable(lazy(() => import('../pages/dashboard/Settings/CompanySetup')));
+ const Miscellaneous = Loadable(lazy(() => import('../pages/dashboard/Settings/Miscellaneous')));
+ const SettingMaintenance = Loadable(lazy(() => import('../pages/dashboard/Settings/SettingMaintenance')));
 // Main 
 
 const HomePage = Loadable(lazy(() => import('../pages/Home')));

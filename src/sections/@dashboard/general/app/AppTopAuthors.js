@@ -30,7 +30,7 @@ export default function AppTopAuthors() {
 
   return (
     <Card>
-      <CardHeader title="Top Sallers" />
+      <CardHeader title="Top S & A Engineer of This Year" />
       <Stack spacing={3} sx={{ p: 3 }}>
         {displayAuthor.map((author, index) => (
           <AuthorItem key={author.id} author={author} index={index} />

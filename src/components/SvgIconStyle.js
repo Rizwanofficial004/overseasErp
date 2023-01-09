@@ -16,7 +16,7 @@ export default function SvgIconStyle({ src, sx }) {
         width: 24,
         height: 24,
         display: 'inline-block',
-        bgcolor: 'currentColor',
+        bgcolor: '#D35400',
         mask: `url(${src}) no-repeat center / contain`,
         WebkitMask: `url(${src}) no-repeat center / contain`,
         ...sx,

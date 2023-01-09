@@ -28,7 +28,7 @@ export default function GeneralApp() {
   const { themeStretch } = useSettings();
 
   return (
-    <Page title="General: App">
+    <Page title="ERP DASHBOARD">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Grid container spacing={3}>
          {/* <Grid item xs={12} md={8}>
@@ -50,7 +50,7 @@ export default function GeneralApp() {
           </Grid>
           <Grid item xs={12} md={4}>
             <AppWidgetSummary
-              title="Total Installed"
+              title="Total Customers"
               percent={0.2}
               total={4876}
               chartColor={theme.palette.chart.blue[0]}
@@ -59,7 +59,7 @@ export default function GeneralApp() {
           </Grid>
           <Grid item xs={12} md={4}>
             <AppWidgetSummary
-              title="Total Downloads"
+              title="Total Suppliers"
               percent={-0.1}
               total={678}
               chartColor={theme.palette.chart.red[0]}

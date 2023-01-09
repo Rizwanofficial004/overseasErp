@@ -7,11 +7,9 @@
 
     import { useForm } from 'react-hook-form';
     import { yupResolver } from '@hookform/resolvers/yup';
-
     // @mui
     import { Box, Grid, Card, Stack, Typography,Button } from '@mui/material';
     import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
-
     import dayjs from 'dayjs';
     import TextField from '@mui/material/TextField';
     import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -35,53 +33,45 @@
 
     export default function CreditInvoice() {
         const { enqueueSnackbar } = useSnackbar();
-        const [date, setDate] = useState(new Date());
+        const [creditdate, setcreditDate] = useState(new Date());
+        const [creditTodate, setcreditTODate] = useState(new Date());
         const { user } = useAuth();
-
         const UpdateUserSchema = Yup.object().shape({
             displayName: Yup.string().required('Name is required'),
         });
         const AddButton = () => {
             return (
                 <Button
-                
                     // component={RouterLink}
                     // to={PATH_DASHBOARD.user.newUser}
-                    
-                
                 >
                     Add
                 </Button>
             )
         }
-
         const defaultValues = {
-            displayName: user?.displayName || '',
-            email: user?.email || '',
-            photoURL: user?.photoURL || '',
-            phoneNumber: user?.phoneNumber || '',
-            country: user?.country || '',
-            address: user?.address || '',
-            state: user?.state || '',
-            city: user?.city || '',
-            zipCode: user?.zipCode || '',
-            about: user?.about || '',
-            isPublic: user?.isPublic || '',
+            reference: '',
+            creditdate: '',
+            creditTodate: '',
+            alllocation: '',
+            item: '',
+            allitems: '',
+            allcustomers: '',
+            
         };
-        
-
         const methods = useForm({
             resolver: yupResolver(UpdateUserSchema),
             defaultValues,
         });
-
         const {
             setValue,
             handleSubmit,
             formState: { isSubmitting },
         } = methods;
-
-        const onSubmit = async () => {
+        const onSubmit = async (data) => {
+            data.creditdate = creditdate
+            data.creditTodate = creditTodate
+            console.log("=======:::", data);
             try {
                 await new Promise((resolve) => setTimeout(resolve, 500));
                 enqueueSnackbar('Update success!');
@@ -89,11 +79,9 @@
                 console.error(error);
             }
         };
-
         const handleDrop = useCallback(
             (acceptedFiles) => {
                 const file = acceptedFiles[0];
-
                 if (file) {
                     setValue(
                         'photoURL',
@@ -105,7 +93,6 @@
             },
             [setValue]
         );
-
         return (
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                 <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
@@ -118,33 +105,31 @@
                                     columnGap: 1,
                                     gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                                 }}
-                            >
-                                
-                                <RHFTextField name="#" label="#" size='small' sx={{ background:'white', borderRadius:1,}}/>
-                                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            >                      
+                                <RHFTextField name="reference" label="#" size='small' sx={{ background:'white', borderRadius:1,}}/>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <Stack spacing={3}>
                                         <DesktopDatePicker
-                                        container
+                                            container
                                             label="From"
-                                            value={date}
+                                            value={creditdate}
                                             // minDate={dayjs('2017-01-01')}
                                             onChange={(newValue) => {
-                                                setDate(newValue);
+                                                setcreditDate(newValue);
                                             }}
                                             renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
                                         />
                                     </Stack>
                                 </LocalizationProvider>
-
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <Stack spacing={3}>
                                         <DesktopDatePicker
                                         container
                                             label="To"
-                                            value={date}
+                                            value={creditTodate}
                                             // minDate={dayjs('2017-01-01')}
                                             onChange={(newValue) => {
-                                                setDate(newValue);
+                                                setcreditTODate(newValue);
                                             }}
                                             renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
                                         />
@@ -153,8 +138,6 @@
                             </Box>
                         </Card>
                     </Grid>
-
-
                     <Grid item xs={3} md={3}>
                         <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                             <Box
@@ -184,12 +167,9 @@
                                         </option>
                                     ))}
                                 </RHFSelect>
-                                
-
                             </Box>
                         </Card>
                     </Grid>             
-
                     <Grid item xs={6} md={6}>
                         <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                             <Box
@@ -208,39 +188,18 @@
                                         </option>
                                     ))}
                                 </RHFSelect>
-                            
-
-                            {/*   <RHFSelect name="price List" label="Price List" placeholder="Price List" size='small' sx={{ background: 'white'}}>
-                                    <option value="" />
-                                    {countries.map((option) => (
-                                        <option key={option.code} value={option.label}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </RHFSelect>*/}
-                            
-                            
                             <Stack spacing={1} alignItems="flex-center" sx={{ background:'#FF9238', mt: 1,borderRadius: 1 }}>
-                            
-                            
                             <LoadingButton type="submit" >
                                 Search
                             </LoadingButton>
-                            
-                            
-                        
                             </Stack>
                             </Box>
                         </Card>
                     </Grid>
-
-                
-
                 </Grid>
     {/*----------------SALES TABLE CALLING-------------------------------------------*/}
                 <CreditInvoiceItems />
-    {/*----------------3rd portion Detailing Code-------------------------------------------*/}
-            
+    {/*----------------3rd portion Detailing Code-------------------------------------------*/}            
             </FormProvider> 
         );
     }

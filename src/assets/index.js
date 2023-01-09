@@ -1,5 +1,6 @@
 
 import companyLogo from './logos/comLogo.jpeg'
+// import companyLogo from './logos/1.png'
 
 
 export { default as DocIllustration } from './illustration_doc';

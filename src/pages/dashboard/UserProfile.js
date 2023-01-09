@@ -80,7 +80,6 @@ export default function UserProfile() {
       component: <ProfileGallery gallery={_userGallery} />,
     },
   ];
-
   return (
     <Page title="User: Profile">
       <Container maxWidth={themeStretch ? false : 'lg'}>

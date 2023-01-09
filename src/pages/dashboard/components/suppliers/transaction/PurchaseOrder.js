@@ -27,12 +27,13 @@ import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } fro
 import { whitespace } from 'stylis';
 import { red } from '@mui/material/colors';
 import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
+import PurchaseOrderItems from './PurchaseOrderComponents/PurchaseOrderItems';
 
 // ----------------------------------------------------------------------
 
 export default function PurchaseOrder() {
     const { enqueueSnackbar } = useSnackbar();
-    const [date, setDate] = useState(new Date());
+    const [orderdate, setorderDate] = useState(new Date());
     const { user } = useAuth();
 
     const UpdateUserSchema = Yup.object().shape({
@@ -102,7 +103,7 @@ export default function PurchaseOrder() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="customers" label="Customers"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
+                            <RHFSelect name="Supplier" label="Supplier"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -110,7 +111,7 @@ export default function PurchaseOrder() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="branch" label="Branch" size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <RHFSelect name="Suppliercurrency" label="Supplier Currency" size='small' sx={{ background: 'white',borderRadius:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -118,13 +119,11 @@ export default function PurchaseOrder() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFTextField name="reference" label="Reference"  size='small' sx={{ background:'white', borderRadius:1,}}/>
-
+                            <RHFTextField name="Exchangerate" label="Exchange Rata"  size='small' sx={{ background:'white', borderRadius:1,}}/>
+                            
                         </Box>
                     </Card>
                 </Grid>
-
-
                 <Grid item xs={3} md={3}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
@@ -137,16 +136,27 @@ export default function PurchaseOrder() {
                                 
                                 }}
                         >
-                            <RHFTextField name="customerdiscount" label="Customer Discount %" size='small' sx={{ background: 'white',borderRadius:1 }}  />
-                            <RHFTextField name="exchangeRate" label="Exchange Rate" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="currentCredit" label="Current Credit" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            
-
+                            <RHFTextField name="Currentcredit" label="Current Credit    "  size='small' sx={{ background:'white', borderRadius:1,}}/>
+                            <RHFTextField name="reference" label="Reference" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <Stack spacing={3}>
+                                    <DesktopDatePicker
+                                    container
+                                        label="Order Date"
+                                        value={orderdate}
+                                        // minDate={dayjs('2017-01-01')}
+                                        onChange={(newValue) => {
+                                            setorderDate(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                    />
+                                </Stack>
+                            </LocalizationProvider>                                                      
                         </Box>
                     </Card>
                 </Grid>             
 
-                <Grid item xs={6} md={6}>
+                <Grid item xs={3} md={3}>
                     <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -156,7 +166,8 @@ export default function PurchaseOrder() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="payment" label="Payment" placeholder="Payment" size='small'sx={{ background: 'white',borderRadius:1}}>
+                            <RHFTextField name="SuppliersReference " label="Supplier's Reference" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                            <RHFSelect name="receiveinto" label="Receive Into" placeholder="Payment" size='small'sx={{ background: 'white',borderRadius:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -172,150 +183,48 @@ export default function PurchaseOrder() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <Stack spacing={3}>
-                                    <DesktopDatePicker
-                                    container
-                                        label="Quotation Date"
-                                        value={date}
-                                        // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>
-
-                         {/*   <RHFSelect name="price List" label="Price List" placeholder="Price List" size='small' sx={{ background: 'white'}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>*/}
-
                         </Box>
                     </Card>
                 </Grid>
-
-              
-
-            </Grid>
-{/*----------------SALES TABLE CALLING-------------------------------------------*/}
-            
-{/*----------------3rd portion Detailing Code-------------------------------------------*/}
-            <Grid mt={3} container spacing={1}>
-                <Grid item xs={12} md={12}>
-                    
-                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                        
-                    <h2
-                        style={{  textAlign:'center',color:'black',borderRadius:10}}>Quotation Delivery Details </h2>
+                
+                <Grid item xs={3} md={3}>
+                    <Card sx={{  p: 8, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
                                 display: 'grid',
-                                rowGap: 2,
+                                rowGap: 1,
                                 columnGap: 2,
-                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(3, 1fr)' },
+                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-    <Grid mt={3} container spacing={1}>
-        <Grid item xs={12} md={12}>
-            <Card sx={{ p: 3 }}>
-                <Grid>
-                            <RHFSelect name="deliverFromLocation" label="Deliver from Location" placeholder="Deliver from Location" size='small' sx={{ mt: 1}}>
-                                <option value=""/>
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFTextField name="ShippingTerms" label="Shipping Terms" size="small" sx={{ mt: 1 }}/>
-                            {/* <RHFTextField name="carrierReceiptNo" label="Carrier Receipt No" size="small" sx={{ mt: 1 }}/> */}
-                            <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                <Stack spacing={3} sx={{ mt: 1 }}>
-                                    <DesktopDatePicker
-                                        label=" Quotation Date"
-                                        value={date}
-                                        // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size="small" />}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>
-                            </Grid>
-            </Card>
-        </Grid>
-    </Grid>
-            <Grid mt={3} container spacing={1}>
-                <Grid item xs={12} md={12}>
-                    <Card  sx={{ p: 3 }}>
-                        <RHFTextField  name="deliveryTo" label="Delivery To" size="small" sx={{ mt: 1}}/>
-                        <RHFTextField name="contactPhoneNumber" label="Contact Phone Number"size='small' sx={{ mt: 1}} />
+                        <RHFTextField name="Deliverto " label="Deliver To" size ='small' sx={{ background: 'white',borderRadius:1}}/>
+                        </Box>
                     </Card>
                 </Grid>
             </Grid>
- <Grid mt={3} container spacing={1}>
-    <Grid item xs={12} md={12}>
-        <Card sx={{ p: 3 }}>
-                            <RHFTextField name="address" label="Address" size='small' sx={{ mt: 1}}/>
-                            <RHFTextField name="customerReference" placeholderTextColor={'green'} label="Customer Reference" size='small' sx={{ mt: 1}} />
-                            <RHFSelect name="shippingCompany" label="Shipping Company" placeholder="Deliver from Location" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-             </Card>
-        </Grid>
-    </Grid>
-                            <RHFTextField name="purchaseOrder" label="Purchase Order" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}/>
-                            <RHFTextField name="comments" label="Comments" size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}/>
-                            <RHFTextField name="attn" label="ATTN" size='small' sx={{ mt: 1 , background:'white',borderRadius: 1}}/>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <Stack spacing={3} sx={{ mt: 1}}>
-                                    <DesktopDatePicker
-                                        label="Purchase Order Date"
-                                        value={date}
-                                        // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{ background:'white',borderRadius: 1}}/>}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>
-                            <RHFTextField name="deliveryTerms" label="Delivery Terms"size='small' sx={{ mt: 1, background:'white',borderRadius: 1}} />
-                            <RHFSelect name="currency" label="Currency"  size='small' sx={{ mt: 1, background:'white',borderRadius: 1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                        </Box>
-                        <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
-                         <Box display={'flex'} >
-                          <Box m={1}>
-                           <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                             Save
-                           </LoadingButton>
-                          </Box>
-                          <Box m={1}>
-                          <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+{/*----------------SALES TABLE CALLING-------------------------------------------*/}
+                    <PurchaseOrderItems />
+{/*----------------3rd portion Detailing Code-------------------------------------------*/}
+            <Grid mt={3} ml={23} container spacing={1}>
+                <Grid item xs={8} md={8}>
+                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
+                        
+           
+           <RHFTextField name="memo" label="MEMO" multiline rows={4}  sx={{ mt: 1, background: 'white',borderRadius:1 }}/>
+                    <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
+                        <Box display={'flex'} >
+                            <Box m={1}>
+                                <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                                    Save
+                                </LoadingButton>
+                            </Box>
+                            <Box m={1}>
+                                <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                              Cancel
-                          </LoadingButton>
-                          </Box>
-                         </Box>
-                        </Stack>                        
+                                </LoadingButton>
+                            </Box>
+                        </Box>
+                    </Stack>                        
                     </Card>
                 </Grid>
             </Grid>

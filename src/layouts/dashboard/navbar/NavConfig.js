@@ -3,6 +3,7 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
 import Label from '../../../components/Label';
 import SvgIconStyle from '../../../components/SvgIconStyle';
+import { Icon } from '@iconify/react';
 
 // ----------------------------------------------------------------------
 
@@ -21,6 +22,8 @@ const ICONS = {
   analytics: getIcon('ic_analytics'),
   dashboard: getIcon('ic_dashboard'),
   booking: getIcon('ic_booking'),
+  inventory: getIcon('material-symbols:inventory-2'),
+  
 };
 
 const navConfig = [
@@ -59,14 +62,53 @@ const navConfig = [
       {
         title: 'Customers',
         path: PATH_DASHBOARD.customers.root,
-        icon: ICONS.user,
+        icon: <Icon icon="material-symbols:account-box" color="#d35400" />,
         children: [
           { title: 'Transactions', path: PATH_DASHBOARD.customers.transactions },
           { title: 'Reports', path: PATH_DASHBOARD.customers.reports },
           { title: 'Setup', path: PATH_DASHBOARD.customers.setup },
         ],
       },
-
+      {
+        title: 'Suppliers',
+        path: PATH_DASHBOARD.suppliers.root,
+        icon: <Icon icon="material-symbols:supervisor-account" color="#d35400" />,
+        children: [
+          { title: 'Transactions', path: PATH_DASHBOARD.suppliers.transaction },
+          { title: 'Reports', path: PATH_DASHBOARD.suppliers.report },
+          { title: 'Setup', path: PATH_DASHBOARD.suppliers.setup },
+        ],
+      },
+      {
+        title: 'Inventory',
+        path: PATH_DASHBOARD.inventory.root,
+        icon: <Icon icon="material-symbols:inventory-2" color="#d35400" />,
+        children: [
+          { title: 'Transaction', path: PATH_DASHBOARD.inventory.inventorytransaction },
+          { title: 'Report', path: PATH_DASHBOARD.inventory.inventoryreport },
+          { title: 'Setup', path: PATH_DASHBOARD.inventory.inventorysetup },
+        ],
+      },
+      {
+        title: 'General Ledger ',
+        path: PATH_DASHBOARD.generalledger.root,
+        icon: <Icon icon="material-symbols:attractions" color="#d35400" />,
+        children: [
+          { title: 'Transactions', path: PATH_DASHBOARD.generalledger.generaltransactions },
+          { title: 'Reports', path: PATH_DASHBOARD.generalledger.generalreport },
+          { title: 'Setup', path: PATH_DASHBOARD.generalledger.generalsetup },
+        ],
+      },
+      {
+        title: 'Settings ',
+        path: PATH_DASHBOARD.settings.root,
+        icon: <Icon icon="material-symbols:construction-rounded" color="#d35400" />,
+        children: [
+          { title: 'Company Setup', path: PATH_DASHBOARD.settings.companysetup },
+          { title: 'Miscellaneous', path: PATH_DASHBOARD.settings.miscellaneous },
+          { title: 'Maintenance', path: PATH_DASHBOARD.settings.settingmaintenance },
+        ],
+      },
       // MANAGEMENT : E-COMMERCE
       // {
       //   title: 'e-commerce',

@@ -1,5 +1,5 @@
 import { capitalCase } from 'change-case';
-import { useState } from 'react';
+import React, { useState } from 'react';
 // @mui
 import { Container, Tab, Box, Tabs } from '@mui/material';
 // routes
@@ -20,7 +20,8 @@ import {
   AccountNotifications,
   AccountChangePassword,
 } from 'src/sections/@dashboard/user/account';
-import {AddCustomer,AddBranch,SalesType,SalesPersons} from '../components/customers/setup';
+import {AddBranch,SalesType,SalesPersons,NewCustomer} from '../components/customers/setup';
+
 
 // ----------------------------------------------------------------------
 
@@ -33,7 +34,7 @@ export default function Setup() {
     {
       value:  'New Customer',
       icon: <Iconify icon={'la:industry'} color='#F2740B' width={25} height={40} />,
-      component: <AddCustomer />
+      component: <NewCustomer />
     },
     {
       value: 'New Branch',
@@ -50,6 +51,7 @@ export default function Setup() {
       icon: <Iconify icon={'lucide:file-type'} color='#F2740B' width={25} height={40} />,
       component: <SalesType />,
     },
+    
   ];
   return (
     <Page title="Customers: Setup">

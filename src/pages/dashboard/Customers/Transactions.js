@@ -1,7 +1,9 @@
 import { capitalCase } from 'change-case';
 import { useState } from 'react';
+
 // @mui
-import { Container, Tab, Box, Tabs } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { Container, Tab, Box, Tabs,Card } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
@@ -23,16 +25,29 @@ import {
 import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
 import {SalesOrder} from '../components/customers/transactions';
 import {DeliveryNote} from '../components/customers/transactions';
+import QuotationPrint from '../components/customers/transactions/QuotationPrint';
 
-
+const TabsWrapperStyle = styled('div')(({ theme }) => ({
+  zIndex: 9,
+  bottom: 0,
+  width: '100%',
+  display: 'flex',
+  position: 'absolute',
+  backgroundColor: theme.palette.background.paper,
+  [theme.breakpoints.up('sm')]: {
+    justifyContent: 'center',
+  },
+  [theme.breakpoints.up('md')]: {
+    justifyContent: 'flex-end',
+    paddingRight: theme.spacing(3),
+  },
+}));
 
 // ----------------------------------------------------------------------
 
 export default function Transactions() {
   const { themeStretch } = useSettings();
-
   const [currentTab, setCurrentTab] = useState('Quotations');
-
   const ACCOUNT_TABS = [
     {
       value: 'Quotations',
@@ -79,12 +94,16 @@ export default function Transactions() {
       icon: <Iconify icon={'ooui:articles-rtl'} color='#F2740B' width={23} height={20} />,
       component: <Allocation />,
     },
-
+    {
+      value: 'Print',
+      icon: <Iconify icon={'ooui:articles-rtl'} color='#F2740B' width={23} height={20} />,
+      component: <QuotationPrint />,
+    },
   ];
-
   return (
     <Page title="Customers: Transactions">
       <Container maxWidth={themeStretch ? false : 'lg'}>
+     
         <HeaderBreadcrumbs
           heading="Transactions"
           links={[
@@ -93,6 +112,15 @@ export default function Transactions() {
             { name: 'Account Settings' },
           ]}
         />
+         <Card
+          sx={{
+            backgroundColor:'#ff6347',
+            mb: 3,
+            height: 200,
+            position: 'relative',
+          }}
+        ><Tab name={currentTab}></Tab>
+          <TabsWrapperStyle>
         <Tabs
           value={currentTab}
           scrollButtons="auto"
@@ -104,6 +132,8 @@ export default function Transactions() {
             <Tab disableRipple key={tab.value} label={tab.value} icon={tab.icon} value={tab.value} />
           ))}
         </Tabs>
+        </TabsWrapperStyle>
+        </Card>
         <Box sx={{ mb: 3 }} />
         {ACCOUNT_TABS.map((tab) => {
           const isMatched = tab.value === currentTab;

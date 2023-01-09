@@ -30,7 +30,7 @@ const ItemIconStyle = styled(Iconify)(({ theme }) => ({
 export default function AppTopInstalledCountries() {
   return (
     <Card>
-      <CardHeader title="Top Rated Brands" />
+      <CardHeader title="Brands Sale of Current Year" />
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3 }}>
           {_appInstalled.map((country) => (

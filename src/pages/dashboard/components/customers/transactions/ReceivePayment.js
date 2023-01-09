@@ -29,24 +29,23 @@
     // ----------------------------------------------------------------------
     export default function ReceivePayment() {
         const { enqueueSnackbar } = useSnackbar();
-        const [date, setDate] = useState(new Date());
+        const [depositdate, setdepositDate] = useState(new Date());
         const { user } = useAuth();
 
         const UpdateUserSchema = Yup.object().shape({
-            displayName: Yup.string().required('Name is required'),
+            memo: Yup.string().required('Messege is required'),
         });
         const defaultValues = {
-            displayName: user?.displayName || '',
-            email: user?.email || '',
-            photoURL: user?.photoURL || '',
-            phoneNumber: user?.phoneNumber || '',
-            country: user?.country || '',
-            address: user?.address || '',
-            state: user?.state || '',
-            city: user?.city || '',
-            zipCode: user?.zipCode || '',
-            about: user?.about || '',
-            isPublic: user?.isPublic || '',
+            intobank: '',
+            reference: '',
+            exchangerate: '',
+            bankcharges: '',
+            depositdate: '',
+            cppd: '',
+            wht: '',
+            gst: '',
+            amount: '',
+            memo: '',
         };
         const methods = useForm({
             resolver: yupResolver(UpdateUserSchema),
@@ -57,7 +56,9 @@
             handleSubmit,
             formState: { isSubmitting },
         } = methods;
-        const onSubmit = async () => {
+        const onSubmit = async (data) => {
+            data.depositdate = depositdate 
+            console.log("=======:::", data);
             try {
                 await new Promise((resolve) => setTimeout(resolve, 500));
                 enqueueSnackbar('Update success!');
@@ -65,21 +66,20 @@
                 console.error(error);
             }
         };
-        const handleDrop = useCallback(
-            (acceptedFiles) => {
-                const file = acceptedFiles[0];
-
-                if (file) {
-                    setValue(
-                        'photoURL',
-                        Object.assign(file, {
-                            preview: URL.createObjectURL(file),
-                        })
-                    );
-                }
-            },
-            [setValue]
-        );
+        // const handleDrop = useCallback(
+        //     (acceptedFiles) => {
+        //         const file = acceptedFiles[0];
+        //         if (file) {
+        //             setValue(
+        //                 'photoURL',
+        //                 Object.assign(file, 
+        //                     preview: URL.createObjectURL(file),
+        //                 })
+        //             );
+        //         }
+        //     },
+        //     [setValue]
+        // );
         return (
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                 <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
@@ -110,47 +110,44 @@
                                     ))}
                                 </RHFSelect>
                                 <RHFTextField name="reference" label="Reference" size='small' sx={{ background:'white', borderRadius:1,}}/>
-
                             </Box>
                         </Card>
                     </Grid>
-                <Grid item xs={6} md={6}>
-                    <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
-                        <Box
-                            sx={{
-                                display: 'grid',
-                                rowGap: 1,
-                                columnGap: 1,
-                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
-                                }}
-                            >
-                                <RHFTextField name="exchangerate" label="Exchange Rate (PKR = 1)" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                                <RHFTextField name="bankcharges" label="Bank Charges" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <Stack spacing={3}>     
-                                        <DesktopDatePicker
-                                            container
-                                                label="Date Of Deposit"
-                                                value={date}
-                                            // minDate={dayjs('2017-01-01')}
-                                                onChange={(newValue) => {
-                                                setDate(newValue);
-                                            }}
-                                            renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
-                                        />
-                                    </Stack>
-                                </LocalizationProvider>
-                        </Box>
-                    </Card>
+                    <Grid item xs={6} md={6}>
+                        <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
+                            <Box
+                                sx={{
+                                    display: 'grid',
+                                    rowGap: 1,
+                                    columnGap: 1,
+                                    gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
+                                    }}
+                                >
+                                    <RHFTextField name="exchangerate" label="Exchange Rate (PKR = 1)" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                                    <RHFTextField name="bankcharges" label="Bank Charges" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <Stack spacing={3}>     
+                                            <DesktopDatePicker
+                                                container
+                                                    label="Date Of Deposit"
+                                                    value={depositdate}
+                                                // minDate={dayjs('2017-01-01')}
+                                                    onChange={(newValue) => {
+                                                    setdepositDate(newValue);
+                                                }}
+                                                renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                            />
+                                        </Stack>
+                                    </LocalizationProvider>
+                            </Box>
+                        </Card>
+                    </Grid>
                 </Grid>
-            </Grid>
-
     {/*----------------2nd Portion Detailing Code-------------------------------------------*/}
                 <Grid mt={3} container spacing={1}>
                     <Grid item xs={12} md={12}>                 
                         <Card sx={{ p: 3, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                        <h4
-                            style={{ textAlign:'center'}}>Amount and WHT Are In Customer's Currency </h4>
+                        <h4 style={{ textAlign:'center'}}>Amount and WHT Are In Customer's Currency </h4>
                             <Box
                                 sx={{
                                     display: 'grid',
@@ -181,10 +178,8 @@
                             </Box>
                             </Box>
                             </Stack>
-                            
-                                            </Card>
+                        </Card>
                     </Grid>
-
                 </Grid>
             </FormProvider> 
         );

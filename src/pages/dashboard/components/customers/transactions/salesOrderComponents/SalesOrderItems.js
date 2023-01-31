@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import {
+    Box,
     Card,
     Table,
     Avatar,
@@ -15,14 +16,15 @@ import {
     Container,
     Typography,
     TableContainer,
-    DialogTitle
+    DialogTitle,
+    Grid
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _quotationItems } from 'src/_mock';
+import { _userList, _saleOrderItems } from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -31,7 +33,7 @@ import SearchNotFound from 'src/components/SearchNotFound';
 // sections
 import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/sections/@dashboard/user/list';
 import { DialogAnimate } from 'src/components/animate';
-import { CalendarForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
+import { CalendarForm, CalendarStyle, CalendarToolbar,SalesOrderItemsForm } from 'src/sections/@dashboard/calendar';
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
@@ -51,23 +53,37 @@ let data = [
     id: '2354',
     priceBeforeText: 'Amount Total', 
     discount: '0.00',
+
     total: 'update' , bold: true
     },
   ]
-  let QItem = [..._quotationItems, ...data]
-export default function SalesQuotaionsItems() {
+  let QItem = [..._saleOrderItems, ...data]
+  function RedBar() {
+    return (
+      <Box
+        sx={{
+          height: 2,
+          width:155,
+          backgroundColor: 'red',
+          marginLeft:55,
+          marginBottom:3,
+        }}
+      />
+    );
+  }
+export default function SalesOrderItems() {
     console.log("++++++++++++++", QItem);
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems, ...data]);
+    const [saleOrderItems, setsaleOrderItems] = useState([..._saleOrderItems]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
     const [orderBy, setOrderBy] = useState('name');
     const [filterName, setFilterName] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selectedQuotation, setSelectedQuotation ] = useState(null)
+    const [selectedsaleOrder, setselectedsaleOrder ] = useState(null)
     const AddButton = () => {
             return (
                 <Button
@@ -88,7 +104,7 @@ export default function SalesQuotaionsItems() {
             { id: 'role', label: 'Long Description', alignRight: false },
             { id: 'isVerified', label: 'Quantity', alignRight: false },
             { id: 'status', label: 'Unit', alignRight: false },
-            { id: 'status', label: 'Price Before Tex', alignRight: false },
+            { id: 'status', label: 'Price Before Tax', alignRight: false },
             { id: 'status', label: 'Discount %', alignRight: false },
             { id: 'status', label: 'Total', alignRight: false },
             { id: '', label: <AddButton />, alignRight: false },
@@ -169,10 +185,10 @@ export default function SalesQuotaionsItems() {
         setUserList(deleteUsers);
     };
     const handleEditEvent = (obj) => {
-        setSelectedQuotation(obj)
+        setselectedsaleOrder(obj)
         dispatch(openModal());
     };  
-
+  
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userList.length) : 0;
 
     const filteredUsers = applySortFilter(userList, getComparator(order, orderBy), filterName);
@@ -181,16 +197,14 @@ export default function SalesQuotaionsItems() {
    
 
     return (
-        <Page title="User: List" padding='1.5rem'>
+        <Page title="Transaction :Sales Order " padding='1.5rem'>
             <Container  maxWidth={themeStretch ? false : 'lg'}>
                 <Card>
                     <Scrollbar>
-                        <TableContainer sx={{ minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Sales Order Items </h4>
-                        
+                        <TableContainer sx={{ minWidth: 800 ,padding:1}}>
+                        <h2 style={{ textAlign:'center', color:'black'}}>Sales Order Items</h2>
+                        <RedBar />
                             <Table>
-                                
                                 <UserListHead
                                     order={order}
                                     orderBy={orderBy}
@@ -200,12 +214,10 @@ export default function SalesQuotaionsItems() {
                                     onRequestSort={handleRequestSort}
                                     onSelectAllClick={handleSelectAllClick}
                                 />
-                                
                                 <TableBody >
-                                    {quotationItems.map((row) => {
-                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeText, discount, total } = row;
+                                    {saleOrderItems.map((row) => {
+                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeTax, discount, total } = row;
                                         const isItemSelected = selected.indexOf(itemCode) !== -1;
-
                                         return (
                                             <TableRow
                                                 hover
@@ -228,7 +240,7 @@ export default function SalesQuotaionsItems() {
                                                 <TableCell align="left">{longDescription}</TableCell>
                                                 <TableCell align="left">{quantity}</TableCell>
                                                 <TableCell align="left">{unit}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{priceBeforeText}</TableCell>
+                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{priceBeforeTax}</TableCell>
                                                 <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{discount}</TableCell>
                                                 <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{total}</TableCell>
                                                 <TableCell align="right">
@@ -257,15 +269,14 @@ export default function SalesQuotaionsItems() {
                     </Scrollbar>
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
-                    <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>
+                    <DialogTitle>{selectedsaleOrder ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>
 
-                    <CalendarForm event={selectedQuotation || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <SalesOrderItemsForm saleOrderItems={saleOrderItems} setsaleOrderItems={setsaleOrderItems} event={selectedsaleOrder || {}} range={selectedRange} onCancel={handleCloseModal}/>
                 </DialogAnimate>
             </Container>
         </Page>
     );
 }
-
 // ----------------------------------------------------------------------
 
 function descendingComparator(a, b, orderBy) {

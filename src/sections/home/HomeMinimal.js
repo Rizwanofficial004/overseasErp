@@ -98,11 +98,11 @@ export default function HomeMinimal() {
         >
           <MotionInView variants={varFade().inUp}>
             <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
-              Minimal
+              OE ERP
             </Typography>
           </MotionInView>
           <MotionInView variants={varFade().inDown}>
-            <Typography variant="h2">What minimal helps you?</Typography>
+            <Typography variant="h2">What OE helps you?</Typography>
           </MotionInView>
         </Box>
 

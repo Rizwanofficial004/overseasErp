@@ -96,7 +96,7 @@
         return (
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                 <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                    <Grid item xs={3} md={3} >
+                    <Grid item xs={12} md={12} >
                         <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                             <Box
                                 sx={{
@@ -106,7 +106,7 @@
                                     gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                                 }}
                             >                      
-                                <RHFTextField name="reference" label="#" size='small' sx={{ background:'white', borderRadius:1,}}/>
+                                <RHFTextField name="reference" label="#" size='small' sx={{ borderRadius:1,}}/>
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <Stack spacing={3}>
                                         <DesktopDatePicker
@@ -117,7 +117,7 @@
                                             onChange={(newValue) => {
                                                 setcreditDate(newValue);
                                             }}
-                                            renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                            renderInput={(params) => <TextField {...params} size='small' sx={{borderRadius:1}}/>}
                                         />
                                     </Stack>
                                 </LocalizationProvider>
@@ -131,14 +131,14 @@
                                             onChange={(newValue) => {
                                                 setcreditTODate(newValue);
                                             }}
-                                            renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                            renderInput={(params) => <TextField {...params} size='small' sx={{borderRadius:1}}/>}
                                         />
                                     </Stack>
                                 </LocalizationProvider>
                             </Box>
                         </Card>
                     </Grid>
-                    <Grid item xs={3} md={3}>
+                    <Grid item xs={12} md={12}>
                         <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                             <Box
                                 sx={{
@@ -150,7 +150,7 @@
                                     
                                     }}
                             >
-                                <RHFSelect name="alllocation" label="All Locations" placeholder="All Locations" size='small'sx={{ background: 'white',borderRadius:1}}>
+                                <RHFSelect name="alllocation" label="All Locations" placeholder="All Locations" size='small'sx={{ borderRadius:1}}>
                                     <option value="" />
                                     {countries.map((option) => (
                                         <option key={option.code} value={option.label}>
@@ -158,8 +158,8 @@
                                         </option>
                                     ))}
                                 </RHFSelect>
-                                <RHFTextField name="item" label="Item" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                                <RHFSelect name="allitems" label="All Items" placeholder="All Items" size='small'sx={{ background: 'white',borderRadius:1}}>
+                                <RHFTextField name="item" label="Item" size='small' sx={{ borderRadius:1}}/>
+                                <RHFSelect name="allitems" label="All Items" placeholder="All Items" size='small'sx={{borderRadius:1}}>
                                     <option value="" />
                                     {countries.map((option) => (
                                         <option key={option.code} value={option.label}>
@@ -170,7 +170,7 @@
                             </Box>
                         </Card>
                     </Grid>             
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={12} md={12}>
                         <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                             <Box
                                 sx={{
@@ -180,7 +180,7 @@
                                     gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                                 }}
                             >
-                                <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small'sx={{ background: 'white',borderRadius:1}}>
+                                <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small'sx={{ borderRadius:1}}>
                                     <option value="" />
                                     {countries.map((option) => (
                                         <option key={option.code} value={option.label}>
@@ -188,7 +188,7 @@
                                         </option>
                                     ))}
                                 </RHFSelect>
-                            <Stack spacing={1} alignItems="flex-center" sx={{ background:'#FF9238', mt: 1,borderRadius: 1 }}>
+                            <Stack spacing={1} alignItems="flex-center" sx={{  mt: 1,borderRadius: 1 }}>
                             <LoadingButton type="submit" >
                                 Search
                             </LoadingButton>

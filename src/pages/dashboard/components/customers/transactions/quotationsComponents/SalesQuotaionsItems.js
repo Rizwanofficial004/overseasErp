@@ -60,7 +60,7 @@ export default function SalesQuotaionsItems() {
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems, ...data]);
+    const [quotationItems, setQuotationItems] = useState([..._quotationItems]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
@@ -93,7 +93,6 @@ export default function SalesQuotaionsItems() {
             { id: 'status', label: 'Total', alignRight: false },
             { id: '', label: <AddButton />, alignRight: false },
         ];
-        
             const selectedEventSelector = (state) => {
                 const { events, selectedEventId } = state.calendar;
                 if (selectedEventId) {
@@ -186,8 +185,7 @@ export default function SalesQuotaionsItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h2
-                        style={{ textAlign:'center', color:'black'}}>Sales Quotation Items </h2>
+                        <h2 style={{ textAlign:'center', color:'black'}}>Sales Quotation Items </h2>
                             <Table>
                                 <UserListHead
                                     order={order}
@@ -198,12 +196,10 @@ export default function SalesQuotaionsItems() {
                                     onRequestSort={handleRequestSort}
                                     onSelectAllClick={handleSelectAllClick}
                                 />
-                                
                                 <TableBody >
                                     {quotationItems.map((row) => {
-                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeText, discount, total } = row;
+                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeTax, discount, total } = row;
                                         const isItemSelected = selected.indexOf(itemCode) !== -1;
-
                                         return (
                                             <TableRow
                                                 hover
@@ -212,21 +208,18 @@ export default function SalesQuotaionsItems() {
                                                 role="checkbox"
                                                 selected={isItemSelected}
                                                 aria-checked={isItemSelected}
-                                            >
-                                                {/* <TableCell padding="checkbox" >
-                                                    <Checkbox checked={isItemSelected} onClick={() => handleClick(itemCode)} />
-                                                </TableCell> */}
+                                            > 
                                                 <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
                                                     {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
                                                     <Typography variant="subtitle2" noWrap>
                                                         {itemCode}
-                                                    </Typography>
+                                                    </Typography>    
                                                 </TableCell>
                                                 <TableCell align="left">{itemDescription}</TableCell>
                                                 <TableCell align="left">{longDescription}</TableCell>
                                                 <TableCell align="left">{quantity}</TableCell>
                                                 <TableCell align="left">{unit}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{priceBeforeText}</TableCell>
+                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{priceBeforeTax}</TableCell>
                                                 <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{discount}</TableCell>
                                                 <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{total}</TableCell>
                                                 <TableCell align="right">
@@ -254,10 +247,9 @@ export default function SalesQuotaionsItems() {
                         </TableContainer>
                     </Scrollbar>
                 </Card>
-                 <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
+                <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
                     <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>
-
-                    <CalendarForm event={selectedQuotation || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <CalendarForm quotationItems={quotationItems} setQuotationItems={setQuotationItems} event={selectedQuotation || {}} range={selectedRange} onCancel={handleCloseModal} />
                 </DialogAnimate>
             </Container>
         </Page>
@@ -275,13 +267,11 @@ function descendingComparator(a, b, orderBy) {
     }
     return 0;
 }
-
 function getComparator(order, orderBy) {
     return order === 'desc'
         ? (a, b) => descendingComparator(a, b, orderBy)
         : (a, b) => -descendingComparator(a, b, orderBy);
 }
-
 function applySortFilter(array, comparator, query) {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {

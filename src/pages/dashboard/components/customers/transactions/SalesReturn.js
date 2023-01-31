@@ -96,7 +96,7 @@
         return (
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
                 <Grid  px={1} py={1}  container spacing={1}  sx={{ borderColor:'grey',borderRadius:1}} >
-                    <Grid item xs={3} md={3} >
+                    <Grid item xs={12} md={12} >
                         <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                             <Box
                                 sx={{
@@ -129,7 +129,7 @@
                     </Grid>
 
 
-                    <Grid item xs={3} md={3}>
+                    <Grid item xs={12} md={12}>
                         <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                             <Box
                                 sx={{
@@ -150,7 +150,7 @@
                         </Card>
                     </Grid>             
 
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={12} md={12}>
                         <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                             <Box
                                 sx={{
@@ -190,9 +190,6 @@
                                         />
                                     </Stack>
                                 </LocalizationProvider>
-
-                         
-
                             </Box>
                         </Card>
                     </Grid>

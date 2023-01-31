@@ -83,7 +83,7 @@
         return (
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                 <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                    <Grid item xs={6} md={6} >
+                    <Grid item xs={12} md={12} >
                         <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                             <Box
                                 sx={{
@@ -113,7 +113,7 @@
                             </Box>
                         </Card>
                     </Grid>
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={12} md={12}>
                         <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                             <Box
                                 sx={{
@@ -165,17 +165,10 @@
                             </Grid>
                             </Box>  
                             <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
-                                <Box display={'flex'} >
-                                <Box m={1}>
+                            <Box display={'flex'} sx={{justifyContent: 'center',m:5}} >
                                 <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                                    Update Payment
+                                     Update Payment
                                 </LoadingButton>
-                                </Box>
-                            <Box m={1}>
-                            <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                                Cancel
-                            </LoadingButton>
-                            </Box>
                             </Box>
                             </Stack>
                         </Card>

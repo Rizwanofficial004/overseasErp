@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { m, AnimatePresence } from 'framer-motion';
 // @mui
-import { Dialog, Box, Paper } from '@mui/material';
+import { Dialog, Box, Paper, colors } from '@mui/material';
 //
 import { varFade } from './variants';
 
@@ -39,7 +39,7 @@ export default function DialogAnimate({modalWidth= 'xs', open = false, variants,
                 height: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
               }}
             >
               <Box onClick={onClose} sx={{ width: '100%', height: '100%', position: 'fixed' }} />

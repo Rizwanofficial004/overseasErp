@@ -134,16 +134,38 @@ export const _userList = [...Array(24)].map((_, index) => ({
   role: _mock.role(index),
 }));
 
-export const _quotationItems = [...Array(3)].map((_, index) => ({
+export const _quotationItems = [...Array(0)].map((_, index) => ({
   id: _mock.id(index),
-  itemCode: '#8888',
-  itemDescription: 'senser',
-  longDescription: 'senser is available',
-  quantity: 10,
-  unit: 'pc.',
-  priceBeforeText: 100000,
-  discount: '10%',
-  total: 1000000,
+  itemCode: '',
+  itemDescription: '',
+  longDescription: '',
+  quantity: '',
+  unit: '',
+  priceBeforeText: '',
+  discount: '',
+  total: '',
+}));
+export const _saleOrderItems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  itemCode: '',
+  itemDescription: '',
+  longDescription: '',
+  quantity: '',
+  unit: '',
+  priceBeforeText: '',
+  discount: '',
+  total: '',
+}));
+export const _sampleOrderItems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  itemCode: '',
+  itemDescription: '',
+  longDescription: '',
+  quantity: '',
+  unit: '',
+  priceBeforeText: '',
+  discount: '',
+  total: '',
 }));
 export const _deliveryitems = [...Array(3)].map((_, index) => ({
   id: _mock.id(index),

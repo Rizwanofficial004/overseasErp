@@ -1,5 +1,4 @@
 import { capitalCase } from 'change-case';
-
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo,useState } from 'react';
@@ -27,9 +26,7 @@ import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
 import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 //sections
-import {
-  
-  ProfileCover
+import { ProfileCover
 } from 'src/sections/@dashboard/user/profile';
 import { countries } from 'src/_mock';
 import Contact from './NewCustomerComponents/Contact';
@@ -146,29 +143,27 @@ export default function NewCustomer() {
           },
           [setValue]
       );
-  const CURRENT_TABS = [
-  
-    {
-      value: 'Contacts',
-      icon: <Iconify icon={'eva:heart-fill'} width={20} height={20} />,
-      component: <Contact/>,
-    },
-    {
-      value: 'Transactions',
-      icon: <Iconify icon={'eva:people-fill'} width={20} height={20} />,
-      component: <CustomerTransation />,
-    },
-    {
-      value: 'Sale Orders',
-      icon: <Iconify icon={'ic:round-perm-media'} width={20} height={20} />,
-      //component: <ProfileGallery gallery={_userGallery} />,
-    },
-  ];
+      const CURRENT_TABS = [
+        {
+          value: 'Contacts',
+          icon: <Iconify icon={'eva:heart-fill'} width={20} height={20} />,
+          component: <Contact/>,
+        },
+        {
+          value: 'Transactions',
+          icon: <Iconify icon={'eva:people-fill'} width={20} height={20} />,
+          component: <CustomerTransation />,
+        },
+        {
+          value: 'Sale Orders',
+          icon: <Iconify icon={'ic:round-perm-media'} width={20} height={20} />,
+          //component: <ProfileGallery gallery={_userGallery} />,
+        },
+      ];
   return (
-    <Container>
+  <Container>
     <Page title="Setup: New Customer">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-      
         <Card
           sx={{
             mb: 3,
@@ -176,10 +171,9 @@ export default function NewCustomer() {
             position: 'relative',
           }}
         >
-          <ProfileCover myProfile={_userAbout} />
-
-         <TabsWrapperStyle>
-         <Tabs
+        <ProfileCover myProfile={_userAbout} />
+          <TabsWrapperStyle>
+        <Tabs
           value={currentTab}
           scrollButtons="auto"
           variant="scrollable"
@@ -190,7 +184,7 @@ export default function NewCustomer() {
             <Tab disableRipple key={tab.value} label={tab.value} icon={tab.icon} value={tab.value} />
           ))}
             </Tabs>
-              </TabsWrapperStyle>
+          </TabsWrapperStyle>
         </Card>
         <Box sx={{ mb: 3 }} />
         { CURRENT_TABS.map((tab) => {
@@ -198,7 +192,6 @@ export default function NewCustomer() {
           return isMatched && <Box key={tab.value}>{tab.component}</Box>;
         })}
       </Container>
-      
     </Page>
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
@@ -213,7 +206,7 @@ export default function NewCustomer() {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFTextField name="customername" label="Customer Name" size='small'  sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}} />
+              <RHFTextField name="customername" label="Customer Name" size='small'  sx={{ background: 'white',color:'#FF0000',borderColor:'#FF0000', borderRadius:1}} />
               <RHFTextField name="customershortname" label="Customer Short Name" size='small'  sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}/>
               <RHFTextField name="address" label="Address" size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}/>
               <RHFTextField name="ntnnumber" label="NTN Number" size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}/>
@@ -226,7 +219,6 @@ export default function NewCustomer() {
                   </option>
                 ))}
               </RHFSelect>
-              
               <RHFSelect name="salestype" label="Sales Type / Price List" size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
                 <option value="" />
                 {countries.map((option) => (
@@ -235,7 +227,6 @@ export default function NewCustomer() {
                   </option>
                 ))}
               </RHFSelect>
-
               <RHFTextField name="phone"  label="Phone" size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}/>
               <RHFTextField name="secondaryphonenumber"  label="Secondary Phone Number" size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}/>
               <RHFTextField name="faxnumber"  label="Fax Number" size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}/>
@@ -252,83 +243,84 @@ export default function NewCustomer() {
           </Card>
         </Grid>
       </Grid>
-              <Grid  px={1} py={1}  container spacing={1}   >
-                <Grid item xs={6} md={6} >
-                    <Card height={3} sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }} >
-                        <Box
-                            sx={{
-                                display: 'grid',
-                                rowGap: 2,
-                                columnGap: 1,
-                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
-                            }}
-                        >
-                           <h4 style={{ textAlign:'center', color:'black'}}>BRANCH</h4>
-                            <RHFSelect name="defaultinventorylocation" label="Default Inventory Location"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="defaultshippingcompany" label="Default Shipping Company" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="salesarea" label="Sales Area" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="taxgroup" label="Tax Group" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFTextField name="otherdetails" label="OTHER Details" multiline rows={6.5} size='small' sx={{ background:'white', borderRadius:1,}}/>
-
-                        </Box>
-                    </Card>
-                </Grid>
-                <Grid item xs={6} md={6}>
-                    <Card sx={{ p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                        <Box
-                            sx={{
-                                display: 'grid',
-                                rowGap: 2,
-                                columnGap: 1,
-                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
-                                
-                                }}
-                        >
-                           <h4 style={{ textAlign:'center', color:'black'}}>SALES</h4>
-                            <RHFTextField name="discountpercent" label="Discount Percent %" size='small' sx={{ background: 'white',borderRadius:1 }}  />
-                            <RHFTextField name="promotepaymentdiscount" label="Prompt Payment Discount Percent % " size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="Creditlimit" label="Credit Limit" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="paymentterms" label="Payment Terms" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="creditstatus" label="Credit Status" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="generalnotes" label="General Notes" multiline rows={4} size='small' sx={{ background: 'white',borderRadius:1}}/>
-                        </Box>
-                    </Card>
-                </Grid>             
-              </Grid>  
-            <Stack alignItems="flex-center" sx={{ mt: 3}}>
-              <LoadingButton type="submit" variant="contained" loading={isSubmitting} >
-                {/* {!isEdit ? 'Create New Customer' : 'Save Changes'} */}
-              </LoadingButton>
-            </Stack>
+      <Grid  px={1} py={1}  container spacing={1}   >
+        <Grid item xs={12} md={12} >
+            <Card height={3} sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }} >
+                <Box
+                    sx={{
+                        display: 'grid',
+                        rowGap: 2,
+                        columnGap: 1,
+                        gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
+                    }}
+                >
+                    <h4 style={{ textAlign:'center', color:'black'}}>BRANCH</h4>
+                    <RHFSelect name="defaultinventorylocation" label="Default Inventory Location"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
+                        <option value="" />
+                        {countries.map((option) => (
+                            <option key={option.code} value={option.label}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </RHFSelect>
+                    <RHFSelect name="defaultshippingcompany" label="Default Shipping Company" size='small' sx={{ background: 'white',borderRadius:1}}>
+                        <option value="" />
+                        {countries.map((option) => (
+                            <option key={option.code} value={option.label}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </RHFSelect>
+                    <RHFSelect name="salesarea" label="Sales Area" size='small' sx={{ background: 'white',borderRadius:1}}>
+                        <option value="" />
+                        {countries.map((option) => (
+                            <option key={option.code} value={option.label}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </RHFSelect>
+                    <RHFSelect name="taxgroup" label="Tax Group" size='small' sx={{ background: 'white',borderRadius:1}}>
+                        <option value="" />
+                        {countries.map((option) => (
+                            <option key={option.code} value={option.label}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </RHFSelect>
+                    <RHFTextField name="otherdetails" label="OTHER Details" multiline rows={6.5} size='small' sx={{ background:'white', borderRadius:1,}}/>
+                </Box>
+            </Card>
+        </Grid>
+        <Grid item xs={12} md={12}>
+            <Card sx={{ p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
+                <Box
+                    sx={{
+                        display: 'grid',
+                        rowGap: 2,
+                        columnGap: 1,
+                        gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
+                        
+                        }}
+                >
+                    <h4 style={{ textAlign:'center', color:'black'}}>SALES</h4>
+                    <RHFTextField name="discountpercent" label="Discount Percent %" size='small' sx={{ background: 'white',borderRadius:1 }}  />
+                    <RHFTextField name="promotepaymentdiscount" label="Prompt Payment Discount Percent % " size='small' sx={{ background: 'white',borderRadius:1}}/>
+                    <RHFTextField name="Creditlimit" label="Credit Limit" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                    <RHFTextField name="paymentterms" label="Payment Terms" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                    <RHFTextField name="creditstatus" label="Credit Status" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                    <RHFTextField name="generalnotes" label="General Notes" multiline rows={4} size='small' sx={{ background: 'white',borderRadius:1}}/>
+                </Box>
+            </Card>
+        </Grid>             
+      </Grid>  
+      <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
+        <Box display={'flex'} sx={{justifyContent: 'center',m:5}} >
+          <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+              Submit
+          </LoadingButton>
+        </Box>
+      </Stack> 
     </FormProvider>
-    </Container>    
+  </Container>    
   );
 }

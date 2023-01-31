@@ -30,16 +30,16 @@ const COLOR_OPTIONS = [
 ];
 
 const getInitialValues = (event) => {
-  const _event = {
-    itemCode: '',
-    itemDescription: '',
-    longDescription: '',
-    quantity: 0,
-    unit: '',
-    priceBeforeTex: 0,
-    discount: 0,
-    total: 0,
-    textColor: '#1890FF',
+    const _event = {
+        itemCode: '',
+        itemDescription: '',
+        longDescription: '',
+        quantity: 0,
+        unit: '',
+        priceBeforeTax: 0,
+        discount: 0,
+        total: 0,
+        textColor: '#1890FF',
   };
 
   if (event) {
@@ -51,25 +51,31 @@ const getInitialValues = (event) => {
 
 // ----------------------------------------------------------------------
 
-CalendarForm.propTypes = {
+SalesOrderItemsForm.propTypes = {
   event: PropTypes.object,
   // range: PropTypes.object,
   onCancel: PropTypes.func,
 };
 
-export default function CalendarForm({ event, onCancel, quotationItems, setQuotationItems }) {
+export default function SalesOrderItemsForm({ event, onCancel, saleOrderItems, setsaleOrderItems }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const dispatch = useDispatch();
 
 
   const EventSchema = Yup.object().shape({
-    title: Yup.string().max(255).required('Title is required'),
-    description: Yup.string().max(5000),
+    itemCode: Yup.string().max(255).required('Item Code is required'),
+    itemDescription: Yup.string().max(5000),
+    longDescription: Yup.string().max(5000),
+    quantity: Yup.string().max(255).required('Quantity is required'),
+    unit: Yup.string().max(255).required('Unit is required'),
+    priceBeforeTax: Yup.string().max(255).required('Price Before Tax is required'),
+    discount: Yup.string().max(255).required('Discount is required'),
+    
   });
 
   const methods = useForm({
-    // resolver: yupResolver(EventSchema),
+    resolver: yupResolver(EventSchema),
     defaultValues: getInitialValues(event),
   });
 
@@ -83,7 +89,7 @@ export default function CalendarForm({ event, onCancel, quotationItems, setQuota
 
   const onSubmit = async (data) => {
     console.log(">>>>>>>>>>:::", data);
-    setQuotationItems([...quotationItems, data])
+    setsaleOrderItems([...saleOrderItems, data])
     onCancel();
       reset();
     // try {

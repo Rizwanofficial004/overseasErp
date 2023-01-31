@@ -89,7 +89,7 @@ export default function HomeHero() {
                 Start a <br />
                 new project <br /> with
                 <Typography component="span" variant="h1" sx={{ color: 'primary.main' }}>
-                  &nbsp;Minimal
+                  &nbsp;OE 
                 </Typography>
               </Typography>
             </m.div>

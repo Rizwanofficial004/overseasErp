@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import {
+    Box,
     Card,
     Table,
     Avatar,
@@ -22,7 +23,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _quotationItems } from 'src/_mock';
+import { _userList, _sampleOrderItems } from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -31,42 +32,55 @@ import SearchNotFound from 'src/components/SearchNotFound';
 // sections
 import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/sections/@dashboard/user/list';
 import { DialogAnimate } from 'src/components/animate';
-import { CalendarForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
+import { CalendarForm, CalendarStyle, CalendarToolbar, SampleOrderItemsForm } from 'src/sections/@dashboard/calendar';
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
 // ----------------------------------------------------------------------
 let data = [
     {   id: '2332',
-        priceBeforeText: 'Shiping Charge', 
+        priceBeforeTax: 'Shiping Charge', 
         discount: '0.00',
         total: '' , bold: true
     },
     {   id: '3434',
-    priceBeforeText: 'Sub Total', 
+    priceBeforeTax: 'Sub Total', 
     discount: '0.00',
     total: ''  ,bold: true
     },
     {   
     id: '2354',
-    priceBeforeText: 'Amount Total', 
+    priceBeforeTax: 'Amount Total', 
     discount: '0.00',
     total: 'update' , bold: true
     },
   ]
-  let QItem = [..._quotationItems, ...data]
+  let QItem = [..._sampleOrderItems, ...data]
+  function RedBar() {
+    return (
+      <Box
+        sx={{
+          height: 2,
+          width:155,
+          backgroundColor: 'red',
+          marginLeft:55,
+          marginBottom:3,
+        }}
+      />
+    );
+  }
 export default function SampleOrderItems() {
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems, ...data]);
+    const [sampleOrderItems, setsampleOrderItems] = useState([..._sampleOrderItems]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
     const [orderBy, setOrderBy] = useState('name');
     const [filterName, setFilterName] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selectedQuotation, setSelectedQuotation ] = useState(null)
+    const [selectedsampleOrder, setselectedsampleOrder ] = useState(null)
     const AddButton = () => {
             return (
                 <Button
@@ -87,7 +101,7 @@ export default function SampleOrderItems() {
             { id: 'role', label: 'Long Description', alignRight: false },
             { id: 'isVerified', label: 'Quantity', alignRight: false },
             { id: 'status', label: 'Unit', alignRight: false },
-            { id: 'status', label: 'Price Before Tex', alignRight: false },
+            { id: 'status', label: 'Price Before Tax', alignRight: false },
             { id: 'status', label: 'Discount %', alignRight: false },
             { id: 'status', label: 'Total', alignRight: false },
             { id: '', label: <AddButton />, alignRight: false },
@@ -168,7 +182,7 @@ export default function SampleOrderItems() {
         setUserList(deleteUsers);
     };
     const handleEditEvent = (obj) => {
-        setSelectedQuotation(obj)
+        setselectedsampleOrder(obj)
         dispatch(openModal());
     };  
 
@@ -184,12 +198,11 @@ export default function SampleOrderItems() {
             <Container  maxWidth={themeStretch ? false : 'lg'}>
                 <Card>
                     <Scrollbar>
-                        <TableContainer sx={{ minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Sample Order Items </h4>
-                        
+                        <TableContainer sx={{ minWidth: 800,padding:1 }}>
+                        <h2
+                        style={{ textAlign:'center', color:'#D35400'}}>Sample Order Items </h2>
+                        <RedBar />
                             <Table>
-                                
                                 <UserListHead
                                     order={order}
                                     orderBy={orderBy}
@@ -199,12 +212,10 @@ export default function SampleOrderItems() {
                                     onRequestSort={handleRequestSort}
                                     onSelectAllClick={handleSelectAllClick}
                                 />
-                                
                                 <TableBody >
-                                    {quotationItems.map((row) => {
-                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeText, discount, total } = row;
+                                    {sampleOrderItems.map((row) => {
+                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeTax, discount, total } = row;
                                         const isItemSelected = selected.indexOf(itemCode) !== -1;
-
                                         return (
                                             <TableRow
                                                 hover
@@ -214,11 +225,8 @@ export default function SampleOrderItems() {
                                                 selected={isItemSelected}
                                                 aria-checked={isItemSelected}
                                             >
-                                                {/* <TableCell padding="checkbox" >
-                                                    <Checkbox checked={isItemSelected} onClick={() => handleClick(itemCode)} />
-                                                </TableCell> */}
+                                               
                                                 <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-                                                    {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
                                                     <Typography variant="subtitle2" noWrap>
                                                         {itemCode}
                                                     </Typography>
@@ -227,7 +235,7 @@ export default function SampleOrderItems() {
                                                 <TableCell align="left">{longDescription}</TableCell>
                                                 <TableCell align="left">{quantity}</TableCell>
                                                 <TableCell align="left">{unit}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{priceBeforeText}</TableCell>
+                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{priceBeforeTax}</TableCell>
                                                 <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{discount}</TableCell>
                                                 <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{total}</TableCell>
                                                 <TableCell align="right">
@@ -245,7 +253,7 @@ export default function SampleOrderItems() {
                                 {isNotFound && (
                                     <TableBody>
                                         <TableRow>
-                                            <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                                            <TableCell align="center" colSpan={10} sx={{ py: 3 }}>
                                                 <SearchNotFound searchQuery={filterName} />
                                             </TableCell>
                                         </TableRow>
@@ -255,10 +263,10 @@ export default function SampleOrderItems() {
                         </TableContainer>
                     </Scrollbar>
                 </Card>
-                 <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
-                    <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>
+                 <DialogAnimate modalWidth='md' open={isOpenModal} onClose={handleCloseModal}>
+                    <DialogTitle>{selectedsampleOrder ? 'Edit Sample Order Items' : 'Add Sample Order Items'}</DialogTitle>
 
-                    <CalendarForm event={selectedQuotation || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <SampleOrderItemsForm sampleOrderItems={sampleOrderItems} setsampleOrderItems={setsampleOrderItems} event={selectedsampleOrder || {}} range={selectedRange} onCancel={handleCloseModal}/>
                 </DialogAnimate>
             </Container>
         </Page>

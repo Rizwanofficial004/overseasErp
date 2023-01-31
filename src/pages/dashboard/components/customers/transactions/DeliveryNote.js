@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 import Avatar from '@mui/material/Avatar';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-// @mui
+// @  
 import { Box, Grid, Card, Stack, Typography, Button } from '@mui/material';
 import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
 import dayjs from 'dayjs';
@@ -93,7 +93,7 @@ export default function DeliveryNote() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Grid px={1} py={1} container spacing={1} sx={{ border: 1, borderColor: '#FB7600', borderRadius: 1 }} >
-                <Grid item xs={3} md={3} >
+                <Grid item xs={12} md={12} >
                     <Card height={3} sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)', borderRadius: 1 }} >
                         <Box
                             sx={{
@@ -103,13 +103,13 @@ export default function DeliveryNote() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFTextField name="Ref" label="#" size='small' sx={{ background: 'white', borderRadius: 1, }} />
-                            <RHFTextField name="reference" label="Reference" size='small' sx={{ background: 'white', borderRadius: 1, }} />
-                            <RHFTextField name="PurchaseOrder" label="Purchase Order (P.O)" size='small' sx={{ background: 'white', borderRadius: 1, }} />
+                            <RHFTextField name="Ref" label="#" size='small' sx={{  borderRadius: 1, }} />
+                            <RHFTextField name="reference" label="Reference" size='small' sx={{  borderRadius: 1, }} />
+                            <RHFTextField name="PurchaseOrder" label="Purchase Order (P.O)" size='small' sx={{ borderRadius: 1, }} />
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={3} md={3}>
+                <Grid item xs={12} md={12}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)', borderRadius: 1 }}>
                         <Box
                             sx={{
@@ -119,7 +119,7 @@ export default function DeliveryNote() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="alllocation" label="All Locations" placeholder="All Locations" size='small' sx={{ background: 'white', borderRadius: 1 }}>
+                            <RHFSelect name="alllocation" label="All Locations" placeholder="All Locations" size='small' sx={{ borderRadius: 1 }}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -127,8 +127,8 @@ export default function DeliveryNote() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFTextField name="item" label="Item" size='small' sx={{ background: 'white', borderRadius: 1 }} />
-                            <RHFSelect name="allitems" label="All Items" placeholder="All Items" size='small' sx={{ background: 'white', borderRadius: 1 }}>
+                            <RHFTextField name="item" label="Item" size='small' sx={{  borderRadius: 1 }} />
+                            <RHFSelect name="allitems" label="All Items" placeholder="All Items" size='small' sx={{ borderRadius: 1 }}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -139,7 +139,7 @@ export default function DeliveryNote() {
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={6} md={6}>
+                <Grid item xs={12} md={12}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)', borderRadius: 1 }}>
                         <Box
                             sx={{
@@ -149,7 +149,7 @@ export default function DeliveryNote() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small' sx={{ background: 'white', borderRadius: 1 }}>
+                            <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small' sx={{ borderRadius: 1 }}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -157,7 +157,7 @@ export default function DeliveryNote() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <Stack spacing={1} alignItems="flex-center" sx={{ background: '#FF9238', mt: 1, borderRadius: 1 }}>
+                            <Stack spacing={1} alignItems="flex-center" sx={{  mt: 1, borderRadius: 1 }}>
                                 <LoadingButton type="submit" variant="contained" loading={isSubmitting} >
                                     Search
                                 </LoadingButton>

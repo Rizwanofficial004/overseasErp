@@ -108,7 +108,7 @@ export default function CustomerAllocationDashboard() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={3} md={3} >
+                <Grid item xs={12} md={12} >
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
                             sx={{
@@ -130,9 +130,7 @@ export default function CustomerAllocationDashboard() {
                         </Box>
                     </Card>
                 </Grid>
-
-
-                <Grid item xs={3} md={3}>
+                <Grid item xs={12} md={12}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -144,7 +142,7 @@ export default function CustomerAllocationDashboard() {
                                 
                                 }}
                         >
-                               <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <Stack spacing={3}>
                                     <DesktopDatePicker
                                     container
@@ -172,13 +170,10 @@ export default function CustomerAllocationDashboard() {
                                     />
                                 </Stack>
                             </LocalizationProvider>
-                            
-
                         </Box>
                     </Card>
                 </Grid>             
-
-                <Grid item xs={6} md={6}>
+                <Grid item xs={12} md={12}>
                     <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -196,34 +191,14 @@ export default function CustomerAllocationDashboard() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                           
-
-                         {/*   <RHFSelect name="price List" label="Price List" placeholder="Price List" size='small' sx={{ background: 'white'}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>*/}
-                        
-                        
-                        <Stack spacing={1} alignItems="flex-center" sx={{ background:'#FF9238', mt: 1,borderRadius: 1 }}>
-                        
-                          
-                           <LoadingButton type="submit" >
+                            <Stack spacing={1} alignItems="flex-center" sx={{ background:'#FF9238', mt: 1,borderRadius: 1 }}>
+                            <LoadingButton type="submit" >
                              Search
-                           </LoadingButton>
-                        
-                         
-                    
-                        </Stack>
+                            </LoadingButton>
+                            </Stack>
                         </Box>
                     </Card>
                 </Grid>
-
-              
-
             </Grid>
 {/*----------------SALES TABLE CALLING-------------------------------------------*/}
             <CustomerAlloItems />

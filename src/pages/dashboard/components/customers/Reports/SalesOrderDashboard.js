@@ -94,7 +94,7 @@ export default function SalesOrderDashboard() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={3} md={3} >
+                <Grid item xs={12} md={12} >
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
                             sx={{
@@ -104,19 +104,15 @@ export default function SalesOrderDashboard() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-
                             <RHFTextField name="sno" label="S.NO #" size='small' sx={{ background: 'white',borderRadius:1 }}  />
                             <RHFTextField name="reference" label="Reference" size='small' sx={{ background: 'white',borderRadius:1 }}  />
                             <RHFTextField name="PurchaseOrder" label="Purchase Order" size='small' sx={{ background: 'white',borderRadius:1 }}  />
-                            
-                        
-
                         </Box>
                     </Card>
                 </Grid>
 
 
-                <Grid item xs={3} md={3}>
+                <Grid item xs={12} md={12}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -168,7 +164,7 @@ export default function SalesOrderDashboard() {
                     </Card>
                 </Grid>             
 
-                <Grid item xs={3} md={3}>
+                <Grid item xs={12} md={12}>
                     <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -199,7 +195,7 @@ export default function SalesOrderDashboard() {
                     </Card>
                 </Grid>
                 
-                <Grid item xs={3} md={3}>
+                <Grid item xs={12} md={12}>
                     <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -221,9 +217,6 @@ export default function SalesOrderDashboard() {
                         </Box>
                     </Card>
                 </Grid>
-
-              
-
             </Grid>
 {/*----------------SALES TABLE CALLING-------------------------------------------*/}
             <SalesDashboardItems  />

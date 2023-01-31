@@ -7,3 +7,4 @@ export { default as ReceivePayment} from './ReceivePayment';
 export { default as SalesReturn} from './SalesReturn';
 export { default as Allocation} from './Allocation';
 export { default as SampleOrder} from './SampleOrder';
+export { default as QuotationPrint} from './QuotationPrint';

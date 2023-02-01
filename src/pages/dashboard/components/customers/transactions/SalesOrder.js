@@ -185,7 +185,6 @@ export default function SalesOrder() {
                                     </option>
                                 ))}
                             </RHFSelect>
-
                         </Box>
                     </Card>
                 </Grid>             
@@ -312,9 +311,18 @@ export default function SalesOrder() {
                         </Card>
                     </Grid>
                 </Grid>
+                <Grid mt={3} container spacing={1}>
+                    <Grid item xs={12} md={12}>
+                        <Card sx={{ p: 3 }}>
                             <RHFTextField name="purchaseOrder" label="Purchase Order" size='small' sx={{ mt: 1, borderRadius: 1}}/>
                             <RHFTextField name="comments" label="Comments" size='small' sx={{ mt: 1, borderRadius: 1}}/>
                             <RHFTextField name="attn" label="ATTN" size='small' sx={{ mt: 1 , borderRadius: 1}}/>
+                        </Card>
+                    </Grid>
+                </Grid>
+                <Grid mt={3} container spacing={1}>
+                    <Grid item xs={12} md={12}>
+                        <Card sx={{ p: 3 }}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <Stack spacing={3} sx={{ mt: 1}}>
                                     <DesktopDatePicker
@@ -336,10 +344,6 @@ export default function SalesOrder() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFTextField name="grn" label="GRN" size='small' sx={{ mt: 1, borderRadius: 1}}/>
-                            <RHFTextField name="deliveryTerms" label="Delivery Terms"size='small' sx={{ mt: 1, borderRadius: 1}} />
-                            <RHFTextField name="gridNo" label="Grid No" size='small' sx={{ mt: 1, borderRadius: 1}}/>
-                            
                             <RHFSelect name="currency" label="Currency" placeholder="Currency" size='small' sx={{ mt: 1,borderRadius: 1}}>
                                 <option value="" />
                                 {countries.map((option) => (
@@ -348,6 +352,20 @@ export default function SalesOrder() {
                                     </option>
                                 ))}
                             </RHFSelect>
+                        </Card>
+                    </Grid>
+                </Grid>
+                <Grid mt={3} container spacing={1}>
+                    <Grid item xs={12} md={12}>
+                        <Card sx={{ p: 3 }}>
+                            <RHFTextField name="grn" label="GRN" size='small' sx={{ mt: 1, borderRadius: 1}}/>
+                            <RHFTextField name="deliveryTerms" label="Delivery Terms"size='small' sx={{ mt: 1, borderRadius: 1}} />
+                            <RHFTextField name="gridNo" label="Grid No" size='small' sx={{ mt: 1, borderRadius: 1}}/>
+                            
+                            
+                        </Card>
+                    </Grid>
+                </Grid>
                         </Box>
                         <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
                             <Box display={'flex'} sx={{justifyContent: 'center',m:5}} >

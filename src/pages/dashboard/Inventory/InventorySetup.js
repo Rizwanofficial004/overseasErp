@@ -20,45 +20,47 @@ import {
   AccountNotifications,
   AccountChangePassword,
 } from 'src/sections/@dashboard/user/account';
-// import { LocationTransfer, OpeningBalance } from '../components/Inventory/transactions';
+import { NewItems,BarCode,Category, InventoryLocation, Description } from '../components/Inventory/Setup';
+import LocationinventoryForm from 'src/sections/@dashboard/calendar/inventory/LocationinventoryForm';
+import UnitsOfMeasure from '../components/Inventory/Setup/UnitsOfMeasure';
 
 // ----------------------------------------------------------------------
 
 export default function InventorySetup() {
   const { themeStretch } = useSettings();
 
-  const [currentTab, setCurrentTab] = useState('Location Transfer');
+  const [currentTab, setCurrentTab] = useState('items');
 
   const ACCOUNT_TABS = [
     {
       value: 'items',
       icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
-      //component: <LocationTransfer />,
+      component: <NewItems/>,
     },
     {
       value: 'BarCodes',
       icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
-      //component: <OpeningBalance /> 
+      component: <BarCode /> 
     },
     {
         value: 'Categories',
         icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
-        //component: <OpeningBalance /> 
+        component: <Category /> 
       },
       {
         value: 'Locations',
         icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
-        //component: <OpeningBalance /> 
+        component: <InventoryLocation /> 
       },
       {
         value: 'Movement Type',
         icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
-        //component: <OpeningBalance /> 
+        component: <Description /> 
       },
       {
         value: 'Unit of Measure',
         icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
-        //component: <OpeningBalance /> 
+        component: <UnitsOfMeasure /> 
       },
       {
         value: 'Import CSV Items',

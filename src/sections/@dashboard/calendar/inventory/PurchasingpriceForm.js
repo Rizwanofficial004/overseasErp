@@ -6,16 +6,17 @@ import { useSnackbar } from 'notistack';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { countries } from 'src/_mock';
 // @mui
 import { Box, Stack, Button, Tooltip, TextField, IconButton, DialogActions } from '@mui/material';
 import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
 // redux
-import { useDispatch } from '../../../redux/store';
-import { createEvent, updateEvent, deleteEvent } from '../../../redux/slices/calendar';
+import { useDispatch } from 'src/redux/store';
+import { createEvent, updateEvent, deleteEvent } from 'src/redux/slices/calendar';
 // components
-import Iconify from '../../../components/Iconify';
-import { ColorSinglePicker } from '../../../components/color-utils';
-import { FormProvider, RHFTextField, RHFSwitch } from '../../../components/hook-form';
+import Iconify from 'src/components/Iconify';
+import { ColorSinglePicker } from 'src/components/color-utils';
+import { FormProvider, RHFTextField, RHFSwitch,RHFSelect } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
@@ -31,14 +32,12 @@ const COLOR_OPTIONS = [
 
 const getInitialValues = (event) => {
     const _event = {
-        itemCode: '',
-        itemDescription: '',
-        longDescription: '',
-        quantity: 0,
-        unit: '',
-        priceBeforeTax: 0,
-        discount: 0,
-        total: 0,
+      supplier: '',
+      price: '',
+      suppliersunitofmeasure: '',
+      conversionfactor:'',
+      supplerscode:'',
+       
         textColor: '#1890FF',
   };
 
@@ -51,13 +50,13 @@ const getInitialValues = (event) => {
 
 // ----------------------------------------------------------------------
 
-SampleOrderItemsForm.propTypes = {
+PurchasingpriceForm.propTypes = {
   event: PropTypes.object,
   // range: PropTypes.object,
   onCancel: PropTypes.func,
 };
 
-export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems, setsampleOrderItems }) {
+export default function PurchasingpriceForm({ event, onCancel, purchasingprice, setpurchasingprice }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const dispatch = useDispatch();
@@ -75,7 +74,7 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
   });
 
   const methods = useForm({
-    resolver: yupResolver(EventSchema),
+    // resolver: yupResolver(EventSchema),
     defaultValues: getInitialValues(event),
   });
 
@@ -89,7 +88,7 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
 
   const onSubmit = async (data) => {
     console.log(">>>>>>>>>>:::", data);
-    setsampleOrderItems([...sampleOrderItems, data])
+    setpurchasingprice([...purchasingprice, data])
     onCancel();
       reset();
     // try {
@@ -114,21 +113,32 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
     //   console.error(error);
     // }
   };
+
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} sx={{ p: 3 }}>
-        <RHFTextField name="itemCode" label="Item Code " />
-        <RHFTextField name="itemDescription" label="Item Description" />
-        <RHFTextField name="longDescription" label="Long Description" />
-        <RHFTextField name="quantity" label="Quantity" />
-        <RHFTextField name="unit" label="Unit" />
-        <RHFTextField name="priceBeforeTax" label="Price Before Tax" />
-        <RHFTextField name="discount" label="Discount %" />
-        <RHFTextField name="total" label="Total" />
+
+        <RHFSelect name="supplier" label="Supplier" placeholder="Supplier">
+            <option value="" />
+            {countries.map((option) => (
+                <option key={option.code} value={option.label}>
+                {option.label}
+                </option>
+            ))}
+        </RHFSelect>
+        <RHFTextField name="price" label="Price " />
+        <RHFTextField name="suppliersunitofmeasure" label="Suppliers Unit of Measure" />
+        <RHFTextField name="conversionfactor" label="Conversion Factor (to our UOM) " />
+        <RHFTextField name="supplerscode" label="Suppliers Code Of Decription" />
+
+       
+       
       </Stack>
 
       <DialogActions>
         <Box sx={{ flexGrow: 1 }} />
+
         <Button variant="outlined" color="inherit" onClick={onCancel}>
           Cancel
         </Button>

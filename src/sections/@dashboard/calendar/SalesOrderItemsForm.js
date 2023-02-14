@@ -64,13 +64,13 @@ export default function SalesOrderItemsForm({ event, onCancel, saleOrderItems, s
 
 
   const EventSchema = Yup.object().shape({
-    itemCode: Yup.string().max(255).required('Item Code is required'),
-    itemDescription: Yup.string().max(5000),
-    longDescription: Yup.string().max(5000),
-    quantity: Yup.string().max(255).required('Quantity is required'),
-    unit: Yup.string().max(255).required('Unit is required'),
-    priceBeforeTax: Yup.string().max(255).required('Price Before Tax is required'),
-    discount: Yup.string().max(255).required('Discount is required'),
+    // itemCode: Yup.string().max(255).required('Item Code is required'),
+    // itemDescription: Yup.string().max(5000),
+    // longDescription: Yup.string().max(5000),
+    // quantity: Yup.string().max(255).required('Quantity is required'),
+    // unit: Yup.string().max(255).required('Unit is required'),
+    // priceBeforeTax: Yup.string().max(255).required('Price Before Tax is required'),
+    // discount: Yup.string().max(255).required('Discount is required'),
     
   });
 

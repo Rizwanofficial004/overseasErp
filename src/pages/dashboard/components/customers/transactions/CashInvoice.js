@@ -116,7 +116,7 @@ export default function CashInvoice() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={12} md={12} >
+                <Grid item xs={12} sm={6}md={4} >
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
                             sx={{
@@ -146,7 +146,7 @@ export default function CashInvoice() {
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={12} md={12}>
+                <Grid item xs={12} sm={6}md={4}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -171,7 +171,7 @@ export default function CashInvoice() {
                         </Box>  
                     </Card>
                 </Grid>             
-                <Grid item xs={12} md={12}>
+                <Grid item xs={12} sm={6}md={4}>
                     <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -241,7 +241,7 @@ export default function CashInvoice() {
                     <Grid mt={3} container spacing={1}>
                         <Grid item xs={12} md={12}>
                             <Card sx={{ p: 3 }}>
-                                <Grid>
+                                
                                     <RHFSelect name="deliverFromLocation" label="Deliver from Location" placeholder="Deliver from Location" size='small' sx={{ mt: 1}}>
                                         <option value=""/>
                                         {countries.map((option) => (
@@ -265,7 +265,6 @@ export default function CashInvoice() {
                                             />
                                         </Stack>
                                     </LocalizationProvider>
-                                </Grid>
                             </Card>
                         </Grid>
                     </Grid>
@@ -301,9 +300,18 @@ export default function CashInvoice() {
                                 </Card>
                             </Grid>
                         </Grid>
+                        <Grid mt={3} container spacing={1}>
+                        <Grid item xs={12} md={12}>
+                            <Card sx={{ p: 3 }}>
                                     <RHFTextField name="purchaseOrder" label="Purchase Order" size='small' sx={{ mt: 1, borderRadius: 1}}/>
                                     <RHFTextField name="comments" label="Comments" size='small' sx={{ mt: 1, borderRadius: 1}}/>
                                     <RHFTextField name="attn" label="ATTN" size='small' sx={{ mt: 1 , borderRadius: 1}}/>
+                                </Card>
+                            </Grid>
+                        </Grid>
+                    <Grid mt={3} container spacing={1}>
+                        <Grid item xs={12} md={12}>
+                            <Card sx={{ p: 3 }}>     
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <Stack spacing={3} sx={{ mt: 1}}>
                                             <DesktopDatePicker
@@ -326,6 +334,12 @@ export default function CashInvoice() {
                                         ))}
                                     </RHFSelect>
                                     <RHFTextField name="grn" label="GRN" size='small' sx={{ mt: 1, borderRadius: 1}}/>
+                                </Card>
+                            </Grid>
+                        </Grid>
+                    <Grid mt={3} container spacing={1}>
+                        <Grid item xs={12} md={12}>
+                            <Card sx={{ p: 3 }}>            
                                     <RHFTextField name="deliveryTerms" label="Delivery Terms"size='small' sx={{ mt: 1, borderRadius: 1}} />
                                     <RHFTextField name="gridNo" label="Grid No" size='small' sx={{ mt: 1, borderRadius: 1}}/>
                                     
@@ -337,6 +351,9 @@ export default function CashInvoice() {
                                             </option>
                                         ))}
                                     </RHFSelect>
+                                    </Card>
+                            </Grid>
+                        </Grid>
                               </Box>
                         <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
                             <Box display={'flex'} sx={{justifyContent: 'center',m:5}} >

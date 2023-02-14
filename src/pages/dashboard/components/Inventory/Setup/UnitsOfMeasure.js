@@ -1,10 +1,20 @@
 import { sentenceCase } from 'change-case';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { FormProvider, RHFTextField, RHFSelect,RHFSwitch } from 'src/components/hook-form';
+import * as Yup from 'yup';
+import { useSnackbar } from 'notistack';
+import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import useAuth from 'src/hooks/useAuth';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import {
+    Box, 
+    Grid,
     Card,
+    Stack,
     Table,
     Avatar,
     Button,
@@ -19,10 +29,11 @@ import {
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
+import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _salespersonItems } from 'src/_mock';
+import { _userList, _unitsofmeasure } from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -31,26 +42,70 @@ import SearchNotFound from 'src/components/SearchNotFound';
 // sections
 import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/sections/@dashboard/user/list';
 import { DialogAnimate } from 'src/components/animate';
-import { SalesPersonForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
+import { CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
+// import SalespricingForm from 'src/sections/@dashboard/calendar/inventory/SalespricingForm';
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
+import CategoryForm from 'src/sections/@dashboard/calendar/inventory/CategoryForm';
+import LocationinventoryForm from 'src/sections/@dashboard/calendar/inventory/LocationinventoryForm';
+import UnitsOfMeasureForm from 'src/sections/@dashboard/calendar/inventory/UnitsOfMeasureForm';
+
 // ----------------------------------------------------------------------
 
 
-    export default function SalesPersonitems() {
+    export default function UnitsOfMeasure() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [salespersonItems, setsalespersonItems] = useState([..._salespersonItems]);
+    const [unitsofmeasure, setunitsofmeasure] = useState([..._unitsofmeasure]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
     const [orderBy, setOrderBy] = useState('name');
     const [filterName, setFilterName] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selectedSalesperson, setSelectedSalesperson ] = useState(null)
+    const [selectedunitsofmeasure, setSelectedunitsofmeasure] = useState(null)
+    const { enqueueSnackbar } = useSnackbar();
+    // const [quotationDate, setQuotationDate] = useState(new Date());
+   
+    const {user} = useAuth();
+    const UpdateUserSchema = Yup.object().shape({
+        // purchaseOrder: Yup.string().required('purchase order is required'),
+        // customers: Yup.string().required('purchase order is required'),
+        // branch: Yup.string().required('purchase order is required'),
+        // exchangeRate: Yup.string().required('purchase order is required'),
+        // quotationDate: Yup.string().required('purchase order is required'),
+        // deliverFromLocation: Yup.string().required('purchase order is required'),
+        // quotationDeliveryDate: Yup.string().required('purchase order is required'),
+        // deliveryTo: Yup.string().required('purchase order is required'),
+    });
+    const defaultValues = {
+        item: '',
+        itemcode:'',
+    };
+    const methods = useForm({
+        resolver: yupResolver(UpdateUserSchema),
+        defaultValues,
+    });
+    const {
+        setValue,
+        handleSubmit,
+        formState: { isSubmitting },
+    } = methods;
+    const onSubmit = async (data) => {
+        // data.quotationDate = quotationDate
+        // data.quotationDeliveryDate = quotationDeliveryDate
+        // data.purchaseOrderDate = purchaseOrderDate
+        console.log("=======:::", data);
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            enqueueSnackbar('Update success!');
+        } catch (error) {
+            console.error(error);
+        }
+    };
    
     const AddButton = () => {
             return (
@@ -67,14 +122,11 @@ import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange
             )
         }
         const TABLE_HEAD = [
-            { id: 'name', label: 'Sales Person Name', alignRight: false },
-            { id: 'company', label: 'TelePhone Number', alignRight: false },
-            { id: 'role', label: 'Fax Number', alignRight: false },
-            { id: 'name', label: 'E-mail', alignRight: false },
-            { id: 'company', label: 'Pervision', alignRight: false },
-            { id: 'role', label: 'Break PT..', alignRight: false },
-            { id: 'role', label: 'Pervision 2', alignRight: false },
-            { id: '', label: <AddButton />, alignRight: false },
+            { id: 'role', label: 'Unit Abbreviation', alignRight: false },
+            { id: 'name', label: 'Descriptive Name', alignRight: false },
+            { id: 'company', label: 'Decimal Places ', alignRight: false },
+         
+            { id: '', label: <AddButton />,  alignRight: false },
         ];
         
             const selectedEventSelector = (state) => {
@@ -152,7 +204,7 @@ import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange
         setUserList(deleteUsers);
     };
     const handleEditEvent = (obj) => {
-        setSelectedSalesperson(obj)
+        setSelectedunitsofmeasure(obj)
         dispatch(openModal());
     };  
 
@@ -165,36 +217,30 @@ import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange
 
     return (
         <Page title="User: List" padding='1.5rem'>
+            
             <Container  maxWidth={themeStretch ? false : 'lg'}>
-                <Card>
+                <Card mt={3}>
                     <Scrollbar>
-                        <TableContainer sx={{ minWidth: 800 }}>
+                        <TableContainer sx={{mt:3, minWidth: 800 }}>
                         <h4
-                        style={{ textAlign:'center', color:'black'}}>Sales Person Details </h4>
+                        style={{ textAlign:'center', color:'black'}}>Units Of Measure Details</h4>
                         
                             <Table>
-                                
                                 <UserListHead
                                     order={order}
                                     orderBy={orderBy}
                                     headLabel={TABLE_HEAD}
-                                    rowCount={salespersonItems.length}
+                                    rowCount={unitsofmeasure.length}
                                     numSelected={selected.length}
                                     onRequestSort={handleRequestSort}
                                     onSelectAllClick={handleSelectAllClick}
                                 />
-                                
                                 <TableBody >
-                                    {salespersonItems.map((row) => {
-                                        const { id, bold,  salespersonname,
-                                        Telephonenumber,
-                                        faxnumber,
-                                        provison2,
-                                        provision,
-                                        breakpt,
-                                        email} = row;
-                                        const isItemSelected = selected.indexOf(salespersonname) !== -1;
-
+                                    {unitsofmeasure.map((row) => {
+                                        const { id, bold, 
+                                                   unitabbreviation,descriptivename,decimalplaces
+                                        } = row;
+                                        const isItemSelected = selected.indexOf(unitabbreviation) !== -1;
                                         return (
                                             <TableRow
                                                 hover
@@ -210,17 +256,13 @@ import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange
                                                 <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
                                                     {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
                                                     <Typography variant="subtitle2" noWrap>
-                                                        {salespersonname}
+                                                        {unitabbreviation}
                                                     </Typography>
                                                 </TableCell>
-                                                <TableCell align="left">{Telephonenumber}</TableCell>
-                                                <TableCell align="left">{faxnumber}</TableCell>
-                                                <TableCell align="left">{email}</TableCell>
-                                                <TableCell align="left">{provision}</TableCell>
-                                                <TableCell align="left">{breakpt}</TableCell>
-                                                <TableCell align="left">{provison2}</TableCell>
+                                                <TableCell align="left">{descriptivename}</TableCell>
+                                                <TableCell align="left">{decimalplaces}</TableCell>    
                                                 <TableCell align="right">
-                                                <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={salespersonname} />
+                                                <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={decimalplaces} />
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -245,8 +287,8 @@ import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange
                     </Scrollbar>
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
-                    <DialogTitle>{selectedSalesperson ? 'Edit Sales Person' : 'Add Sales Person'}</DialogTitle>
-                    <SalesPersonForm salespersonItems={salespersonItems} setsalespersonItems={setsalespersonItems} event={selectedSalesperson || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <DialogTitle>{selectedunitsofmeasure ? 'Edit Units Of Measure' : 'Add Units Of Measure'}</DialogTitle>
+                    <UnitsOfMeasureForm unitsofmeasure={unitsofmeasure} setunitsofmeasure={setunitsofmeasure} event={selectedunitsofmeasure || {}} range={selectedRange} onCancel={handleCloseModal} />
                 </DialogAnimate>
             </Container>
         </Page>

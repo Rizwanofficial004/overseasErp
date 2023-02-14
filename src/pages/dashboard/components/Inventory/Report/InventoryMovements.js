@@ -126,7 +126,7 @@ export default function InventoryMovements() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={3} md={3} >
+                <Grid item xs={12} sm={6} md={4} >
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
                             sx={{
@@ -155,7 +155,7 @@ export default function InventoryMovements() {
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={3} md={3}>
+                <Grid item xs={12} sm={6} md={4}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -199,17 +199,18 @@ export default function InventoryMovements() {
                         </Box>
                     </Card>
                 </Grid>             
-                <Grid item xs={6} md={6}>
-                    <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
+                <Grid item xs={12} sm={6} md={4}>
+                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
                                 display: 'grid',
                                 rowGap: 1,
                                 columnGap: 1,
+                                
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
-                            }}
-                        >
-                            
+                                
+                                }}
+                        > 
                             <Box m={1}>
                                 <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                                     Show MOVEMENTS

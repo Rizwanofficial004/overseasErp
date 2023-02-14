@@ -139,7 +139,7 @@ export default function DeliveryNote() {
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={12} sm={4}md={6 }>
+                <Grid item xs={12} sm={6}md={4}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)', borderRadius: 1 }}>
                         <Box
                             sx={{
@@ -151,7 +151,7 @@ export default function DeliveryNote() {
                         >
                             <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small' sx={{ borderRadius: 1 }}>
                                 <option value="" />
-                                {countries.map((option) => (
+                                    {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
                                         {option.label}
                                     </option>
@@ -167,7 +167,7 @@ export default function DeliveryNote() {
                 </Grid>
             </Grid>
             {/*----------------SALES TABLE CALLING-------------------------------------------*/}
-            <DeliveryNoteItems />
+                                <DeliveryNoteItems />
             {/*----------------3rd portion Detailing Code-------------------------------------------*/}
         </FormProvider>
     );

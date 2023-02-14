@@ -125,11 +125,9 @@ export default function CalendarForm({ event, onCancel, quotationItems, setQuota
 
       <DialogActions>
         <Box sx={{ flexGrow: 1 }} />
-
         <Button variant="outlined" color="inherit" onClick={onCancel}>
           Cancel
         </Button>
-
         <LoadingButton type="submit" variant="contained" loading={isSubmitting} loadingIndicator="Loading...">
           Add
         </LoadingButton>

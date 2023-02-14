@@ -1,102 +1,119 @@
-    import React, { useState } from 'react';
-    import * as Yup from 'yup';
-    import { useSnackbar } from 'notistack';
-    import { useCallback } from 'react';
-    // form
-    import { useForm } from 'react-hook-form';
-    import { yupResolver } from '@hookform/resolvers/yup';
-    // @mui
-    import { Box, Grid, Card, Stack, Button } from '@mui/material';
-    import { LoadingButton } from '@mui/lab';
- 
-    // hooks
-    import useAuth from 'src/hooks/useAuth';
-    // utils
+import React, { useState } from 'react';
+import * as Yup from 'yup';
+import { useSnackbar } from 'notistack';
+import { useCallback } from 'react';
+// form
+import Avatar from '@mui/material/Avatar';
 
-    // _mock
-    import { countries } from 'src/_mock';
-    // components
-    import { FormProvider, RHFSelect, RHFTextField } from 'src/components/hook-form';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+// @mui
+import { Box, Grid, Card, Stack, Typography } from '@mui/material';
+import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
 
-    // ----------------------------------------------------------------------
-    export default function AddBranch(){
-        const { enqueueSnackbar } = useSnackbar();
-        const [date, setDate] = useState(new Date());
-        const { user } = useAuth();
-        const UpdateUserSchema = Yup.object().shape({
-            displayName: Yup.string().required('Name is required'),
-        });
-        const AddButton = () => {
-            return (
-                <Button
-                    // component={RouterLink}
-                    // to={PATH_DASHBOARD.user.newUser}
-                >
-                    Add
-                </Button>
-                )
+import dayjs from 'dayjs';
+import TextField from '@mui/material/TextField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+// hooks
+import useAuth from 'src/hooks/useAuth';
+// utils
+import { fData } from 'src/utils/formatNumber';
+// _mock
+import { countries } from 'src/_mock';
+// components
+import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from 'src/components/hook-form';
+// import SalesQuotaionsItems from './quotationsComponents/SalesQuotaionsItems';
+import { whitespace } from 'stylis';
+import { red } from '@mui/material/colors';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
+import AddBranchItems from './AddBranchComponents/AddBranchItems';
+
+// ----------------------------------------------------------------------
+
+export default function AddBranch() {
+    const { enqueueSnackbar } = useSnackbar();
+    // const [quotationDate, setQuotationDate] = useState(new Date());
+    // const [quotationDeliveryDate, setQuotationDeliveryDate] = useState(new Date());
+    // const [purchaseOrderDate, setPurchaseOrderDate] = useState(new Date());
+    const {user} = useAuth();
+    const UpdateUserSchema = Yup.object().shape({
+        // purchaseOrder: Yup.string().required('purchase order is required'),
+        // customers: Yup.string().required('purchase order is required'),
+        // branch: Yup.string().required('purchase order is required'),
+        // exchangeRate: Yup.string().required('purchase order is required'),
+        // quotationDate: Yup.string().required('purchase order is required'),
+        // deliverFromLocation: Yup.string().required('purchase order is required'),
+        // quotationDeliveryDate: Yup.string().required('purchase order is required'),
+        // deliveryTo: Yup.string().required('purchase order is required'),
+    });
+    const defaultValues = {
+        // customers: '',
+        // branch: '',
+        // reference: '',
+        // customerDiscount: '',
+        // exchangeRate: '',
+        // currentCredit: '',
+        // payment: '',
+        // salesPerson: '',
+        // quotationDate: '',
+        // deliverFromLocation: '',
+        // shippingTerms: '',
+        // quotationDeliveryDate: '',
+        // deliveryTo: '',
+        // contactPhoneNumber: '',
+        // address: '',
+        // customerReference: '',
+        // shippingCompany: '',
+        // purchaseOrder: '',
+        // comments: '',
+        // attn: '',
+        // purchaseOrderDate: '',
+        // deliveryTerms: '',
+        // currency: '',
+    
+    };
+    const methods = useForm({
+        resolver: yupResolver(UpdateUserSchema),
+        defaultValues,
+    });
+    const {
+        setValue,
+        handleSubmit,
+        formState: { isSubmitting },
+    } = methods;
+    const onSubmit = async (data) => {
+        // data.quotationDate = quotationDate
+        // data.quotationDeliveryDate = quotationDeliveryDate
+        // data.purchaseOrderDate = purchaseOrderDate
+        console.log("=======:::", data);
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            enqueueSnackbar('Update success!');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const handleDrop = useCallback(
+        (acceptedFiles) => {
+            const file = acceptedFiles[0];
+            if (file) {
+                setValue(
+                    'photoURL',
+                    Object.assign(file, {
+                        preview: URL.createObjectURL(file),
+                    })
+                );
             }
-            const defaultValues = {
-                alltypes: '',
-                branchname:'',
-                Bshortname:'',
-                address:'',
-                secondaryphonenumber:'',
-                phone:'',
-                salesaccount:'',
-                salesdiscountaccount:'',
-                accountreceivableaccount:'',
-                wht:'',
-                salesperson:'',
-                salesarea:'',
-                salesgroup:'',
-                defaultinventory:'',
-                defaultshippingcompany:'',
-                taxgroup:'',
-                contactperson:'',
-                phonenumber:'',
-                secondaryphonenumber:'',
-                faxnumber:'',
-                email:'',
-                documentlanguage:'',
-
-            };
-            const methods = useForm({
-                resolver: yupResolver(UpdateUserSchema),
-                defaultValues,
-            });
-            const {
-                setValue,
-                handleSubmit,
-                formState: { isSubmitting },
-            } = methods;
-
-            const onSubmit = async () => {
-                try {
-                    await new Promise((resolve) => setTimeout(resolve, 500));
-                    enqueueSnackbar('Update success!');
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-            const handleDrop = useCallback(
-                (acceptedFiles) => {
-                    const file = acceptedFiles[0];
-
-                    if (file) {
-                        setValue(
-                            'photoURL',
-                            Object.assign(file, {
-                                preview: URL.createObjectURL(file),
-                            })
-                        );
-                    }
-                },
-                [setValue]
-            );
-            return (
-                <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-                    <Grid  px={30} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >                         <Grid item xs={12} md={12}>
+        },
+        [setValue]
+    );
+    return (
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
+             <Grid  px={30} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >                         <Grid item xs={12} md={12}>
                             <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                                 <Box
                                     sx={{
@@ -120,168 +137,8 @@
                             </Card>
                         </Grid>            
                     </Grid>
-            <Grid item xs={12} md={12}>
-                <Card sx={{ m:5,p: 5, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }}>
-                <h4 style={{marginBottom:20, textAlign:'center', color:'black'}}> BRANCH DETAILS </h4>
-                    <Box
-                        sx={{
-                        display: 'grid',
-                        columnGap: 2,
-                        rowGap: 3,
-                        gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
-                            }}
-                    >
-                        <RHFTextField name="branchname" label="Branch Name" size='small'  sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}} />
-                        <RHFTextField name="Bshortname" label="Branch Short Name" size='small'  sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}/>
-                        <RHFTextField name="address"  label="Mailing Address" multiline rows={4}size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}/>
-                        <RHFTextField name="secondaryphonenumber"  label="Billing Address"multiline rows={4} size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}/>
-                    </Box>
-                        <RHFTextField  name="phone"  label="General Notes" size='small' multiline rows={4}sx={{ mt:3,background:'white',borderColor:'#FF0000', borderRadius:1}}/>
-                        <h4 style={{marginBottom:20,textAlign:'center',marginTop:20}}>GL ACCOUNTS</h4>
-                        <Box
-                        sx={{
-                        display: 'grid',
-                        columnGap: 2,
-                        rowGap: 3,
-                        gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
-                            }}
-                    >
-                        <RHFSelect name="salesaccount" label="Sales Account:"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="salesdiscountaccount" label="Sales Discount Account"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="accountreceivableaccount" label="Accounts Receivable Account"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="wht" label="WHT"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            </Box>
-                </Card> 
-            </Grid>
-            <Grid  px={1} py={1}  container spacing={1}   >
-                <Grid item xs={6} md={6} >
-                    <Card height={3} sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }} >
-                        <Box
-                            sx={{
-                                display: 'grid',
-                                rowGap: 2,
-                                columnGap: 1,
-                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
-                            }}
-                        >
-                           <h4 style={{ textAlign:'center', color:'black'}}>SALES</h4>
-                            <RHFSelect name="salesperson" label="Sales Person"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="salesarea" label="Sales Area" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="salesgroup" label="Sales Group" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="defaultinventory" label="Default Inventory Location" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="defaultshippingcompany" label="Default Shipping Company" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="taxgroup" label="Tax Group" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>                      
-                        </Box>
-                    </Card>
-                </Grid>
-                <Grid item xs={6} md={6}>
-                    <Card sx={{ p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                        <Box
-                            sx={{
-                                display: 'grid',
-                                rowGap: 2,
-                                columnGap: 1,
-                                
-                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
-                                
-                                }}
-                        >
-                            <h4 style={{ textAlign:'center', color:'black'}}>GENRAL CONTACT DATA</h4>
-                            <RHFTextField name="contactperson" label="Contact Person" size='small' sx={{ background: 'white',borderRadius:1 }}  />
-                            <RHFTextField name="phonenumber" label="Phone Number " size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="secondaryphonenumber" label="Secondary Phone Number" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="faxnumber" label="Fax Number" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="email" label="E-mail" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFSelect name="documentlanguage" label="Document Language" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                        </Box>
-                    </Card>
-                </Grid>             
-            </Grid>  
-
-
             
-            <Stack alignItems="flex-center" sx={{ mt: 3}}>  
-                <LoadingButton type="submit" variant="contained" loading={isSubmitting} >
-                   Add branch
-                </LoadingButton>
-            </Stack>
+            <AddBranchItems />
         </FormProvider> 
-            );
-        }
+    );
+}

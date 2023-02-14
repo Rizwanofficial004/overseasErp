@@ -123,7 +123,10 @@ export default function Quotations() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="customers" label="Customers"  size='small' sx={{ color:'#FF5733',borderColor:'#FF0000', borderRadius:1}}>
+                 <Grid  container spacing={1}>
+                    <Grid item xs={12} md={12}>
+                        <Card sx={{ p: 3 }}>              
+                            <RHFSelect name="customers" label="Customers"  size='small' >
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -131,7 +134,7 @@ export default function Quotations() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="branch" label="Branch" size='small' sx={{borderRadius:1}}>
+                            <RHFSelect name="branch" label="Branch" size='small' >
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -139,8 +142,11 @@ export default function Quotations() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFTextField name="reference" label="Reference"  size='small' sx={{ borderRadius:1,}}/>
-                        </Box>
+                            <RHFTextField name="reference" label="Reference"  size='small' />
+                        </Card>
+                    </Grid>
+                </Grid>
+                         </Box>
                     </Card>
                 </Grid> 
                 <Grid item xs={12} sm={6} md={4}>
@@ -156,9 +162,7 @@ export default function Quotations() {
                                 }}
                         >
                             <RHFTextField name="customerDiscount" label="Customer Discount %" size='small' sx={{ borderRadius:1 }}  />
-                            {/* {
-                                errors.customerDiscount && touched.customerDiscount && <text>{errors.customerDiscount}</text>
-                            } */}
+                         
                             <RHFTextField name="exchangeRate" label="Exchange Rate" size='small' sx={{ borderRadius:1}}/>
                             <RHFTextField name="currentCredit" label="Current Credit" size='small' sx={{borderRadius:1}}/>
                         </Box>

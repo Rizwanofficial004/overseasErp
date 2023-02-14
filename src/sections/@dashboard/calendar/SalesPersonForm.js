@@ -31,14 +31,13 @@ const COLOR_OPTIONS = [
 
 const getInitialValues = (event) => {
     const _event = {
-        itemCode: '',
-        itemDescription: '',
-        longDescription: '',
-        quantity: 0,
-        unit: '',
-        priceBeforeTax: 0,
-        discount: 0,
-        total: 0,
+        salespersonname: '',
+        Telephonenumber: '',
+        faxnumber: '',
+        provison2: 0,
+        provision: 0,
+        breakpt: 0,
+        email: '',
         textColor: '#1890FF',
   };
 
@@ -51,13 +50,13 @@ const getInitialValues = (event) => {
 
 // ----------------------------------------------------------------------
 
-SampleOrderItemsForm.propTypes = {
+SalesPersonForm.propTypes = {
   event: PropTypes.object,
   // range: PropTypes.object,
   onCancel: PropTypes.func,
 };
 
-export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems, setsampleOrderItems }) {
+export default function SalesPersonForm({ event, onCancel, salespersonItems, setsalespersonItems }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const dispatch = useDispatch();
@@ -75,7 +74,7 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
   });
 
   const methods = useForm({
-    resolver: yupResolver(EventSchema),
+    // resolver: yupResolver(EventSchema),
     defaultValues: getInitialValues(event),
   });
 
@@ -89,7 +88,7 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
 
   const onSubmit = async (data) => {
     console.log(">>>>>>>>>>:::", data);
-    setsampleOrderItems([...sampleOrderItems, data])
+    setsalespersonItems([...salespersonItems, data])
     onCancel();
       reset();
     // try {
@@ -114,21 +113,24 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
     //   console.error(error);
     // }
   };
+
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} sx={{ p: 3 }}>
-        <RHFTextField name="itemCode" label="Item Code " />
-        <RHFTextField name="itemDescription" label="Item Description" />
-        <RHFTextField name="longDescription" label="Long Description" />
-        <RHFTextField name="quantity" label="Quantity" />
-        <RHFTextField name="unit" label="Unit" />
-        <RHFTextField name="priceBeforeTax" label="Price Before Tax" />
-        <RHFTextField name="discount" label="Discount %" />
-        <RHFTextField name="total" label="Total" />
+        <RHFTextField name="salespersonname" label="Sales Person Name " />
+        <RHFTextField name="Telephonenumber" label="telephone Number" />
+        <RHFTextField name="faxnumber" label="Fax Number" />
+        <RHFTextField name="email" label="E-mail" />
+        <RHFTextField name="provision" label="Provision" />
+        <RHFTextField name="breakpt" label="Break Pt" />
+        <RHFTextField name="provison2" label="Provision 2" />
+       
       </Stack>
 
       <DialogActions>
         <Box sx={{ flexGrow: 1 }} />
+
         <Button variant="outlined" color="inherit" onClick={onCancel}>
           Cancel
         </Button>

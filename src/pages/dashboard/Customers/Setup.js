@@ -76,7 +76,7 @@ export default function Setup() {
           ))}
         </Tabs>
         <Box sx={{ mb: 3 }} />
-        {ACCOUNT_TABS.map((tab) => {
+          {ACCOUNT_TABS.map((tab) => {
           const isMatched = tab.value === currentTab;
           return isMatched && <Box key={tab.value}>{tab.component}</Box>;
         })}

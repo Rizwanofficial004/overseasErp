@@ -270,7 +270,6 @@ export default function SalesOrderItems() {
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
                     <DialogTitle>{selectedsaleOrder ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>
-
                     <SalesOrderItemsForm saleOrderItems={saleOrderItems} setsaleOrderItems={setsaleOrderItems} event={selectedsaleOrder || {}} range={selectedRange} onCancel={handleCloseModal}/>
                 </DialogAnimate>
             </Container>

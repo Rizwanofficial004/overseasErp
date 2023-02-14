@@ -83,7 +83,7 @@
         return (
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                 <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                    <Grid item xs={12} md={12} >
+                    <Grid item xs={12} sm={6}md={6} >
                         <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                             <Box
                                 sx={{
@@ -93,7 +93,7 @@
                                     gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                                 }}
                             >
-                                <RHFSelect name="fromcustomers" label="From Customer"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
+                                <RHFSelect name="fromcustomers" label="From Customer"  size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}>
                                     <option value="" />
                                     {countries.map((option) => (
                                         <option key={option.code} value={option.label}>
@@ -101,7 +101,7 @@
                                         </option>
                                     ))}
                                 </RHFSelect>
-                                <RHFSelect name="intobank" label="In To Bank Account"  size='small' sx={{ background: 'white',borderRadius:1}}>
+                                <RHFSelect name="intobank" label="In To Bank Account"  size='small' sx={{ borderRadius:1}}>
                                     <option value="" />
                                     {countries.map((option) => (
                                         <option key={option.code} value={option.label}>
@@ -109,11 +109,11 @@
                                         </option>
                                     ))}
                                 </RHFSelect>
-                                <RHFTextField name="reference" label="Reference" size='small' sx={{ background:'white', borderRadius:1,}}/>
+                                <RHFTextField name="reference" label="Reference" size='small' sx={{  borderRadius:1,}}/>
                             </Box>
                         </Card>
                     </Grid>
-                    <Grid item xs={12} md={12}>
+                    <Grid item xs={12} sm={6}md={6}>
                         <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                             <Box
                                 sx={{
@@ -123,8 +123,8 @@
                                     gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                                     }}
                                 >
-                                    <RHFTextField name="exchangerate" label="Exchange Rate (PKR = 1)" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                                    <RHFTextField name="bankcharges" label="Bank Charges" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                                    <RHFTextField name="exchangerate" label="Exchange Rate (PKR = 1)" size='small' sx={{ borderRadius:1}}/>
+                                    <RHFTextField name="bankcharges" label="Bank Charges" size='small' sx={{ borderRadius:1}}/>
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <Stack spacing={3}>     
                                             <DesktopDatePicker
@@ -135,7 +135,7 @@
                                                     onChange={(newValue) => {
                                                     setdepositDate(newValue);
                                                 }}
-                                                renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                                renderInput={(params) => <TextField {...params} size='small' sx={{borderRadius:1}}/>}
                                             />
                                         </Stack>
                                     </LocalizationProvider>
@@ -156,13 +156,12 @@
                                     gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(3, 1fr)' },
                                 }}
                             >
-                            <RHFTextField name="cppd" label="Customer Promte Payment Discount" size="small" sx={{ mt: 1, background: 'white',borderRadius:1 }}/>
-                            <RHFTextField name="wht" label="With Holding Tax" size="small" sx={{ mt: 1, background: 'white',borderRadius:1 }}/>
-                            <RHFTextField name="gst" label="GST WithHolding Amount" size="small" sx={{ mt: 1, background: 'white',borderRadius:1 }}/>
-                            <RHFTextField name="amount" label="Amount" size="small" sx={{ mt: 1, background: 'white',borderRadius:1 }}/> 
-                            <Grid>
-                                <RHFTextField name="memo" label="MEMO" multiline rows={4}  sx={{ mt: 1, background: 'white',borderRadius:1 }}/>
-                            </Grid>
+                                <RHFTextField name="cppd" label="Customer Promte Payment Discount" size="small" sx={{ mt: 1,borderRadius:1 }}/>
+                                <RHFTextField name="wht" label="With Holding Tax" size="small" sx={{ mt: 1,borderRadius:1 }}/>
+                                <RHFTextField name="gst" label="GST WithHolding Amount" size="small" sx={{ mt: 1, borderRadius:1 }}/>
+                                <RHFTextField name="amount" label="Amount" size="small" sx={{ mt: 1, borderRadius:1 }}/>
+                                <RHFTextField name="memo" label="MEMO" multiline rows={4}  sx={{ mt: 1,borderRadius:1 }}/>
+                        
                             </Box>  
                             <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
                             <Box display={'flex'} sx={{justifyContent: 'center',m:5}} >

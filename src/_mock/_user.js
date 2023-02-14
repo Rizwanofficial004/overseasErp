@@ -156,6 +156,24 @@ export const _saleOrderItems = [...Array(0)].map((_, index) => ({
   discount: '',
   total: '',
 }));
+export const _unitsofmeasure = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  unitabbreviation:'',
+  descriptivename:'',
+  decimalplaces:'',
+}));
+export const _BranchItems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+      branchname: '',
+      bshortname: '',
+      salesperson: '',
+      salesarea: '',
+      wht: 0,
+      salesgroup: '',
+      accountreceivableamount: '',
+      salesaccount:'',
+      taxgroup: '',
+}));
 export const _sampleOrderItems = [...Array(0)].map((_, index) => ({
   id: _mock.id(index),
   itemCode: '',
@@ -166,6 +184,59 @@ export const _sampleOrderItems = [...Array(0)].map((_, index) => ({
   priceBeforeText: '',
   discount: '',
   total: '',
+}));
+export const _salespersonItems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  salespersonname: '',
+  Telephonenumber: '',
+  faxnumber: '',
+  provison2: 0,
+  provision: 0,
+  breakpt: 0,
+  email: '',
+}));
+export const _salespricing = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  currency: '',
+  price: '',
+  salestype: '',
+ 
+}));
+export const _purchasingprice = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  supplier: '',
+  price: '',
+  suppliersunitofmeasure: '',
+  conversionfactor:'',
+  supplerscode:'',
+ 
+}));
+export const _barcode = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  upc: '',
+  quantity: '',
+  description: '',
+  category:'',
+}));
+export const _categoryitems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  categoryname:'',
+  itemtaxtype:'',
+  itemtype:'',
+  unitsofmeasure:'',
+  salesaccount:'',
+  inventoryaccount:'',
+  cogsaccount:'',
+  inventoryadjustmentaccount:'',
+}));
+export const _inventorylocationitems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  locationcode:'',locationname:'',contactofdelivery:'',
+  address:'',telephone:'',secondaryphone:'',facsimileno:'',email:'',
+}));
+export const _descriptionitems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  description:'',
 }));
 export const _deliveryitems = [...Array(3)].map((_, index) => ({
   id: _mock.id(index),

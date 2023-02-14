@@ -88,7 +88,7 @@ export default function Allocation() {
     );
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
-            <Grid  px={1} py={1}  container spacing={1}  sx={{ borderColor:'grey',borderRadius:1}} >
+            <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
                 <Grid item xs={3} md={3} >
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
@@ -99,7 +99,7 @@ export default function Allocation() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="customers" label="Customers"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
+                            <RHFSelect name="customers" label="Customers"  size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -107,7 +107,7 @@ export default function Allocation() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="branch" label="Branch" size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <RHFSelect name="branch" label="Branch" size='small' sx={{ borderRadius:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -115,7 +115,7 @@ export default function Allocation() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFTextField name="reference" label="Reference"  size='small' sx={{ background:'white', borderRadius:1,}}/>
+                            <RHFTextField name="reference" label="Reference"  size='small' sx={{ borderRadius:1,}}/>
                         </Box>
                     </Card>
                 </Grid>
@@ -131,9 +131,9 @@ export default function Allocation() {
                                 
                                 }}
                         > 
-                            <RHFTextField name="customerdiscount" label="Customer Discount %" size='small' sx={{ background: 'white',borderRadius:1 }}  />
-                            <RHFTextField name="exchangeRate" label="Exchange Rate" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="currentCredit" label="Current Credit" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                            <RHFTextField name="customerdiscount" label="Customer Discount %" size='small' sx={{ borderRadius:1 }}  />
+                            <RHFTextField name="exchangeRate" label="Exchange Rate" size='small' sx={{ borderRadius:1}}/>
+                            <RHFTextField name="currentCredit" label="Current Credit" size='small' sx={{ borderRadius:1}}/>
                         </Box>
                     </Card>
                 </Grid>             
@@ -147,7 +147,7 @@ export default function Allocation() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="payment" label="Payment" placeholder="Payment" size='small'sx={{ background: 'white',borderRadius:1}}>
+                            <RHFSelect name="payment" label="Payment" placeholder="Payment" size='small'sx={{ borderRadius:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -155,7 +155,7 @@ export default function Allocation() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="salesPerson" label="Sales Person" placeholder="Sales Person" size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <RHFSelect name="salesPerson" label="Sales Person" placeholder="Sales Person" size='small' sx={{ borderRadius:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -173,7 +173,7 @@ export default function Allocation() {
                                         onChange={(newValue) => {
                                             setqutationDate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{borderRadius:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>

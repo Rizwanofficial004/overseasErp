@@ -53,13 +53,13 @@ export default function SalesOrder() {
     const { user } = useAuth();
 
     const UpdateUserSchema = Yup.object().shape({
-        customers: Yup.string().required('Name is required'),
-        branch: Yup.string().required('Branch Name is required'),
-        orderdate: Yup.string().required('Order Date is required'),
-        address: Yup.string().required('Address is required'),
-        typeOfPacking: Yup.string().required('Type of Packing is required'),
-        attn: Yup.string().required('Attention person is required'),
-        currency: Yup.string().required('Currency is required'),
+        // customers: Yup.string().required('Name is required'),
+        // branch: Yup.string().required('Branch Name is required'),
+        // orderdate: Yup.string().required('Order Date is required'),
+        // address: Yup.string().required('Address is required'),
+        // typeOfPacking: Yup.string().required('Type of Packing is required'),
+        // attn: Yup.string().required('Attention person is required'),
+        // currency: Yup.string().required('Currency is required'),
     });
     const defaultValues = {
 

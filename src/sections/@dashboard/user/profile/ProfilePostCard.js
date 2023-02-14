@@ -127,7 +127,6 @@ export default function ProfilePostCard({ post }) {
             <Iconify icon={'eva:share-fill'} width={20} height={20} />
           </IconButton>
         </Stack>
-
         {hasComments && (
           <Stack spacing={1.5}>
             {post.comments.map((comment) => (

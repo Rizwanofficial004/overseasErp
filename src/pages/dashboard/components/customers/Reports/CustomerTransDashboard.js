@@ -108,7 +108,7 @@ export default function CustomerTransDashboard() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={12} md={12} >
+                <Grid item xs={12} sm={6}md={4}>
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
                             sx={{
@@ -132,7 +132,7 @@ export default function CustomerTransDashboard() {
                 </Grid>
 
 
-                <Grid item xs={12} md={12}>
+                <Grid item xs={12} sm={6}md={4}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -171,14 +171,11 @@ export default function CustomerTransDashboard() {
                                         renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
                                     />
                                 </Stack>
-                            </LocalizationProvider>
-                            
-
+                            </LocalizationProvider> 
                         </Box>
                     </Card>
                 </Grid>             
-
-                <Grid item xs={12} md={12}>
+                <Grid item xs={12} sm={6}md={4}>
                     <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -197,9 +194,9 @@ export default function CustomerTransDashboard() {
                                 ))}
                             </RHFSelect>
                             <Stack spacing={1} alignItems="flex-center" sx={{ background:'#FF9238', mt: 1,borderRadius: 1 }}>
-                            <LoadingButton type="submit" >
-                             Search
-                            </LoadingButton>
+                                <LoadingButton type="submit" >
+                                    Search
+                                </LoadingButton>
                             </Stack>
                         </Box>
                     </Card>

@@ -6,16 +6,17 @@ import { useSnackbar } from 'notistack';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { countries } from 'src/_mock';
 // @mui
 import { Box, Stack, Button, Tooltip, TextField, IconButton, DialogActions } from '@mui/material';
 import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
 // redux
-import { useDispatch } from '../../../redux/store';
-import { createEvent, updateEvent, deleteEvent } from '../../../redux/slices/calendar';
+import { useDispatch } from 'src/redux/store';
+import { createEvent, updateEvent, deleteEvent } from 'src/redux/slices/calendar';
 // components
-import Iconify from '../../../components/Iconify';
-import { ColorSinglePicker } from '../../../components/color-utils';
-import { FormProvider, RHFTextField, RHFSwitch } from '../../../components/hook-form';
+import Iconify from 'src/components/Iconify';
+import { ColorSinglePicker } from 'src/components/color-utils';
+import { FormProvider, RHFTextField, RHFSwitch,RHFSelect } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
@@ -31,14 +32,10 @@ const COLOR_OPTIONS = [
 
 const getInitialValues = (event) => {
     const _event = {
-        itemCode: '',
-        itemDescription: '',
-        longDescription: '',
-        quantity: 0,
-        unit: '',
-        priceBeforeTax: 0,
-        discount: 0,
-        total: 0,
+        locationcode:'',locationname:'',contactofdelivery:'',
+  address:'',telephone:'',secondaryphone:'',facsimileno:'',email:'',
+
+       
         textColor: '#1890FF',
   };
 
@@ -51,31 +48,25 @@ const getInitialValues = (event) => {
 
 // ----------------------------------------------------------------------
 
-SampleOrderItemsForm.propTypes = {
+LocationinventoryForm.propTypes = {
   event: PropTypes.object,
   // range: PropTypes.object,
   onCancel: PropTypes.func,
 };
 
-export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems, setsampleOrderItems }) {
+export default function LocationinventoryForm({ event, onCancel, inventorylocationitems, setinventorylocationitems }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const dispatch = useDispatch();
 
 
   const EventSchema = Yup.object().shape({
-    // itemCode: Yup.string().max(255).required('Item Code is required'),
-    // itemDescription: Yup.string().max(5000),
-    // longDescription: Yup.string().max(5000),
-    // quantity: Yup.string().max(255).required('Quantity is required'),
-    // unit: Yup.string().max(255).required('Unit is required'),
-    // priceBeforeTax: Yup.string().max(255).required('Price Before Tax is required'),
-    // discount: Yup.string().max(255).required('Discount is required'),
+    
     
   });
 
   const methods = useForm({
-    resolver: yupResolver(EventSchema),
+    // resolver: yupResolver(EventSchema),
     defaultValues: getInitialValues(event),
   });
 
@@ -89,7 +80,7 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
 
   const onSubmit = async (data) => {
     console.log(">>>>>>>>>>:::", data);
-    setsampleOrderItems([...sampleOrderItems, data])
+    setinventorylocationitems([...inventorylocationitems, data])
     onCancel();
       reset();
     // try {
@@ -114,21 +105,24 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
     //   console.error(error);
     // }
   };
+
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} sx={{ p: 3 }}>
-        <RHFTextField name="itemCode" label="Item Code " />
-        <RHFTextField name="itemDescription" label="Item Description" />
-        <RHFTextField name="longDescription" label="Long Description" />
-        <RHFTextField name="quantity" label="Quantity" />
-        <RHFTextField name="unit" label="Unit" />
-        <RHFTextField name="priceBeforeTax" label="Price Before Tax" />
-        <RHFTextField name="discount" label="Discount %" />
-        <RHFTextField name="total" label="Total" />
+        <RHFTextField name="locationcode" label="Location Code   " />
+        <RHFTextField name="locationname" label="Location Name" />
+        <RHFTextField name="contactofdelivery" label="Contact Of Delivery " />
+        <RHFTextField name="address" label="Address " />
+        <RHFTextField name="telephone" label="Telephone " />
+        <RHFTextField name="secondaryphone" label="Secondary Phone" />
+        <RHFTextField name="facsimileno" label="Facsimile No" />
+        <RHFTextField name="email" label="E-mail " />
       </Stack>
 
       <DialogActions>
         <Box sx={{ flexGrow: 1 }} />
+
         <Button variant="outlined" color="inherit" onClick={onCancel}>
           Cancel
         </Button>

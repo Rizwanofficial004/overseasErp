@@ -22,18 +22,18 @@ import {
 } from 'src/sections/@dashboard/user/account';
 //import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
 //import {SalesOrder} from '../components/customers/transactions';
-import {GeneralSettings} from '../components/suppliers/setup/GerenalSettings';
+import NewSuppliers from '../components/suppliers/setup/NewSuppliers';
 // ----------------------------------------------------------------------
 export default function SupplierSetup() {
   const { themeStretch } = useSettings();
 
-  const [currentTab, setCurrentTab] = useState('Purchase Order');
+  const [currentTab, setCurrentTab] = useState('Add Suppliers');
 
   const ACCOUNT_TABS = [
     {
       value: 'Add Suppliers',
       icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
-      component: <GeneralSettings />,
+      component: <NewSuppliers />,
     },
     
   ];

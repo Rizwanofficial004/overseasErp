@@ -20,7 +20,7 @@ import {
   AccountNotifications,
   AccountChangePassword,
 } from 'src/sections/@dashboard/user/account';
-import { CompanyDetails } from '../components/settings/CompanySetup';
+import { CompanyDetails,ItemTax } from '../components/settings/CompanySetupComponents';
 // import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
 // import {SalesOrder} from '../components/customers/transactions';
 // import {DeliveryNote} from '../components/customers/transactions';
@@ -73,7 +73,7 @@ export default function CompanySetup() {
     {
       value: 'Item Tax Setup',
       icon: <Iconify icon={'fluent:group-return-24-regular'} color='#F2740B' width={25} height={40} />,
-      //component: <SalesReturn/>,
+      component: <ItemTax/>,
     },
     {
       value: 'System Setup',

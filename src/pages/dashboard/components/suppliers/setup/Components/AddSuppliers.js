@@ -112,7 +112,6 @@ export default function AddSuppliers() {
                                 ))}
                             </RHFSelect>
                             <RHFTextField name="reference" label="Reference" size='small' sx={{ background:'white', borderRadius:1,}}/>
-
                         </Box>
                     </Card>
                 </Grid>
@@ -183,10 +182,8 @@ export default function AddSuppliers() {
                         </Box>
                         </Box>
                         </Stack>
-                        
-                                        </Card>
+                     </Card>
                 </Grid>
-
             </Grid>
         </FormProvider> 
     );

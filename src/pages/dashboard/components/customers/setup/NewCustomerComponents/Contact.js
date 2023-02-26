@@ -111,7 +111,7 @@ export default function Contact(){
                 <Grid container mt={ 3}spacing={3}>
                     <Grid item xs={12} md={12}>
                         <Card sx={{ p: 3,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }}>
-                        <h4 style={{marginBottom:15,marginTop:10, textAlign:'center', color:'black'}}> Contact Data</h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}> Contact Data</h4>
                             <Box
                             sx={{
                                 display: 'grid',

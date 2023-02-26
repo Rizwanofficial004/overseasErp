@@ -105,8 +105,9 @@
                                     columnGap: 1,
                                     gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                                 }}
-                            >                      
-                                <RHFTextField name="reference" label="#" size='small' sx={{ borderRadius:1,}}/>
+                            >          
+                                <Card sx={{ p: 3 }}>       
+                                <RHFTextField name="reference" label="#" size='small' sx={{ mt: 1,}}/>
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <Stack spacing={3}>
                                         <DesktopDatePicker
@@ -117,7 +118,7 @@
                                             onChange={(newValue) => {
                                                 setcreditDate(newValue);
                                             }}
-                                            renderInput={(params) => <TextField {...params} size='small' sx={{borderRadius:1}}/>}
+                                            renderInput={(params) => <TextField {...params} size='small' sx={{mt: 1}}/>}
                                         />
                                     </Stack>
                                 </LocalizationProvider>
@@ -131,10 +132,11 @@
                                             onChange={(newValue) => {
                                                 setcreditTODate(newValue);
                                             }}
-                                            renderInput={(params) => <TextField {...params} size='small' sx={{borderRadius:1}}/>}
+                                            renderInput={(params) => <TextField {...params} size='small' sx={{mt: 1}}/>}
                                         />
                                     </Stack>
                                 </LocalizationProvider>
+                            </Card>
                             </Box>
                         </Card>
                     </Grid>
@@ -150,7 +152,8 @@
                                     
                                     }}
                             >
-                                <RHFSelect name="alllocation" label="All Locations" placeholder="All Locations" size='small'sx={{ borderRadius:1}}>
+                                <Card sx={{ p: 3 }}> 
+                                <RHFSelect name="alllocation" label="All Locations" placeholder="All Locations" size='small'sx={{ mt: 1}}>
                                     <option value="" />
                                     {countries.map((option) => (
                                         <option key={option.code} value={option.label}>
@@ -158,8 +161,8 @@
                                         </option>
                                     ))}
                                 </RHFSelect>
-                                <RHFTextField name="item" label="Item" size='small' sx={{ borderRadius:1}}/>
-                                <RHFSelect name="allitems" label="All Items" placeholder="All Items" size='small'sx={{borderRadius:1}}>
+                                <RHFTextField name="item" label="Item" size='small' sx={{ mt: 1}}/>
+                                <RHFSelect name="allitems" label="All Items" placeholder="All Items" size='small'sx={{mt: 1}}>
                                     <option value="" />
                                     {countries.map((option) => (
                                         <option key={option.code} value={option.label}>
@@ -167,6 +170,7 @@
                                         </option>
                                     ))}
                                 </RHFSelect>
+                           </Card>
                             </Box>
                         </Card>
                     </Grid>             
@@ -180,7 +184,8 @@
                                     gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                                 }}
                             >
-                                <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small'sx={{ borderRadius:1}}>
+                                <Card sx={{ p: 3 }}> 
+                                <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small'sx={{ mt: 1}}>
                                     <option value="" />
                                     {countries.map((option) => (
                                         <option key={option.code} value={option.label}>
@@ -188,11 +193,12 @@
                                         </option>
                                     ))}
                                 </RHFSelect>
-                            <Stack spacing={1} alignItems="flex-center" sx={{  mt: 1,borderRadius: 1 }}>
+                            <Stack spacing={1} alignItems="flex-center" sx={{  mt: 1}}>
                             <LoadingButton type="submit" >
                                 Search
                             </LoadingButton>
                             </Stack>
+                            </Card>
                             </Box>
                         </Card>
                     </Grid>

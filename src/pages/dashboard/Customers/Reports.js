@@ -1,12 +1,13 @@
 import { capitalCase } from 'change-case';
 import { useState } from 'react';
 // @mui
-import { Container, Tab, Box, Tabs } from '@mui/material';
+import { Container, Tab, Box, Tabs,Card  } from '@mui/material';
 
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
+import { styled } from '@mui/material/styles';
 // _mock_
 import { _userPayment, _userAddressBook, _userInvoices, _userAbout } from 'src/_mock';
 // components
@@ -14,18 +15,27 @@ import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
 import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import {
-  AccountGeneral,
-  AccountBilling,
-  AccountSocialLinks,
-  AccountNotifications,
-  AccountChangePassword,
-} from 'src/sections/@dashboard/user/account';
+
 import { CustomerAllocationDashboard, QuotationDashboard, SalesOrderDashboard, SampleDashboard,PrintReport } from '../components/customers/Reports';
 import CustomerTransDashboard from '../components/customers/Reports/CustomerTransDashboard';
 // import {SalesOrder} from '../components/customers/reports';
 // import {DeliveryNote} from '../components/customers/reports';
 // ----------------------------------------------------------------------
+const TabsWrapperStyle = styled('div')(({ theme }) => ({
+  zIndex: 9,
+  bottom: 0,
+  width: '100%',
+  display: 'flex',
+  position: 'absolute',
+  backgroundColor: theme.palette.background.paper,
+  [theme.breakpoints.up('sm')]: {
+    justifyContent: 'center',
+  },
+  [theme.breakpoints.up('md')]: {
+    justifyContent: 'flex-end',
+    paddingRight: theme.spacing(3),
+  },
+}));
 export default function Reports() {
   const { themeStretch } = useSettings();
   const [currentTab, setCurrentTab] = useState('QuotationDashboard');
@@ -79,33 +89,43 @@ export default function Reports() {
   ];
   return (
     <Page title="Customers: Reports">
-      <Container maxWidth={themeStretch ? false : 'lg'}>
-        <HeaderBreadcrumbs
-          heading="Reports"
-          links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: 'Account Settings' },
-          ]}
-        />
-        <Tabs
-          value={currentTab}
-          scrollButtons="auto"
-          variant="scrollable"
-          allowScrollButtonsMobile
-          onChange={(e, value) => setCurrentTab(value)}
-        >
-          {ACCOUNT_TABS.map((tab) => (
-            <Tab disableRipple key={tab.value} label={tab.value} icon={tab.icon} value={tab.value} />
-          ))}
-        </Tabs>
-        <Box sx={{ mb: 3 }} />
-
-        {ACCOUNT_TABS.map((tab) => {
-          const isMatched = tab.value === currentTab;
-          return isMatched && <Box key={tab.value}>{tab.component}</Box>;
-        })}
-      </Container>
-    </Page>
+    <Container maxWidth={themeStretch ? false : 'lg'}>
+      <HeaderBreadcrumbs
+        heading="QuotationDashboard"
+        links={[
+          { name: 'Dashboard', href: PATH_DASHBOARD.root },
+          { name: 'User', href: PATH_DASHBOARD.user.root },
+          { name: 'Account Settings' },
+        ]}
+      />
+       <Card
+        sx={{
+          backgroundColor:'#ff6347',
+          mb: 3,
+          height: 200,
+          position: 'relative',
+        }}
+      ><Tab name={currentTab}></Tab>
+        <TabsWrapperStyle>
+      <Tabs
+        value={currentTab}
+        scrollButtons="auto"
+        variant="scrollable"
+        allowScrollButtonsMobile
+        onChange={(e, value) => setCurrentTab(value)}
+      >
+        {ACCOUNT_TABS.map((tab) => (
+          <Tab disableRipple key={tab.value} label={tab.value} icon={tab.icon} value={tab.value} />
+        ))}
+      </Tabs>
+      </TabsWrapperStyle>
+      </Card>
+      <Box sx={{ mb: 3 }} />
+      {ACCOUNT_TABS.map((tab) => {
+        const isMatched = tab.value === currentTab;
+        return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+      })}
+    </Container>
+  </Page>
   );
 }

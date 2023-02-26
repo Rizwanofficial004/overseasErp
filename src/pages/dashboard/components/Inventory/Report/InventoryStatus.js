@@ -136,19 +136,20 @@ export default function InventoryStatus() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="items" label="Items" size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            
+                            <Card sx={{p:2}}> 
+                                <RHFSelect name="items" label="Items" size='small' sx={{mt:1}}>
+                                    <option value="" />
+                                    {countries.map((option) => (
+                                        <option key={option.code} value={option.label}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </RHFSelect>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>
-                            </Grid>
+            </Grid>
 {/*----------------SALES TABLE CALLING-------------------------------------------*/}
         <InventoryStatusItems />
 {/*----------------3rd portion Detailing Code-------------------------------------------*/}

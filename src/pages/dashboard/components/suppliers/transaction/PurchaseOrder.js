@@ -41,17 +41,8 @@ export default function PurchaseOrder() {
     });
 
     const defaultValues = {
-        displayName: user?.displayName || '',
-        email: user?.email || '',
-        photoURL: user?.photoURL || '',
-        phoneNumber: user?.phoneNumber || '',
-        country: user?.country || '',
-        address: user?.address || '',
-        state: user?.state || '',
-        city: user?.city || '',
-        zipCode: user?.zipCode || '',
-        about: user?.about || '',
-        isPublic: user?.isPublic || '',
+     
+        memo:'',
     };
     
     const methods = useForm({
@@ -93,7 +84,7 @@ export default function PurchaseOrder() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={3} md={3} >
+                <Grid item xs={12} sm={6} md={3} >
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
                             sx={{
@@ -103,7 +94,8 @@ export default function PurchaseOrder() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="Supplier" label="Supplier"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
+                            <Card sx={{p:3}}>
+                            <RHFSelect name="Supplier" label="Supplier"  size='small' sx={{mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -111,7 +103,7 @@ export default function PurchaseOrder() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="Suppliercurrency" label="Supplier Currency" size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <RHFSelect name="Suppliercurrency" label="Supplier Currency" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -119,12 +111,12 @@ export default function PurchaseOrder() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFTextField name="Exchangerate" label="Exchange Rata"  size='small' sx={{ background:'white', borderRadius:1,}}/>
-                            
+                            <RHFTextField name="Exchangerate" label="Exchange Rata"  size='small' sx={{ mt:1}}/>
+                        </Card>  
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={3} md={3}>
+                <Grid item xs={12} sm={6} md={3}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -136,8 +128,9 @@ export default function PurchaseOrder() {
                                 
                                 }}
                         >
-                            <RHFTextField name="Currentcredit" label="Current Credit    "  size='small' sx={{ background:'white', borderRadius:1,}}/>
-                            <RHFTextField name="reference" label="Reference" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                            <Card sx={{p:3}}>
+                            <RHFTextField name="Currentcredit" label="Current Credit    "  size='small' sx={{ mt:1}}/>
+                            <RHFTextField name="reference" label="Reference" size='small' sx={{ mt:1}}/>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <Stack spacing={3}>
                                     <DesktopDatePicker
@@ -148,15 +141,16 @@ export default function PurchaseOrder() {
                                         onChange={(newValue) => {
                                             setorderDate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>                                                      
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>             
 
-                <Grid item xs={3} md={3}>
+                <Grid item xs={12} sm={6} md={3}>
                     <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -166,8 +160,9 @@ export default function PurchaseOrder() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFTextField name="SuppliersReference " label="Supplier's Reference" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFSelect name="receiveinto" label="Receive Into" placeholder="Payment" size='small'sx={{ background: 'white',borderRadius:1}}>
+                            <Card sx={{p:3}}>
+                            <RHFTextField name="SuppliersReference " label="Supplier's Reference" size='small' sx={{ mt:1}}/>
+                            <RHFSelect name="receiveinto" label="Receive Into" placeholder="Payment" size='small'sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -175,7 +170,7 @@ export default function PurchaseOrder() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="salesPerson" label="Sales Person" placeholder="Sales Person" size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <RHFSelect name="salesPerson" label="Sales Person" placeholder="Sales Person" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -183,12 +178,13 @@ export default function PurchaseOrder() {
                                     </option>
                                 ))}
                             </RHFSelect>
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>
                 
-                <Grid item xs={3} md={3}>
-                    <Card sx={{  p: 8, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
+                <Grid item xs={12} sm={6} md={3}>
+                    <Card sx={{ p:1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
                                 display: 'grid',
@@ -197,7 +193,9 @@ export default function PurchaseOrder() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                        <RHFTextField name="Deliverto " label="Deliver To" size ='small' sx={{ background: 'white',borderRadius:1}}/>
+                        <Card sx={{p:3}}>
+                        <RHFTextField name="Deliverto " label="Deliver To"  size ='small' multiline rows={5} sx={{ mt:1}}/>
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>
@@ -207,10 +205,10 @@ export default function PurchaseOrder() {
 {/*----------------3rd portion Detailing Code-------------------------------------------*/}
             <Grid mt={3} ml={23} container spacing={1}>
                 <Grid item xs={8} md={8}>
-                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                        
-           
-           <RHFTextField name="memo" label="MEMO" multiline rows={4}  sx={{ mt: 1, background: 'white',borderRadius:1 }}/>
+                    <Card sx={{ p: 2, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>   
+                    <Card sx={{p:3}}>
+                        <RHFTextField name="memo" label="MEMO" multiline rows={4}  sx={{ mt: 1}}/>
+                    </Card>
                     <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
                         <Box display={'flex'} >
                             <Box m={1}>

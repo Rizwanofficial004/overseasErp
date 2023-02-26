@@ -91,8 +91,9 @@ export default function StandardCosts() {
                                         
                                         }}
                                 >
+                                     <Card sx={{p:2}}> 
                                     <RHFTextField name="itemcode" label="Item Code" size='small'  sx={{ borderColor:'#FF0000', borderRadius:1}} />
-                                   
+                                   </Card>
                                 </Box>
                             </Card>
                         </Grid> 
@@ -108,6 +109,7 @@ export default function StandardCosts() {
                                         
                                         }}
                                 >
+                                     <Card sx={{p:2}}> 
                                      <RHFSelect name="item" label="Select an Items"  size='small'sx={{ borderRadius:1}}>
                                         <option value="" />
                                         {countries.map((option) => (
@@ -116,7 +118,7 @@ export default function StandardCosts() {
                                             </option>
                                         ))}
                                     </RHFSelect>
-
+                                    </Card>
                                 </Box>
                             </Card>
                         </Grid>
@@ -132,46 +134,35 @@ export default function StandardCosts() {
                                         
                                         }}
                                 >
+                                     <Card sx={{p:2}}> 
                                         <Stack spacing={1} alignItems="flex-center" sx={{  mt: 1, borderRadius: 1 }}>
                                             <LoadingButton type="submit" variant="contained" loading={isSubmitting} >
                                                 Search
                                             </LoadingButton>
                                         </Stack>
-
+                                    </Card>
                                 </Box>
                             </Card>
                         </Grid>
                     </Grid>           
        
             <Grid mt={3} container spacing={1}>
-                <Grid item xs={12} md={12}>
+                <Grid item xs={12} sm={6} md={12}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                        <h2 style={{  textAlign:'center',color:'black',borderRadius:10}}>Standard Costs Details </h2>
-                        <Box
-                            sx={{
-                                display: 'grid',
-                                rowGap: 2,
-                                columnGap: 2,
-                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(3, 1fr)' },
-                            }}
-                        >
-                            <Grid mt={3} container spacing={1}> 
-                                <Grid item xs={12} md={12}>
-                                    <Card sx={{ p: 3 }}>  
+
+                        <h4 style={{marginBottom:15, marginTop:30, textAlign:'center', color:'#ff6347', fontSize:30}}> Standard Costs Details  </h4>
+                     
+                                <Card  sx={{mt:3, p: 3 }}>  
                                     <RHFTextField  name="standardmaterialcostperunit" label="Standard Material Cost Per Unit" size="small" sx={{ mt: 1}}/>                     
-                                         
-                                    </Card>
-                                </Grid>
-                            </Grid>
-                            
-                        <Stack spacing={1} alignItems="flex-bottom" sx={{ mt: 5,borderRadius: 1 }}>
-                            <Box display={'flex'} sx={{justifyContent: 'center',m:5}} >           
-                                <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                                    Update 
-                                </LoadingButton>
-                            </Box>
-                        </Stack> 
-                        </Box>      
+                                </Card>
+                            <Stack spacing={1} alignItems="flex-bottom" sx={{ mt: 5,borderRadius: 1 }}>
+                                <Box display={'flex'} sx={{justifyContent: 'center',m:5}} >           
+                                    <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                                        Update 
+                                    </LoadingButton>
+                                </Box>
+                            </Stack> 
+                           
                     </Card>
                 </Grid>
             </Grid>

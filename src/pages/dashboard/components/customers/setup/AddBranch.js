@@ -112,31 +112,34 @@ export default function AddBranch() {
         [setValue]
     );
     return (
-        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
-             <Grid  px={30} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >                         <Grid item xs={12} md={12}>
-                            <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
-                                <Box
-                                    sx={{
-                                        display: 'grid',
-                                        rowGap: 2,
-                                        columnGap: 1,
-                                        
-                                        gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
-                                        
-                                        }}
-                                >
-                                    <RHFSelect name="alltypes" label="Select Customer" mt={10} size='small'sx={{ background: 'white',borderRadius:1}}>
-                                        <option value="" />
-                                        {countries.map((option) => (
-                                            <option key={option.code} value={option.label}>
-                                                {option.label}
-                                            </option>
-                                        ))}
-                                    </RHFSelect>
-                                </Box>
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} >
+            <Grid container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >                         
+                <Grid item xs={12} md={12}>
+                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)'}}>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                rowGap: 2,
+                                columnGap: 2,
+                                
+                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
+                                
+                                }}
+                        >
+                            <Card sx={{p:3}}>
+                            <RHFSelect name="alltypes" label="Select Customer"  >
+                                <option value="" />
+                                {countries.map((option) => (
+                                    <option key={option.code} value={option.label}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </RHFSelect>
                             </Card>
-                        </Grid>            
-                    </Grid>
+                        </Box>
+                    </Card>
+                </Grid>            
+            </Grid>
             
             <AddBranchItems />
         </FormProvider> 

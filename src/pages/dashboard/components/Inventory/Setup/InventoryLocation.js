@@ -224,10 +224,8 @@ import LocationinventoryForm from 'src/sections/@dashboard/calendar/inventory/Lo
             <Container  maxWidth={themeStretch ? false : 'lg'}>
                 <Card mt={3}>
                     <Scrollbar>
-                        <TableContainer sx={{mt:3, minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Inventory Location Details </h4>
-                        
+                        <TableContainer sx={{mt:3, minWidth: 1000 }}>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}> Inventory Location Details</h4>
                             <Table>
                                 <UserListHead
                                     order={order}

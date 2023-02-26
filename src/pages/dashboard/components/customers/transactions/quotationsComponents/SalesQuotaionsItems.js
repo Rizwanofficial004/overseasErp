@@ -167,7 +167,7 @@ export default function SalesQuotaionsItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h2 style={{ textAlign:'center', color:'black'}}>Sales Quotation Items </h2>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}> Sales Quotation Details</h4>
                             <Table>
                                 <UserListHead
                                     order={order}

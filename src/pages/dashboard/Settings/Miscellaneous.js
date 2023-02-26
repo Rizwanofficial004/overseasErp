@@ -12,37 +12,29 @@ import { _userPayment, _userAddressBook, _userInvoices, _userAbout } from 'src/_
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
 import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
-// sections
-import {
-  AccountGeneral,
-  AccountBilling,
-  AccountSocialLinks,
-  AccountNotifications,
-  AccountChangePassword,
-} from 'src/sections/@dashboard/user/account';
-// import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
-// import {SalesOrder} from '../components/customers/transactions';
-// import {DeliveryNote} from '../components/customers/transactions';
+import ShippingCompany from 'src/pages/dashboard/components/settings/MiscellaneousComponents/ShippingCompany';
+import PaymentTerms from 'src/pages/dashboard/components/settings/MiscellaneousComponents/PaymentTerms';
 
 
 
-// ----------------------------------------------------------------------
+
+// ---------------------------------------------------- ------------------
 
 export default function Miscellaneous() {
   const { themeStretch } = useSettings();
 
-  const [currentTab, setCurrentTab] = useState('Company Details');
+  const [currentTab, setCurrentTab] = useState('Payment Terms');
 
   const ACCOUNT_TABS = [
     {
       value: 'Payment Terms',
       icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
-     // component: <Quotations />,
+      component: <PaymentTerms />,
     },
     {
       value: 'Shipping Company',
       icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
-     // component: <SalesOrder /> 
+      component: <ShippingCompany /> 
     },
     {
       value: 'POS',

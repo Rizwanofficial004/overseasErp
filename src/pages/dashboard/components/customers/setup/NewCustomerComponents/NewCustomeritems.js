@@ -22,7 +22,7 @@ export default function NewCustomeritems(){
     const { user } = useAuth();
     
     const UpdateUserSchema = Yup.object().shape({
-        displayName: Yup.string().required('Name is required'),
+        // displayName: Yup.string().required('Name is required'),
     });
     const AddButton = () => {
         return (
@@ -71,7 +71,7 @@ export default function NewCustomeritems(){
             formState: { isSubmitting },
         } = methods;
         const onSubmit = async (data) => {
-            console.log("=======:::", data);
+            console.log("=======", data);
             try {
                 await new Promise((resolve) => setTimeout(resolve, 500));
                 enqueueSnackbar('Update success!');
@@ -98,7 +98,7 @@ export default function NewCustomeritems(){
             <Grid container spacing={3}>
                 <Grid item xs={12} md={12}>
                     <Card sx={{ p: 3,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }}>
-                        <h4 style={{marginBottom:15,marginTop:10, textAlign:'center', color:'black'}}> CUSTOMER DETAILS </h4>
+                    <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}> CUSTOMER DETAILS </h4>
                         <Box
                         sx={{
                             display: 'grid',
@@ -110,12 +110,12 @@ export default function NewCustomeritems(){
                             <Grid mt={3} container spacing={1}>
                                 <Grid item xs={12} md={12}>
                                     <Card sx={{ p: 3 }}>  
-                                        <RHFTextField name="customername" label="Customer Name" size='small'  sx={{ mt: 1,color:'#FF0000',borderColor:'#FF0000', borderRadius:1}} />
-                                        <RHFTextField name="customershortname" label="Customer Short Name" size='small'  sx={{ mt: 1, borderColor:'#FF0000', borderRadius:1}}/>
-                                        <RHFTextField name="address" label="Address" size='small' sx={{  mt: 1,borderColor:'#FF0000', borderRadius:1}}/>
-                                        <RHFTextField name="ntnnumber" label="NTN Number" size='small' sx={{ mt: 1, borderColor:'#FF0000', borderRadius:1}}/>
-                                        <RHFTextField name="gstnumber" label="GST Number" size='small' sx={{ mt: 1, borderColor:'#FF0000', borderRadius:1}}/>
-                                        <RHFSelect name="customercurrency" label="Customer Currency" size='small' sx={{ mt: 1, borderColor:'#FF0000', borderRadius:1}}>
+                                        <RHFTextField name="customername" label="Customer Name" size='small'  sx={{mt:2,color:'#FF0000',borderColor:'#FF0000', borderRadius:1}} />
+                                        <RHFTextField name="customershortname" label="Customer Short Name" size='small'  sx={{mt:2, borderColor:'#FF0000', borderRadius:1}}/>
+                                        <RHFTextField name="address" label="Address" size='small' sx={{ mt:2,borderColor:'#FF0000', borderRadius:1}}/>
+                                        <RHFTextField name="ntnnumber" label="NTN Number" size='small' sx={{mt:2, borderColor:'#FF0000', borderRadius:1}}/>
+                                        <RHFTextField name="gstnumber" label="GST Number" size='small' sx={{mt:2, borderColor:'#FF0000', borderRadius:1}}/>
+                                        <RHFSelect name="customercurrency" label="Customer Currency" size='small' sx={{mt:2, borderColor:'#FF0000', borderRadius:1}}>
                                             <option value="" />
                                             {countries.map((option) => (
                                             <option key={option.code} value={option.label}>
@@ -129,7 +129,7 @@ export default function NewCustomeritems(){
                             <Grid mt={3} container spacing={1}>
                                 <Grid item xs={12} md={12}>
                                     <Card sx={{ p: 3 }}> 
-                                        <RHFSelect name="salestype" label="Sales Type / Price List" size='small' sx={{ mt: 1, borderColor:'#FF0000', borderRadius:1}}>
+                                        <RHFSelect name="salestype" label="Sales Type / Price List" size='small' sx={{mt:2, borderColor:'#FF0000', borderRadius:1}}>
                                             <option value="" />
                                             {countries.map((option) => (
                                             <option key={option.code} value={option.label}>
@@ -137,11 +137,11 @@ export default function NewCustomeritems(){
                                             </option>
                                             ))}
                                         </RHFSelect>
-                                        <RHFTextField name="phone"  label="Phone" size='small' sx={{  mt: 1,borderColor:'#FF0000', borderRadius:1}}/>
-                                        <RHFTextField name="secondaryphonenumber"  label="Secondary Phone Number" size='small' sx={{ mt: 1, borderColor:'#FF0000', borderRadius:1}}/>
-                                        <RHFTextField name="faxnumber"  label="Fax Number" size='small' sx={{ mt: 1, borderColor:'#FF0000', borderRadius:1}}/>
-                                        <RHFTextField name="email"  label="E-mail" size='small' sx={{  mt: 1, borderRadius:1}}/>
-                                        <RHFSelect name="salesperson" label="Sales Person" size='small' sx={{  mt: 1,borderColor:'#FF0000', borderRadius:1}}>
+                                        <RHFTextField name="phone"  label="Phone" size='small' sx={{ mt:2,borderColor:'#FF0000', borderRadius:1}}/>
+                                        <RHFTextField name="secondaryphonenumber"  label="Secondary Phone Number" size='small' sx={{mt:2, borderColor:'#FF0000', borderRadius:1}}/>
+                                        <RHFTextField name="faxnumber"  label="Fax Number" size='small' sx={{mt:2, borderColor:'#FF0000', borderRadius:1}}/>
+                                        <RHFTextField name="email"  label="E-mail" size='small' sx={{ mt:2, borderRadius:1}}/>
+                                        <RHFSelect name="salesperson" label="Sales Person" size='small' sx={{ mt:2,borderColor:'#FF0000', borderRadius:1}}>
                                             <option value="" />
                                             {countries.map((option) => (
                                             <option key={option.code} value={option.label}>
@@ -167,12 +167,12 @@ export default function NewCustomeritems(){
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <h4 style={{ textAlign:'center', color:'black'}}>BRANCH</h4>
+                            <h4 style={{marginBottom:5, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>BRANCH</h4>
 
                             <Grid mt={3} container spacing={1}>
                                 <Grid item xs={12} md={12}>
                                 <Card sx={{ p: 3 }}>
-                                    <RHFSelect name="defaultinventorylocation" label="Default Inventory Location"  size='small' sx={{ mt: 1, borderColor:'#FF0000', borderRadius:1}}>
+                                    <RHFSelect name="defaultinventorylocation" label="Default Inventory Location"  size='small' sx={{mt:2, borderColor:'#FF0000', borderRadius:1}}>
                                         <option value="" />
                                         {countries.map((option) => (
                                             <option key={option.code} value={option.label}>
@@ -180,7 +180,7 @@ export default function NewCustomeritems(){
                                             </option>
                                         ))}
                                     </RHFSelect>
-                                    <RHFSelect name="defaultshippingcompany" label="Default Shipping Company" size='small' sx={{  mt: 1,borderRadius:1}}>
+                                    <RHFSelect name="defaultshippingcompany" label="Default Shipping Company" size='small' sx={{ mt:2,borderRadius:1}}>
                                         <option value="" />
                                         {countries.map((option) => (
                                             <option key={option.code} value={option.label}>
@@ -188,7 +188,7 @@ export default function NewCustomeritems(){
                                             </option>
                                         ))}
                                     </RHFSelect>
-                                    <RHFSelect name="salesarea" label="Sales Area" size='small' sx={{ mt: 1, borderRadius:1}}>
+                                    <RHFSelect name="salesarea" label="Sales Area" size='small' sx={{mt:2, borderRadius:1}}>
                                         <option value="" />
                                         {countries.map((option) => (
                                             <option key={option.code} value={option.label}>
@@ -196,7 +196,7 @@ export default function NewCustomeritems(){
                                             </option>
                                         ))}
                                     </RHFSelect>
-                                    <RHFSelect name="taxgroup" label="Tax Group" size='small' sx={{ mt: 1, borderRadius:1}}>
+                                    <RHFSelect name="taxgroup" label="Tax Group" size='small' sx={{mt:2, borderRadius:1}}>
                                         <option value="" />
                                         {countries.map((option) => (
                                             <option key={option.code} value={option.label}>
@@ -204,7 +204,7 @@ export default function NewCustomeritems(){
                                             </option>
                                         ))}
                                     </RHFSelect>
-                                    <RHFTextField name="otherdetails" label="OTHER Details" multiline rows={6.2} size='small' sx={{ mt: 1, borderRadius:1,}}/>
+                                    <RHFTextField name="otherdetails" label="OTHER Details" multiline rows={6.2} size='small' sx={{mt:2, borderRadius:1,}}/>
                                 </Card>
                                 </Grid>
                             </Grid>
@@ -222,16 +222,16 @@ export default function NewCustomeritems(){
                                 
                                 }}
                         >
-                            <h4 style={{ textAlign:'center', color:'black'}}>SALES</h4>
+                            <h4 style={{marginBottom:5, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>SALES</h4>
                             <Grid mt={3} container spacing={1}>
                                 <Grid item xs={12} md={12}>
                                     <Card sx={{ p: 3 }}>  
-                                        <RHFTextField name="discountpercent" label="Discount Percent %" size='small' sx={{  mt: 1,borderRadius:1 }}  />
-                                        <RHFTextField name="promotepaymentdiscount" label="Prompt Payment Discount Percent % " size='small' sx={{ mt: 1, borderRadius:1}}/>
-                                        <RHFTextField name="Creditlimit" label="Credit Limit" size='small' sx={{ mt: 1, borderRadius:1}}/>
-                                        <RHFTextField name="paymentterms" label="Payment Terms" size='small' sx={{ mt: 1, borderRadius:1}}/>
-                                        <RHFTextField name="creditstatus" label="Credit Status" size='small' sx={{  mt: 1,borderRadius:1}}/>
-                                        <RHFTextField name="generalnotes" label="General Notes" multiline rows={4} size='small' sx={{ mt: 1, borderRadius:1}}/>
+                                        <RHFTextField name="discountpercent" label="Discount Percent %" size='small' sx={{  mt: 2,borderRadius:1 }}  />
+                                        <RHFTextField name="promotepaymentdiscount" label="Prompt Payment Discount Percent % " size='small' sx={{ mt: 2, borderRadius:1}}/>
+                                        <RHFTextField name="Creditlimit" label="Credit Limit" size='small' sx={{ mt: 2, borderRadius:1}}/>
+                                        <RHFTextField name="paymentterms" label="Payment Terms" size='small' sx={{ mt: 2, borderRadius:1}}/>
+                                        <RHFTextField name="creditstatus" label="Credit Status" size='small' sx={{  mt: 2,borderRadius:1}}/>
+                                        <RHFTextField name="generalnotes" label="General Notes" multiline rows={4} size='small' sx={{ mt: 2, borderRadius:1}}/>
                                     </Card>
                                 </Grid>
                             </Grid>
@@ -239,7 +239,7 @@ export default function NewCustomeritems(){
                     </Card>
                 </Grid>             
             </Grid>  
-            <Stack spacing={1} alignItems="flex-bottom" sx={{ mt: 1,borderRadius: 1 }}>
+            <Stack spacing={1} alignItems="flex-bottom" sx={{mt:2,borderRadius: 1 }}>
                 <Box display={'flex'} sx={{justifyContent: 'center',m:5}} >           
                     <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                         Submit

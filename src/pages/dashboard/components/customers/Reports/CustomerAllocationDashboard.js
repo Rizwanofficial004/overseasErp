@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
 import { useCallback } from 'react';
 // form
-import Avatar from '@mui/material/Avatar';
+
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,24 +11,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Box, Grid, Card, Stack, Typography,Button } from '@mui/material';
 import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
-import dayjs from 'dayjs';
+
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // hooks
 import useAuth from 'src/hooks/useAuth';
-// utils
-import { fData } from 'src/utils/formatNumber';
-// _mock
+
 import { countries } from 'src/_mock';
 // components
 import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from 'src/components/hook-form';
 import CustomerAlloItems from './CustomerAllocationComponents/CustomerAlloItems';
-import { whitespace } from 'stylis';
-import { red } from '@mui/material/colors';
 
 // ----------------------------------------------------------------------
 
@@ -118,15 +112,17 @@ export default function CustomerAllocationDashboard() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                          <RHFTextField name="reference" label="Reference" size='small' sx={{ background: 'white',borderRadius:1 }}  />
-                            <RHFSelect name="alltypes" label="All Types" placeholder="All Items" size='small'sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
+                            <Card sx={{ p: 3 }}>
+                                <RHFTextField name="reference" label="Reference" size='small' sx={{ mt:1 }}  />
+                                <RHFSelect name="alltypes" label="All Types" placeholder="All Items" size='small'sx={{ mt:1}}>
+                                    <option value="" />
+                                    {countries.map((option) => (
+                                        <option key={option.code} value={option.label}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </RHFSelect>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>
@@ -142,34 +138,36 @@ export default function CustomerAllocationDashboard() {
                                 
                                 }}
                         >
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <Stack spacing={3}>
-                                    <DesktopDatePicker
-                                    container
-                                        label="From"
-                                        value={date}
-                                            // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <Stack spacing={3}>
-                                    <DesktopDatePicker
-                                    container
-                                        label="TO"
-                                        value={date}
-                                            // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>
+                            <Card sx={{ p: 3 }}>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <Stack spacing={3}>
+                                        <DesktopDatePicker
+                                        container
+                                            label="From"
+                                            value={date}
+                                                // minDate={dayjs('2017-01-01')}
+                                            onChange={(newValue) => {
+                                                setDate(newValue);
+                                            }}
+                                            renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
+                                        />
+                                    </Stack>
+                                </LocalizationProvider>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <Stack spacing={3}>
+                                        <DesktopDatePicker
+                                        container
+                                            label="TO"
+                                            value={date}
+                                                // minDate={dayjs('2017-01-01')}
+                                            onChange={(newValue) => {
+                                                setDate(newValue);
+                                            }}
+                                            renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
+                                        />
+                                    </Stack>
+                                </LocalizationProvider>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>             
@@ -183,19 +181,21 @@ export default function CustomerAllocationDashboard() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small'sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <Stack spacing={1} alignItems="flex-center" sx={{ background:'#FF9238', mt: 1,borderRadius: 1 }}>
-                                <LoadingButton type="submit" >
-                                    Search
-                                </LoadingButton>
-                            </Stack>
+                            <Card sx={{ p: 3 }}>
+                                <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small'sx={{ mt:1}}>
+                                    <option value="" />
+                                    {countries.map((option) => (
+                                        <option key={option.code} value={option.label}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </RHFSelect>
+                                <Stack spacing={1} alignItems="flex-center" sx={{ background:'#FF9238', mt: 1,borderRadius: 1 }}>
+                                    <LoadingButton type="submit" >
+                                        Search
+                                    </LoadingButton>
+                                </Stack>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>

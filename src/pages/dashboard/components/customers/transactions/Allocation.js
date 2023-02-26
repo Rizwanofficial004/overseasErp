@@ -2,33 +2,23 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
 import { useCallback } from 'react';
-// form
-import Avatar from '@mui/material/Avatar';
+
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Box, Grid, Card, Stack, Typography } from '@mui/material';
-import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
-
-import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // hooks
 import useAuth from 'src/hooks/useAuth';
-// utils
-import { fData } from 'src/utils/formatNumber';
 // _mock
 import { countries } from 'src/_mock';
 // components
-import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from 'src/components/hook-form';
+import { FormProvider, RHFSwitch, RHFSelect, RHFTextField} from 'src/components/hook-form';
 import AllocationsItems from './allocationComponents/AllocationsItems';
-import { whitespace } from 'stylis';
-import { red } from '@mui/material/colors';
 
 // ----------------------------------------------------------------------
 
@@ -89,7 +79,7 @@ export default function Allocation() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={3} md={3} >
+                <Grid item xs={4} md={4} >
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
                             sx={{
@@ -99,7 +89,8 @@ export default function Allocation() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="customers" label="Customers"  size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}>
+                            <Card sx={{p:3}}>
+                            <RHFSelect name="customers" label="Customers"  size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -107,7 +98,7 @@ export default function Allocation() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="branch" label="Branch" size='small' sx={{ borderRadius:1}}>
+                            <RHFSelect name="branch" label="Branch" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -115,12 +106,13 @@ export default function Allocation() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFTextField name="reference" label="Reference"  size='small' sx={{ borderRadius:1,}}/>
+                            <RHFTextField name="reference" label="Reference"  size='small' sx={{ mt:1,}}/>
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={3} md={3}>
-                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
+                <Grid item xs={4} md={4}>
+                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)'}}>
                         <Box
                             sx={{   
                                 display: 'grid',
@@ -131,14 +123,16 @@ export default function Allocation() {
                                 
                                 }}
                         > 
-                            <RHFTextField name="customerdiscount" label="Customer Discount %" size='small' sx={{ borderRadius:1 }}  />
-                            <RHFTextField name="exchangeRate" label="Exchange Rate" size='small' sx={{ borderRadius:1}}/>
-                            <RHFTextField name="currentCredit" label="Current Credit" size='small' sx={{ borderRadius:1}}/>
+                        <Card sx={{p:3}}>
+                            <RHFTextField name="customerdiscount" label="Customer Discount %" size='small' sx={{ mt:1 }}  />
+                            <RHFTextField name="exchangeRate" label="Exchange Rate" size='small' sx={{ mt:1}}/>
+                            <RHFTextField name="currentCredit" label="Current Credit" size='small' sx={{ mt:1}}/>
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>             
-                <Grid item xs={6} md={6}>
-                    <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
+                <Grid item xs={4} md={4}>
+                    <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)'}}>
                         <Box
                             sx={{
                                 display: 'grid',
@@ -147,7 +141,8 @@ export default function Allocation() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="payment" label="Payment" placeholder="Payment" size='small'sx={{ borderRadius:1}}>
+                            <Card sx={{p:3}}>
+                            <RHFSelect name="payment" label="Payment" placeholder="Payment" size='small'sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -155,7 +150,7 @@ export default function Allocation() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="salesPerson" label="Sales Person" placeholder="Sales Person" size='small' sx={{ borderRadius:1}}>
+                            <RHFSelect name="salesPerson" label="Sales Person" placeholder="Sales Person" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -173,10 +168,11 @@ export default function Allocation() {
                                         onChange={(newValue) => {
                                             setqutationDate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>

@@ -217,20 +217,17 @@ import DescriptionFrom from 'src/sections/@dashboard/calendar/inventory/Descript
                 <Card mt={3}>
                     <Scrollbar>
                         <TableContainer sx={{mt:3, minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Movement Type Details </h4>
-                        
-                            <Table>
-                                
-                                <UserListHead
-                                    order={order}
-                                    orderBy={orderBy}
-                                    headLabel={TABLE_HEAD}
-                                    rowCount={descriptionitems.length}
-                                    numSelected={selected.length}
-                                    onRequestSort={handleRequestSort}
-                                    onSelectAllClick={handleSelectAllClick}
-                                />
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}>Movement Type Details</h4>
+                         <Table>
+                            <UserListHead
+                                order={order}
+                                orderBy={orderBy}
+                                headLabel={TABLE_HEAD}
+                                rowCount={descriptionitems.length}
+                                numSelected={selected.length}
+                                onRequestSort={handleRequestSort}
+                                onSelectAllClick={handleSelectAllClick}
+                            />
                                 <TableBody >
                                     {descriptionitems.map((row) => {
                                         const { id, bold, 

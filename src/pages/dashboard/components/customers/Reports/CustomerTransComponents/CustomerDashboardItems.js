@@ -158,8 +158,7 @@ export default function CustomerDashboardItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Customer Transaction Details</h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>Customer Transaction Details</h4>
                         
                             <Table>
                                 

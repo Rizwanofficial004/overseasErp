@@ -159,8 +159,7 @@ export default function SalesDashboardItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>SALES ORDER DASHBOARD</h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>SALES ORDER DASHBOARD</h4>
                         
                             <Table>
                                 

@@ -93,7 +93,7 @@ export default function GoodReceivedNote() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={3} md={3} >
+                <Grid item  xs={12} sm={6} md={3} >
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
                             sx={{
@@ -103,40 +103,41 @@ export default function GoodReceivedNote() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                          
-                            <RHFTextField name="Exchangerate" label="#"  size='small' sx={{ background:'white', borderRadius:1,}}/>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <Stack spacing={3}>
-                                    <DesktopDatePicker
-                                    container
-                                        label="From"
-                                        value={orderdate}
-                                        // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setorderDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>  
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <Stack spacing={3}>
-                                    <DesktopDatePicker
-                                    container
-                                        label="To "
-                                        value={orderdate}
-                                        // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setorderDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>  
+                          <Card sx={{p:2}}>
+                                <RHFTextField name="Exchangerate" label="#"  size='small' sx={{ mt:1}}/>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <Stack spacing={3}>
+                                        <DesktopDatePicker
+                                        container
+                                            label="From"
+                                            value={orderdate}
+                                            // minDate={dayjs('2017-01-01')}
+                                            onChange={(newValue) => {
+                                                setorderDate(newValue);
+                                            }}
+                                            renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
+                                        />
+                                    </Stack>
+                                </LocalizationProvider>  
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <Stack spacing={3}>
+                                        <DesktopDatePicker
+                                        container
+                                            label="To "
+                                            value={orderdate}
+                                            // minDate={dayjs('2017-01-01')}
+                                            onChange={(newValue) => {
+                                                setorderDate(newValue);
+                                            }}
+                                            renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
+                                        />
+                                    </Stack>
+                                </LocalizationProvider>
+                            </Card>  
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={6} md={6}>
+                <Grid item  xs={12} sm={6} md={6}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -148,46 +149,46 @@ export default function GoodReceivedNote() {
                                 
                                 }}
                         >
-                            <RHFSelect name="receiveinto" label="All Location" placeholder="Payment" size='small'sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFTextField name="Item    " label="Items" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFSelect name="receiveinto" label="All Items" placeholder="Payment" size='small'sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>          
+                            <Card sx={{p:2}}>
+                                <RHFSelect name="receiveinto" label="All Location" placeholder="Payment" size='small'sx={{ mt:1}}>
+                                    <option value="" />
+                                    {countries.map((option) => (
+                                        <option key={option.code} value={option.label}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </RHFSelect>
+                                <RHFTextField name="Item    " label="Items" size='small' sx={{ mt:1}}/>
+                                <RHFSelect name="receiveinto" label="All Items" placeholder="Payment" size='small'sx={{ mt:1}}>
+                                    <option value="" />
+                                    {countries.map((option) => (
+                                        <option key={option.code} value={option.label}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </RHFSelect>          
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>             
-
-                <Grid item xs={3} md={3}>
-                    <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
+                <Grid item  xs={12} sm={6} md={3}>
+                    <Card sx={{  p: 5, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
                                 display: 'grid',
-                                rowGap: 2,
-                                columnGap: 1,
+                                rowGap: 5,
+                                columnGap: 3,
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                           
-                            <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                             Search
+                           <Card sx={{p:5}}>
+                                <LoadingButton type="submit" variant="contained"  loading={isSubmitting}>
+                                     Search
                                 </LoadingButton>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>
-                
-                
             </Grid>
 {/*----------------SALES TABLE CALLING-------------------------------------------*/}
                  <GRNItems /> 

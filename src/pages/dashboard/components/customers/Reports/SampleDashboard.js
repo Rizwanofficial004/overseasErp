@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
 import { useCallback } from 'react';
 // form
-import Avatar from '@mui/material/Avatar';
+import { Icon } from '@iconify/react';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,24 +11,19 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid, Card, Stack, Typography } from '@mui/material';
 import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
 
-import dayjs from 'dayjs';
+
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // hooks
 import useAuth from 'src/hooks/useAuth';
-// utils
-import { fData } from 'src/utils/formatNumber';
 // _mock
 import { countries } from 'src/_mock';
 // components
 import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from 'src/components/hook-form';
 import SampleItems from './SampleComponents/SampleItems';
-import { whitespace } from 'stylis';
-import { red } from '@mui/material/colors';
+
 
 // ----------------------------------------------------------------------
 
@@ -104,13 +99,11 @@ export default function SalesOrderDashboard() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-
-                            <RHFTextField name="sno" label="S.NO #" size='small' sx={{ background: 'white',borderRadius:1 }}  />
-                            <RHFTextField name="reference" label="Reference" size='small' sx={{ background: 'white',borderRadius:1 }}  />
-                            <RHFTextField name="PurchaseOrder" label="Purchase Order" size='small' sx={{ background: 'white',borderRadius:1 }}  />
-                            
-                        
-
+                            <Card sx={{ p: 3 }}>
+                                <RHFTextField name="sno" label="S.NO #" size='small' sx={{ mt:1}}  />
+                                <RHFTextField name="reference" label="Reference" size='small' sx={{ mt:1}}  />
+                                <RHFTextField name="PurchaseOrder" label="Purchase Order" size='small' sx={{ mt:1}}  />
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>
@@ -126,42 +119,44 @@ export default function SalesOrderDashboard() {
                                 
                                 }}
                         >
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <Stack spacing={3}>
-                                    <DesktopDatePicker
-                                    container
-                                        label="From"
-                                        value={date}
-                                        // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <Stack spacing={3}>
-                                    <DesktopDatePicker
-                                    container
-                                        label="To"
-                                        value={date}
+                            <Card sx={{ p: 3 }}>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <Stack spacing={3}>
+                                        <DesktopDatePicker
+                                        container
+                                            label="From"
+                                            value={date}
                                             // minDate={dayjs('2017-01-01')}
-                                        onChange={(newValue) => {
-                                            setDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
-                                    />
-                                </Stack>
-                            </LocalizationProvider>
-                            <RHFSelect name="location" label="Location" size='small'sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
+                                            onChange={(newValue) => {
+                                                setDate(newValue);
+                                            }}
+                                            renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
+                                        />
+                                    </Stack>
+                                </LocalizationProvider>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <Stack spacing={3}>
+                                        <DesktopDatePicker
+                                        container
+                                            label="To"
+                                            value={date}
+                                                // minDate={dayjs('2017-01-01')}
+                                            onChange={(newValue) => {
+                                                setDate(newValue);
+                                            }}
+                                            renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
+                                        />
+                                    </Stack>
+                                </LocalizationProvider>
+                                <RHFSelect name="location" label="Location" size='small'sx={{ mt:1}}>
+                                    <option value="" />
+                                    {countries.map((option) => (
+                                        <option key={option.code} value={option.label}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </RHFSelect>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>             
@@ -175,23 +170,25 @@ export default function SalesOrderDashboard() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="allcustomer" label="Select a Customer" size='small'sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFTextField name="items" label="Items" size='small' sx={{ background: 'white',borderRadius:1 }}  />
-                            <RHFSelect name="allitems" label="All Items" size='small'sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
+                            <Card sx={{ p: 3 }}>
+                                <RHFSelect name="allcustomer" label="Select a Customer" size='small'sx={{ mt:1}}>
+                                    <option value="" />
+                                    {countries.map((option) => (
+                                        <option key={option.code} value={option.label}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </RHFSelect>
+                                <RHFTextField name="items" label="Items" size='small' sx={{ mt:1}}  />
+                                <RHFSelect name="allitems" label="All Items" size='small'sx={{ mt:1}}>
+                                    <option value="" />
+                                    {countries.map((option) => (
+                                        <option key={option.code} value={option.label}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </RHFSelect>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>
@@ -206,15 +203,22 @@ export default function SalesOrderDashboard() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="showall" label="Show All" size='small'sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <LoadingButton>Search</LoadingButton>
+                            <Card sx={{ p: 3 }}>
+                                <RHFSelect name="showall" label="Show All" size='small'sx={{ mt:1}}>
+                                    <option value="" />
+                                    {countries.map((option) => (
+                                        <option key={option.code} value={option.label}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </RHFSelect>
+                                <Box m={3}>
+                                    <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                                        <Icon icon="dashicons:search" width={20}  />
+                                            Search
+                                    </LoadingButton>
+                                </Box>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid> 

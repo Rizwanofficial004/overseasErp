@@ -94,8 +94,8 @@ export default function CashBill() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} sx={{border:1,borderColor:'black'}}>
             <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={3} md={3} >
-                    <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
+                <Grid item  xs={12} sm={6} md={3} >
+                    <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
                             sx={{
                                 display: 'grid',
@@ -104,7 +104,8 @@ export default function CashBill() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="Supplier" label="Supplier"  size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
+                            <Card px={{p:3}}>
+                            <RHFSelect name="Supplier" label="Supplier"  size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -112,7 +113,7 @@ export default function CashBill() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="Suppliercurrency" label="Supplier Currency" size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <RHFSelect name="Suppliercurrency" label="Supplier Currency" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -120,12 +121,12 @@ export default function CashBill() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFTextField name="Exchangerate" label="Exchange Rata"  size='small' sx={{ background:'white', borderRadius:1,}}/>
-                            
+                            <RHFTextField name="Exchangerate" label="Exchange Rata"  size='small' sx={{mt:1}}/>
+                        </Card>    
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={3} md={3}>
+                <Grid item  xs={12} sm={6} md={3}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -137,8 +138,9 @@ export default function CashBill() {
                                 
                                 }}
                         >
-                            <RHFTextField name="Currentcredit" label="Current Credit    "  size='small' sx={{ background:'white', borderRadius:1,}}/>
-                                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <Card px={{p:3}}>
+                            <RHFTextField name="Currentcredit" label="Current Credit"  size='small' sx={{ mt:1}}/>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <Stack spacing={3}>
                                     <DesktopDatePicker
                                     container
@@ -148,7 +150,7 @@ export default function CashBill() {
                                         onChange={(newValue) => {
                                             setorderDate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>
@@ -162,15 +164,15 @@ export default function CashBill() {
                                         onChange={(newValue) => {
                                             setorderDate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>                                                      
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>             
-
-                <Grid item xs={3} md={3}>
+                <Grid item  xs={12} sm={6} md={3}>
                     <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -180,9 +182,10 @@ export default function CashBill() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFTextField name="reference" label="Reference" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="SuppliersReference " label="Supplier's Reference" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFSelect name="receiveinto" label="Receive Into" placeholder="Payment" size='small'sx={{ background: 'white',borderRadius:1}}>
+                            <Card px={{p:3}}>
+                            <RHFTextField name="reference" label="Reference" size='small' sx={{ mt:1}}/>
+                            <RHFTextField name="SuppliersReference " label="Supplier's Reference" size='small' sx={{ mt:1}}/>
+                            <RHFSelect name="receiveinto" label="Receive Into" placeholder="Payment" size='small'sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -190,12 +193,11 @@ export default function CashBill() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            
+                        </Card>    
                         </Box>
                     </Card>
-                </Grid>
-                
-                <Grid item xs={3} md={3}>
+                </Grid> 
+                <Grid item  xs={12} sm={6} md={3}>
                     <Card sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -205,7 +207,8 @@ export default function CashBill() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="salesPerson" label="Sales Person" placeholder="Sales Person" size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <Card px={{p:3}}>
+                            <RHFSelect name="salesPerson" label="Sales Person" placeholder="Sales Person" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -213,7 +216,8 @@ export default function CashBill() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                        <RHFTextField name="Deliverto " label="Deliver To" multiline={4} sx={{ background: 'white',borderRadius:1}}/>
+                        <RHFTextField name="Deliverto " label="Deliver To" multiline rows={3} sx={{mt:1}}/>
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>
@@ -222,20 +226,18 @@ export default function CashBill() {
                     <CashBillItems />
 {/*----------------3rd portion Detailing Code-------------------------------------------*/}
             <Grid mt={3} ml={23} container spacing={1}>
-                <Grid item xs={8} md={8}>
-                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                        
-           
-           <RHFTextField name="memo" label="MEMO" multiline rows={4}  sx={{ mt: 1, background: 'white',borderRadius:1 }}/>
-                    <Stack spacing={1}  sx={{ mt: 1,borderRadius: 1 }}>
-                        <Box display={'flex'} >
-                           
-                            
-                            <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                             Cancel Invoice
-                            </LoadingButton>
-                            </Box>
-                    </Stack>                        
+                <Grid item  xs={12} sm={6} md={8}>
+                    <Card sx={{ p: 3, background: 'rgba(145, 158, 171, 0.12)'}}>
+                        <Card px={{p:3}}>
+                            <RHFTextField name="memo" label="MEMO" multiline rows={4} sx={{ mt: 1}}/>
+                            <Stack spacing={1}  sx={{ mt: 1,borderRadius: 1 }}>
+                                <Box display={'flex'} >
+                                    <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                                        Cancel Invoice
+                                    </LoadingButton>
+                                </Box>
+                            </Stack>  
+                        </Card>                      
                     </Card>
                 </Grid>
             </Grid>

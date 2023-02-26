@@ -235,8 +235,9 @@ import SalespricingForm from 'src/sections/@dashboard/calendar/inventory/Salespr
                                         
                                         }}
                                 >
+                                     <Card sx={{p:2}}> 
                                     <RHFTextField name="itemcode" label="Item Code" size='small'  sx={{ borderColor:'#FF0000', borderRadius:1}} />
-                                   
+                                   </Card>
                                 </Box>
                             </Card>
                         </Grid> 
@@ -252,6 +253,7 @@ import SalespricingForm from 'src/sections/@dashboard/calendar/inventory/Salespr
                                         
                                         }}
                                 >
+                                     <Card sx={{p:2}}> 
                                      <RHFSelect name="item" label="Select an Items"  size='small'sx={{ borderRadius:1}}>
                                         <option value="" />
                                         {countries.map((option) => (
@@ -260,7 +262,7 @@ import SalespricingForm from 'src/sections/@dashboard/calendar/inventory/Salespr
                                             </option>
                                         ))}
                                     </RHFSelect>
-
+                                    </Card>
                                 </Box>
                             </Card>
                         </Grid>
@@ -276,12 +278,13 @@ import SalespricingForm from 'src/sections/@dashboard/calendar/inventory/Salespr
                                         
                                         }}
                                 >
+                                    <Card sx={{p:2}}> 
                                         <Stack spacing={1} alignItems="flex-center" sx={{  mt: 1, borderRadius: 1 }}>
                                             <LoadingButton type="submit" variant="contained" loading={isSubmitting} >
                                                 Search
                                             </LoadingButton>
                                         </Stack>
-
+                                    </Card>
                                 </Box>
                             </Card>
                         </Grid>
@@ -291,12 +294,9 @@ import SalespricingForm from 'src/sections/@dashboard/calendar/inventory/Salespr
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        
-      
-                        <h4 style={{ textAlign:'center', color:'black'}}>Sales Pricing Details </h4>
-                        
+                       
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}> Sales Pricing Details </h4>
                             <Table>
-                                
                                 <UserListHead
                                     order={order}
                                     orderBy={orderBy}

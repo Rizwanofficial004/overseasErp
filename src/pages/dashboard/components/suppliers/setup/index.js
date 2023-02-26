@@ -1,1 +1,1 @@
-export { default as GerenalSettings } from './GerenalSettings';
+export { default as NewSuppliers } from './NewSuppliers';

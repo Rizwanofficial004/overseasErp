@@ -139,13 +139,23 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                     gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
                         }}
                 >
-                    <RHFTextField name="branchname" label="Branch Name" size='small'  sx={{ borderColor:'#FF0000', borderRadius:1}} />
-                    <RHFTextField name="Bshortname" label="Branch Short Name" size='small'  sx={{ borderColor:'#FF0000', borderRadius:1}}/>
-                    <RHFTextField name="Mailaddress"  label="Mailing Address" multiline rows={4}size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}/>
-                    <RHFTextField name="billingaddress"  label="Billing Address"multiline rows={4} size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}/>
+                    <Card sx={{p:3}}>
+                    <RHFTextField name="branchname" label="Branch Name" size='small'  sx={{ mt:1}} />
+                    </Card>
+                    <Card sx={{p:3}}>
+                    <RHFTextField name="Bshortname" label="Branch Short Name" size='small'  sx={{ mt:1}}/>
+                    </Card>
+                    <Card sx={{p:3}}>
+                    <RHFTextField name="Mailaddress"  label="Mailing Address" multiline rows={4}size='small' sx={{ mt:1}}/>
+                    </Card>
+                    <Card sx={{p:3}}>
+                    <RHFTextField name="billingaddress"  label="Billing Address"multiline rows={4} size='small' sx={{ mt:1}}/>
+                    </Card>
                 </Box>
-                    <RHFTextField  name="generalnotes"  label="General Notes" size='small' multiline rows={4}sx={{ mt:3,borderColor:'#FF0000', borderRadius:1}}/>
-                    <h4 style={{marginBottom:20,textAlign:'center',marginTop:20}}>GL ACCOUNTS</h4>
+                <Card sx={{p:3,mt:3}}>
+                    <RHFTextField  name="generalnotes"  label="General Notes" size='small' multiline rows={4}sx={{ mt:1}}/>
+                    </Card>
+                    <h4 style={{marginBottom:5, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>GL ACCOUNTS</h4>
                     <Box
                     sx={{
                     display: 'grid',
@@ -154,7 +164,8 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                     gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
                         }}
                 >
-                    <RHFSelect name="salesaccount" label="Sales Account:"  size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}>
+                    <Card sx={{p:3,mt:3}}>
+                    <RHFSelect name="salesaccount" label="Sales Account:"  size='small' sx={{mt:1}}>
                             <option value="" />
                             {countries.map((option) => (
                                 <option key={option.code} value={option.label}>
@@ -162,7 +173,7 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                                 </option>
                             ))}
                     </RHFSelect>
-                    <RHFSelect name="salesdiscountaccount" label="Sales Discount Account"  size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}>
+                    <RHFSelect name="salesdiscountaccount" label="Sales Discount Account"  size='small' sx={{mt:2}}>
                         <option value="" />
                         {countries.map((option) => (
                             <option key={option.code} value={option.label}>
@@ -170,7 +181,9 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                             </option>
                         ))}
                     </RHFSelect>
-                    <RHFSelect name="accountreceivableamount" label="Accounts Receivable Account"  size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}>
+                    </Card>
+                    <Card sx={{p:3,mt:3}}>
+                    <RHFSelect name="accountreceivableamount" label="Accounts Receivable Account"  size='small' sx={{mt:1}}>
                         <option value="" />
                         {countries.map((option) => (
                             <option key={option.code} value={option.label}>
@@ -178,7 +191,7 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                             </option>
                         ))}
                     </RHFSelect>
-                    <RHFSelect name="wht" label="WHT"  size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}>
+                    <RHFSelect name="wht" label="WHT"  size='small' sx={{mt:2}}>
                         <option value="" />
                         {countries.map((option) => (
                             <option key={option.code} value={option.label}>
@@ -186,12 +199,13 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                             </option>
                         ))}
                     </RHFSelect>
+                    </Card>
                 </Box>
             </Card> 
         </Grid>
         <Grid  px={1} py={1}  container spacing={1}   >
             <Grid item xs={6} md={6} >
-                <Card height={3} sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }} >
+                <Card sx={{  p: 3,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }} >
                     <Box
                         sx={{
                             display: 'grid',
@@ -200,8 +214,9 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                             gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                         }}
                     >
-                       <h4 style={{ textAlign:'center', color:'black'}}>SALES</h4>
-                        <RHFSelect name="salesperson" label="Sales Person"  size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}>
+                        <Card sx={{p:3}}>
+                       <h4 style={{marginBottom:5, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>SALES</h4>
+                        <RHFSelect name="salesperson" label="Sales Person"  size='small' sx={{mt:2  }}>
                             <option value="" />
                             {countries.map((option) => (
                                 <option key={option.code} value={option.label}>
@@ -209,7 +224,7 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                                 </option>
                             ))}
                         </RHFSelect>
-                        <RHFSelect name="salesarea" label="Sales Area" size='small' sx={{ borderRadius:1}}>
+                        <RHFSelect name="salesarea" label="Sales Area" size='small' sx={{ mt:2}}>
                             <option value="" />
                             {countries.map((option) => (
                                 <option key={option.code} value={option.label}>
@@ -217,7 +232,7 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                                 </option>
                             ))}
                         </RHFSelect>
-                        <RHFSelect name="salesgroup" label="Sales Group" size='small' sx={{ borderRadius:1}}>
+                        <RHFSelect name="salesgroup" label="Sales Group" size='small' sx={{ mt:2}}>
                             <option value="" />
                             {countries.map((option) => (
                                 <option key={option.code} value={option.label}>
@@ -225,11 +240,12 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                                 </option>
                             ))}
                         </RHFSelect>
+                    </Card>
                     </Box>
                 </Card>
             </Grid>
             <Grid item xs={6} md={6}>
-                <Card sx={{ p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
+                <Card sx={{ p: 3,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
                     <Box
                         sx={{
                             display: 'grid',
@@ -240,8 +256,9 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                             
                             }}
                     >
-                        <h4 style={{ textAlign:'center', color:'black'}}>GENRAL CONTACT DATA</h4>
-                        <RHFSelect name="defaultinventory" label="Default Inventory Location" size='small' sx={{ borderRadius:1}}>
+                        <Card sx={{p:3}}>
+                        <h4 style={{marginBottom:5, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>GENRAL CONTACT DATA</h4>
+                        <RHFSelect name="defaultinventory" label="Default Inventory Location" size='small' sx={{ mt:2}}>
                             <option value="" />
                             {countries.map((option) => (
                                 <option key={option.code} value={option.label}>
@@ -249,7 +266,7 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                                 </option>
                             ))}
                         </RHFSelect>
-                        <RHFSelect name="defaultshippingcompany" label="Default Shipping Company" size='small' sx={{ borderRadius:1}}>
+                        <RHFSelect name="defaultshippingcompany" label="Default Shipping Company" size='small' sx={{ mt:2}}>
                             <option value="" />
                             {countries.map((option) => (
                                 <option key={option.code} value={option.label}>
@@ -257,7 +274,7 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                                 </option>
                             ))}
                         </RHFSelect>
-                        <RHFSelect name="taxgroup" label="Tax Group" size='small' sx={{ borderRadius:1}}>
+                        <RHFSelect name="taxgroup" label="Tax Group" size='small' sx={{ mt:2}}>
                             <option value="" />
                             {countries.map((option) => (
                                 <option key={option.code} value={option.label}>
@@ -265,7 +282,7 @@ export default function AddBranchItemsForm({ event, onCancel, branchItems, setBr
                                 </option>
                             ))}
                         </RHFSelect>  
-                       
+                    </Card>   
                     </Box>
                 </Card>
             </Grid>             

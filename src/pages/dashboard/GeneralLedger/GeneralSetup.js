@@ -20,9 +20,8 @@ import {
   AccountNotifications,
   AccountChangePassword,
 } from 'src/sections/@dashboard/user/account';
-// import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
-// import {SalesOrder} from '../components/customers/transactions';
-// import {DeliveryNote} from '../components/customers/transactions';
+import ExchangeRate from 'src/pages/dashboard/components/generalTransaction/Setup/ExchangeRate';
+import Currency from 'src/pages/dashboard/components/generalTransaction/Setup/Currency';
 
 
 
@@ -47,12 +46,12 @@ export default function GeneralSetup() {
     {
       value: 'Currencies',
       icon: <Iconify icon={'iconoir:notes'} color='#F2740B' width={23} height={40} />,
-    //   component: <SampleOrder /> 
+      component: <Currency /> 
     },
     {
       value: 'Exchange Rates',
       icon: <Iconify icon={'ic:baseline-manage-search'} color='#F2740B' width={25} height={40} />,
-    //   component: <DeliveryNote />,
+      component: <ExchangeRate />,
     },
     {
       value: 'Chart Of Accounts (COA)',

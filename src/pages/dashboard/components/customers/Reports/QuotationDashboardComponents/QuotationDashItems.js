@@ -158,8 +158,7 @@ export default function QuotationDashItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>QUOTATION DASHBOARD</h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>QUOTATION DASHBOARD</h4>
                         
                             <Table>
                                 

@@ -34,37 +34,37 @@ export default function InventorySetup() {
   const ACCOUNT_TABS = [
     {
       value: 'items',
-      icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
+      icon: <Iconify icon={'fa6-solid:notes-medical'} color='#F2740B' width={23} height={40} />,
       component: <NewItems/>,
     },
     {
       value: 'BarCodes',
-      icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
+      icon: <Iconify icon={'mdi:barcode-scan'} color='#F2740B' width={23} height={40} />,
       component: <BarCode /> 
     },
     {
         value: 'Categories',
-        icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
+        icon: <Iconify icon={'carbon:category-new-each'} color='#F2740B' width={23} height={40} />,
         component: <Category /> 
       },
       {
         value: 'Locations',
-        icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
+        icon: <Iconify icon={'material-symbols:add-location-alt-outline-rounded'} color='#F2740B' width={23} height={40} />,
         component: <InventoryLocation /> 
       },
       {
         value: 'Movement Type',
-        icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
+        icon: <Iconify icon={'carbon:movement'} color='#F2740B' width={23} height={40} />,
         component: <Description /> 
       },
       {
         value: 'Unit of Measure',
-        icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
+        icon: <Iconify icon={'arcticons:tapemeasure'} color='#F2740B' width={30} height={40} />,
         component: <UnitsOfMeasure /> 
       },
       {
         value: 'Import CSV Items',
-        icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
+        icon: <Iconify icon={'tabler:database-import'} color='#F2740B' width={23} height={40} />,
         //component: <OpeningBalance /> 
       },
     

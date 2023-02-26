@@ -171,8 +171,7 @@ export default function DeliveryNoteItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 700 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Delivery Notes Details </h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>Delivery Notes Details </h4>
                         
                             <Table>
                                 

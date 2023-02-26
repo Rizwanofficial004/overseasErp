@@ -100,8 +100,11 @@ export default function GeneralSettings(){
                                         
                                         }}
                                 >
+                                  
+                                   <Card sx={{ p: 3 }}>
                                     <RHFTextField name="itemcode" label="Item Code" size='small'  sx={{ borderColor:'#FF0000', borderRadius:1}} />
-                                   
+                                    </Card>
+                                    
                                 </Box>
                             </Card>
                         </Grid> 
@@ -117,6 +120,7 @@ export default function GeneralSettings(){
                                         
                                         }}
                                 >
+                                   <Card sx={{ p: 3 }}>
                                      <RHFSelect name="item" label="Select an Items"  size='small'sx={{ borderRadius:1}}>
                                         <option value="" />
                                         {countries.map((option) => (
@@ -125,7 +129,7 @@ export default function GeneralSettings(){
                                             </option>
                                         ))}
                                     </RHFSelect>
-
+                                  </Card>
                                 </Box>
                             </Card>
                         </Grid>
@@ -141,12 +145,13 @@ export default function GeneralSettings(){
                                         
                                         }}
                                 >
+                                      <Card sx={{ p: 3 }}>
                                         <Stack spacing={1} alignItems="flex-center" sx={{  borderRadius: 1 }}>
                                             <LoadingButton type="submit" variant="contained" loading={isSubmitting} >
                                                 Search
                                             </LoadingButton>
                                         </Stack>
-
+                                      </Card>
                                 </Box>
                             </Card>
                         </Grid>
@@ -155,7 +160,7 @@ export default function GeneralSettings(){
       <Grid mt={3}container spacing={3}>
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }}>
-          <h4 style={{marginBottom:15,marginTop:10, textAlign:'center', color:'black'}}> Items General DETAILS </h4>
+          <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}> Items General Details </h4>
             <Box
               sx={{
                 display: 'grid',
@@ -239,7 +244,7 @@ export default function GeneralSettings(){
                         gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                     }}
                 >
-                    <h4 style={{ textAlign:'center', color:'black'}}>GL Account</h4>
+                    <h4 style={{ textAlign:'center', color:'#ff6347',fontSize:20}}>GL Account</h4>
 
                   <Grid mt={3} container spacing={1}>
                     <Grid item xs={12} md={12}>
@@ -294,7 +299,7 @@ export default function GeneralSettings(){
                         
                         }}
                 >
-                    <h4 style={{ textAlign:'center', color:'black'}}>Others</h4>
+                    <h4 style={{ textAlign:'center', color:'#ff6347',fontSize:20}}>Others</h4>
                     <Grid mt={3} container spacing={1}>
                       <Grid item xs={12} md={12}>
                         <Card sx={{p:2}}>  
@@ -338,7 +343,7 @@ export default function GeneralSettings(){
           <Box display={'flex'} >
           <Box m={1}>
           <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-              Update  Items 
+              Update This Item 
           </LoadingButton>
           </Box>
           <Box m={1}>
@@ -353,7 +358,7 @@ export default function GeneralSettings(){
           </Box>
           <Box m={1}>
           <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-              Cancel
+              Cancel This item
           </LoadingButton>
           </Box>
           </Box>

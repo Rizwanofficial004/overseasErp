@@ -54,13 +54,13 @@ let data = [
     total: 'update' , bold: true
     },
   ]
-  let QItem = [..._quotationItems, ...data]
+  let QItem = [..._quotationItems]
 export default function GRNItems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems, ...data]);
+    const [quotationItems, setQuotationItems] = useState([..._quotationItems]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
@@ -91,7 +91,7 @@ export default function GRNItems() {
             { id: 'status', label: 'Order Date', alignRight: false },
             { id: 'status', label: 'Currency', alignRight: false },
             { id: 'status', label: 'Order Total', alignRight: false },
-            { id: '', label: <AddButton />, alignRight: false },
+           
         ];
         
             const selectedEventSelector = (state) => {

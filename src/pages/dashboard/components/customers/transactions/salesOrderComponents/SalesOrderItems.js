@@ -202,8 +202,8 @@ export default function SalesOrderItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 ,padding:1}}>
-                        <h2 style={{ textAlign:'center', color:'black'}}>Sales Order Items</h2>
-                        <RedBar />
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}> Sales Order Items</h4>
+                        
                             <Table>
                                 <UserListHead
                                     order={order}

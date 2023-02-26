@@ -22,19 +22,19 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _quotationItems } from 'src/_mock';
+import { _userList, _purchaseorder } from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
 import Scrollbar from 'src/components/Scrollbar';
 import SearchNotFound from 'src/components/SearchNotFound';
 // sections
-import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/sections/@dashboard/user/list';
+import { UserListHead,  UserMoreMenu } from 'src/sections/@dashboard/user/list';
 import { DialogAnimate } from 'src/components/animate';
-import { CalendarForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
-import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
+import { openModal, closeModal } from 'src/redux/slices/calendar';
+import PurchaseorderFormItems from 'src/sections/@dashboard/calendar/supplier/PurchaseorderFormItems';
 // ----------------------------------------------------------------------
 let data = [
     {   id: '2332',
@@ -54,20 +54,20 @@ let data = [
     total: 'update' , bold: true
     },
   ]
-  let QItem = [..._quotationItems, ...data]
+  let QItem = [..._purchaseorder, ...data]
 export default function PurchaseOrderItems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems, ...data]);
+    const [purchaseorder, setpurchaseorder] = useState([..._purchaseorder, ...data]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
     const [orderBy, setOrderBy] = useState('name');
     const [filterName, setFilterName] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selectedQuotation, setSelectedQuotation ] = useState(null)
+    const [selectedpurchaseorder, setSelectedpurchaseorder ] = useState(null)
     const AddButton = () => {
             return (
                 <Button
@@ -169,7 +169,7 @@ export default function PurchaseOrderItems() {
         setUserList(deleteUsers);
     };
     const handleEditEvent = (obj) => {
-        setSelectedQuotation(obj)
+        setSelectedpurchaseorder(obj)
         dispatch(openModal());
     };  
 
@@ -186,8 +186,7 @@ export default function PurchaseOrderItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h2
-                        style={{ textAlign:'center', color:'black'}}>Order Items  </h2>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>Order Items  </h4>
                             <Table>
                                 <UserListHead
                                     order={order}
@@ -200,8 +199,17 @@ export default function PurchaseOrderItems() {
                                 />
                                 
                                 <TableBody >
-                                    {quotationItems.map((row) => {
-                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeText, discount, total } = row;
+                                    {purchaseorder.map((row) => {
+                                        const { id, bold, 
+                                            itemCode,
+                                            received,
+                                            itemDescription,
+                                            quantity,
+                                            unit,
+                                            requireddeliverydate,
+                                            pricebeforetax,
+                                            linetotal,
+                                             } = row;
                                         const isItemSelected = selected.indexOf(itemCode) !== -1;
 
                                         return (
@@ -223,12 +231,12 @@ export default function PurchaseOrderItems() {
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">{itemDescription}</TableCell>
-                                                <TableCell align="left">{longDescription}</TableCell>
                                                 <TableCell align="left">{quantity}</TableCell>
+                                                <TableCell align="left">{received}</TableCell>
                                                 <TableCell align="left">{unit}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{priceBeforeText}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{discount}</TableCell>
-                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{total}</TableCell>
+                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{requireddeliverydate}</TableCell>
+                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{pricebeforetax}</TableCell>
+                                                <TableCell align="left" sx={{ fontWeight:  bold ? 'bold' : '' } }>{linetotal}</TableCell>
                                                 <TableCell align="right">
                                                 { bold ? null :  <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={itemCode} />}
                                                 </TableCell>
@@ -255,9 +263,9 @@ export default function PurchaseOrderItems() {
                     </Scrollbar>
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
-                    <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>
+                    <DialogTitle>{selectedpurchaseorder ? 'Edit Purchase Order Items' : 'Add Purchase Order Items'}</DialogTitle>
 
-                    <CalendarForm event={selectedQuotation || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <PurchaseorderFormItems purchaseorder={purchaseorder} setpurchaseorder={setpurchaseorder} event={selectedpurchaseorder || {}} range={selectedRange} onCancel={handleCloseModal} />
                 </DialogAnimate>
             </Container>
         </Page>

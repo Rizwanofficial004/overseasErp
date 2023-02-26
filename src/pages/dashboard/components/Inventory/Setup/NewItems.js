@@ -83,32 +83,32 @@ export default function NewItems() {
       const CURRENT_TABS = [
         {
           value: 'General Settings',
-          icon: <Iconify icon={'eva:heart-fill'} width={20} height={20} />,
+          icon: <Iconify icon={'mdi:archive-edit'} width={20} height={20} />,
           component: <GeneralSettings/>,
         },
         {
           value: 'Sales Pricing ',
-          icon: <Iconify icon={'eva:people-fill'} width={20} height={20} />,
+          icon: <Iconify icon={'ic:baseline-price-change'} width={25} height={25} />,
           component: <SalesPricing />,
         },
         {
           value: 'Purchasing Pricing  ',
-          icon: <Iconify icon={'ic:round-perm-media'} width={20} height={20} />,
+          icon: <Iconify icon={'ion:pricetags-sharp'} width={20} height={20} />,
           component: <PurchasingPrice />,
         },
         {
             value: 'Standerd Costs ',
-            icon: <Iconify icon={'ic:round-perm-media'} width={20} height={20} />,
+            icon: <Iconify icon={'material-symbols:price-check'} width={30} height={30} />,
             component: <StandardCosts />,
           },
           {
             value: 'Reorder Levels  ',
-            icon: <Iconify icon={'ic:round-perm-media'} width={20} height={20} />,
+            icon: <Iconify icon={'gg:reorder'} width={30} height={30} />,
           
           },
           {
             value: 'Transactions ',
-            icon: <Iconify icon={'ic:round-perm-media'} width={20} height={20} />,
+            icon: <Iconify icon={'ant-design:transaction-outlined'} width={40} height={30} />,
           
           },
           {

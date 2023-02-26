@@ -170,8 +170,7 @@ export default function CreditInvoiceItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 700 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Credit Invoice Details </h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>Credit Invoice Details </h4>
                         
                             <Table>
                                 

@@ -222,9 +222,7 @@ import UnitsOfMeasureForm from 'src/sections/@dashboard/calendar/inventory/Units
                 <Card mt={3}>
                     <Scrollbar>
                         <TableContainer sx={{mt:3, minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Units Of Measure Details</h4>
-                        
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}>Units Of Measure Details</h4>
                             <Table>
                                 <UserListHead
                                     order={order}

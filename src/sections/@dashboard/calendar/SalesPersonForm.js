@@ -1,21 +1,19 @@
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import merge from 'lodash/merge';
-import { isBefore } from 'date-fns';
 import { useSnackbar } from 'notistack';
 // form
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+
 // @mui
-import { Box, Stack, Button, Tooltip, TextField, IconButton, DialogActions } from '@mui/material';
-import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
+import { Box,Card,Grid, Button, DialogActions } from '@mui/material';
+
+import { LoadingButton } from '@mui/lab';
 // redux
 import { useDispatch } from '../../../redux/store';
-import { createEvent, updateEvent, deleteEvent } from '../../../redux/slices/calendar';
-// components
-import Iconify from '../../../components/Iconify';
-import { ColorSinglePicker } from '../../../components/color-utils';
-import { FormProvider, RHFTextField, RHFSwitch } from '../../../components/hook-form';
+import { FormProvider, RHFTextField } from '../../../components/hook-form';
+
+
 
 // ----------------------------------------------------------------------
 
@@ -117,16 +115,37 @@ export default function SalesPersonForm({ event, onCancel, salespersonItems, set
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={3} sx={{ p: 3 }}>
-        <RHFTextField name="salespersonname" label="Sales Person Name " />
-        <RHFTextField name="Telephonenumber" label="telephone Number" />
-        <RHFTextField name="faxnumber" label="Fax Number" />
-        <RHFTextField name="email" label="E-mail" />
-        <RHFTextField name="provision" label="Provision" />
-        <RHFTextField name="breakpt" label="Break Pt" />
-        <RHFTextField name="provison2" label="Provision 2" />
-       
-      </Stack>
+      <Grid item xs={12} md={12}>
+        <Card sx={{ p: 5, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }}>
+          <Box
+            sx={{
+            display: 'grid',
+            columnGap: 2,
+            rowGap: 3,
+            gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+                }}
+          >
+          <Card sx={{p:3}}>
+            <RHFTextField name="salespersonname" label="Sales Person Name "sx={{mt:2}} />
+            <RHFTextField name="Telephonenumber" label="telephone Number" sx={{mt:2}}/>
+          </Card>
+          <Card sx={{p:3}}>
+            <RHFTextField name="faxnumber" label="Fax Number" sx={{mt:2}} />
+            <RHFTextField name="email" label="E-mail" sx={{mt:2}}/>
+          </Card>
+          <Card sx={{p:3}}>
+            <RHFTextField name="provision" label="Provision" />
+          </Card>
+          <Card sx={{p:3}}>
+            <RHFTextField name="breakpt" label="Break Pt" />
+          </Card>
+          </Box>
+          <Card sx={{p:3,mt:2}}>
+            <RHFTextField name="provison2" label="Provision 2" />
+          </Card>
+        </Card>
+      </Grid>
+      
 
       <DialogActions>
         <Box sx={{ flexGrow: 1 }} />

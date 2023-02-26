@@ -34,17 +34,17 @@ export default function InventoryReport() {
   const ACCOUNT_TABS = [
     {
       value: 'Inventory Movements',
-      icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
+      icon: <Iconify icon={'eva:move-fill'} color='#F2740B' width={23} height={40} />,
       component: <InventoryMovements />,
     },
     {
       value: 'Inventory Status',
-      icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
+      icon: <Iconify icon={'dashicons:admin-settings'} color='#F2740B' width={23} height={40} />,
       component: <InventoryStatus /> 
     },
     {
       value: 'Print Reports',
-      icon: <Iconify icon={'mdi:view-dashboard-edit-outline'} color='#F2740B' width={23} height={40} />,
+      icon: <Iconify icon={'dashicons:printer'} color='#F2740B' width={23} height={40} />,
    //   component: <OpeningBalance /> 
       },
     

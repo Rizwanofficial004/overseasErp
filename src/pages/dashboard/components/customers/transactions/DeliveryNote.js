@@ -103,9 +103,11 @@ export default function DeliveryNote() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFTextField name="Ref" label="#" size='small' sx={{  borderRadius: 1, }} />
-                            <RHFTextField name="reference" label="Reference" size='small' sx={{  borderRadius: 1, }} />
-                            <RHFTextField name="PurchaseOrder" label="Purchase Order (P.O)" size='small' sx={{ borderRadius: 1, }} />
+                             <Card sx={{ p: 3 }}>
+                            <RHFTextField name="Ref" label="#" size='small' sx={{  mt: 1 }} />
+                            <RHFTextField name="reference" label="Reference" size='small' sx={{  mt: 1 }} />
+                            <RHFTextField name="PurchaseOrder" label="Purchase Order (P.O)" size='small' sx={{ mt: 1 }} />
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>
@@ -119,7 +121,8 @@ export default function DeliveryNote() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="alllocation" label="All Locations" placeholder="All Locations" size='small' sx={{ borderRadius: 1 }}>
+                             <Card sx={{ p: 3 }}>                            
+                             <RHFSelect name="alllocation" label="All Locations" placeholder="All Locations" size='small' sx={{ mt: 1 }}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -127,8 +130,8 @@ export default function DeliveryNote() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFTextField name="item" label="Item" size='small' sx={{  borderRadius: 1 }} />
-                            <RHFSelect name="allitems" label="All Items" placeholder="All Items" size='small' sx={{ borderRadius: 1 }}>
+                            <RHFTextField name="item" label="Item" size='small' sx={{  mt: 1 }} />
+                            <RHFSelect name="allitems" label="All Items" placeholder="All Items" size='small' sx={{ mt: 1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -136,6 +139,7 @@ export default function DeliveryNote() {
                                     </option>
                                 ))}
                             </RHFSelect>
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>
@@ -149,7 +153,8 @@ export default function DeliveryNote() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small' sx={{ borderRadius: 1 }}>
+                             <Card sx={{ p: 3 }}>
+                            <RHFSelect name="allcustomers" label="All Customers" placeholder="All Customers" size='small' sx={{mt: 1 }}>
                                 <option value="" />
                                     {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -162,6 +167,7 @@ export default function DeliveryNote() {
                                     Search
                                 </LoadingButton>
                             </Stack>
+                        </Card>
                         </Box >
                     </Card>
                 </Grid>

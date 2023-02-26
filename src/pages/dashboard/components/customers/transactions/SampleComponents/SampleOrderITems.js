@@ -201,7 +201,7 @@ export default function SampleOrderItems() {
                         <TableContainer sx={{ minWidth: 800,padding:1 }}>
                         <h2
                         style={{ textAlign:'center', color:'#D35400'}}>Sample Order Items </h2>
-                        <RedBar />
+                        
                             <Table>
                                 <UserListHead
                                     order={order}

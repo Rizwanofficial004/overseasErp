@@ -233,8 +233,9 @@ import BarcodeForm from 'src/sections/@dashboard/calendar/inventory/BarcodeForm'
                                         
                                         }}
                                 >
+                                    <Card sx={{p:2}}> 
                                     <RHFTextField name="itemcode" label="Item Code" size='small'  sx={{ borderColor:'#FF0000', borderRadius:1}} />
-                                   
+                                   </Card>
                                 </Box>
                             </Card>
                         </Grid> 
@@ -250,6 +251,7 @@ import BarcodeForm from 'src/sections/@dashboard/calendar/inventory/BarcodeForm'
                                         
                                         }}
                                 >
+                                    <Card sx={{p:2}}> 
                                      <RHFSelect name="item" label="Select an Items"  size='small'sx={{ borderRadius:1}}>
                                         <option value="" />
                                         {countries.map((option) => (
@@ -258,7 +260,7 @@ import BarcodeForm from 'src/sections/@dashboard/calendar/inventory/BarcodeForm'
                                             </option>
                                         ))}
                                     </RHFSelect>
-
+                                    </Card>
                                 </Box>
                             </Card>
                         </Grid>
@@ -274,12 +276,13 @@ import BarcodeForm from 'src/sections/@dashboard/calendar/inventory/BarcodeForm'
                                         
                                         }}
                                 >
+                                    <Card sx={{p:2}}> 
                                         <Stack spacing={1} alignItems="flex-center" sx={{  mt: 1, borderRadius: 1 }}>
                                             <LoadingButton type="submit" variant="contained" loading={isSubmitting} >
                                                 Search
                                             </LoadingButton>
                                         </Stack>
-
+                                    </Card>
                                 </Box>
                             </Card>
                         </Grid>
@@ -288,9 +291,8 @@ import BarcodeForm from 'src/sections/@dashboard/calendar/inventory/BarcodeForm'
             <Container  maxWidth={themeStretch ? false : 'lg'}>
                 <Card mt={3}>
                     <Scrollbar>
-                        <TableContainer sx={{mt:3, minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>BarCode Details </h4>
+                        <TableContainer sx={{mt:3, minWidth: 700 }}>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}> BarCode Details</h4>
                         
                             <Table>
                                 

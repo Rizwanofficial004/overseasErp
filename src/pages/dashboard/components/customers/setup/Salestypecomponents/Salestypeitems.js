@@ -1,7 +1,5 @@
-import { sentenceCase } from 'change-case';
+
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-// @mui
 import { useTheme } from '@mui/material/styles';
 import {
     Card,
@@ -22,7 +20,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _quotationItems } from 'src/_mock';
+import { _userList, _saletype } from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -31,43 +29,25 @@ import SearchNotFound from 'src/components/SearchNotFound';
 // sections
 import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/sections/@dashboard/user/list';
 import { DialogAnimate } from 'src/components/animate';
-import { CalendarForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
-import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
+import {openModal, closeModal} from 'src/redux/slices/calendar';
+import SaletypeFormItems from 'src/sections/@dashboard/calendar/customer/SaletypeFormItems';
 // ----------------------------------------------------------------------
-let data = [
-    {   id: '2332',
-        priceBeforeText: 'Shiping Charge', 
-        discount: '0.00',
-        total: '' , bold: true
-    },
-    {   id: '3434',
-    priceBeforeText: 'Sub Total', 
-    discount: '0.00',
-    total: ''  ,bold: true
-    },
-    {   
-    id: '2354',
-    priceBeforeText: 'Amount Total', 
-    discount: '0.00',
-    total: 'update' , bold: true
-    },
-  ]
-  let QItem = [..._quotationItems]
+
 export default function Salestypeitems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [quotationItems, setQuotationItems] = useState([..._quotationItems]);
+    const [saletype, setsaletype] = useState([..._saletype]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
     const [orderBy, setOrderBy] = useState('name');
     const [filterName, setFilterName] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selectedQuotation, setSelectedQuotation ] = useState(null)
+    const [selectedsaletype, setSelectedsaletype ] = useState(null)
     const AddButton = () => {
             return (
                 <Button
@@ -165,7 +145,7 @@ export default function Salestypeitems() {
         setUserList(deleteUsers);
     };
     const handleEditEvent = (obj) => {
-        setSelectedQuotation(obj)
+        setSelectedsaletype(obj)
         dispatch(openModal());
     };  
 
@@ -182,8 +162,7 @@ export default function Salestypeitems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Sale Types </h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}>Sale Types </h4>
                         
                             <Table>
                                 
@@ -198,9 +177,9 @@ export default function Salestypeitems() {
                                 />
                                 
                                 <TableBody >
-                                    {quotationItems.map((row) => {
-                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeText, discount, total } = row;
-                                        const isItemSelected = selected.indexOf(itemCode) !== -1;
+                                    {saletype.map((row) => {
+                                        const { id, bold, saletypename,calculatorfactor,taxincluded } = row;
+                                        const isItemSelected = selected.indexOf(saletypename) !== -1;
 
                                         return (
                                             <TableRow
@@ -217,14 +196,14 @@ export default function Salestypeitems() {
                                                 <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
                                                     {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
                                                     <Typography variant="subtitle2" noWrap>
-                                                        {itemCode}
+                                                        {saletypename}
                                                     </Typography>
                                                 </TableCell>
-                                                <TableCell align="left">{itemDescription}</TableCell>
-                                                <TableCell align="left">{longDescription}</TableCell>
+                                                <TableCell align="left">{calculatorfactor}</TableCell>
+                                                <TableCell align="left">{taxincluded}</TableCell>
                                                
                                                 <TableCell align="right">
-                                                <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={itemCode} />
+                                                <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={saletypename} />
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -249,9 +228,9 @@ export default function Salestypeitems() {
                     </Scrollbar>
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
-                    <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>
+                    <DialogTitle>{selectedsaletype ? 'Edit Sales Type' : 'Add Sales Type'}</DialogTitle>
 
-                    <CalendarForm event={selectedQuotation || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <SaletypeFormItems saletype={saletype} setsaletype={setsaletype} event={selectedsaletype || {}} range={selectedRange} onCancel={handleCloseModal}  />
                 </DialogAnimate>
             </Container>
         </Page>

@@ -145,6 +145,24 @@ export const _quotationItems = [...Array(0)].map((_, index) => ({
   discount: '',
   total: '',
 }));
+export const _purchaseorder = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  itemCode:'',
+  received:'',
+  itemDescription:'',
+  quantity:'',
+  unit:'',
+  requireddeliverydate:'',
+  pricebeforetax:'',
+  linetotal:'',
+  
+}));
+export const _saletype = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  saletypename: '',
+  calculatorfactor: '',
+  taxincluded: '',
+}));
 export const _saleOrderItems = [...Array(0)].map((_, index) => ({
   id: _mock.id(index),
   itemCode: '',
@@ -234,9 +252,43 @@ export const _inventorylocationitems = [...Array(0)].map((_, index) => ({
   locationcode:'',locationname:'',contactofdelivery:'',
   address:'',telephone:'',secondaryphone:'',facsimileno:'',email:'',
 }));
+export const _shippingItems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  shippingname:'',
+  shippingcontactnumber:'',
+  shippingsecondarynumber:'',
+  shippingcontactperson:'',
+  shippingaddress:'',
+}));
+export const _currencyItems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  currencyabbreviation:'',
+  currencysymbol:'',
+  currencyname:'',
+  hundredthsname:'',
+  country:'',
+  automaticexchangerateupdate:'',
+}));
+export const _exchangerate = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  dateofusefrom:'',
+  exchangerate:'',
+ 
+}));
+export const _itemtax = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  itemtaxdescription:'',
+  isfullytax:'',
+ 
+}));
 export const _descriptionitems = [...Array(0)].map((_, index) => ({
   id: _mock.id(index),
   description:'',
+}));
+export const _paymentterms = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  termsdescription:'',
+  paymenttype:'',
 }));
 export const _deliveryitems = [...Array(3)].map((_, index) => ({
   id: _mock.id(index),

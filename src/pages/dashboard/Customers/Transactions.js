@@ -15,13 +15,6 @@ import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
 import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import {
-  AccountGeneral,
-  AccountBilling,
-  AccountSocialLinks,
-  AccountNotifications,
-  AccountChangePassword,
-} from 'src/sections/@dashboard/user/account';
 import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
 import {SalesOrder} from '../components/customers/transactions';
 import {DeliveryNote} from '../components/customers/transactions';
@@ -51,7 +44,7 @@ export default function Transactions() {
   const ACCOUNT_TABS = [
     {
       value: 'Quotations',
-      icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
+      icon: <Iconify icon={'fa6-solid:notes-medical'} color='#F2740B' width={23} height={40} />,
       component: <Quotations />,
     },
     {
@@ -103,7 +96,6 @@ export default function Transactions() {
   return (
     <Page title="Customers: Transactions">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-     
         <HeaderBreadcrumbs
           heading="Transactions"
           links={[

@@ -135,7 +135,8 @@ export default function LocationTransfer() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="fromLocation" label="From Location" placeholder="Customers" size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
+                            <Card sx={{p:2}}> 
+                            <RHFSelect name="fromLocation" label="From Location" placeholder="Customers" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -143,7 +144,7 @@ export default function LocationTransfer() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="toLocation" label="To Location" placeholder="Branch" size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <RHFSelect name="toLocation" label="To Location" placeholder="Branch" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -151,6 +152,7 @@ export default function LocationTransfer() {
                                     </option>
                                 ))}
                             </RHFSelect>
+                        </Card>    
                         </Box>
                     </Card>
                 </Grid>
@@ -166,8 +168,8 @@ export default function LocationTransfer() {
                                 
                                 }}
                         >
-                             
-                            <RHFTextField name="reference" label="Reference" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                             <Card sx={{p:2}}> 
+                            <RHFTextField name="reference" label="Reference" size='small' sx={{ mt:1}}/>
                             
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <Stack spacing={3}>
@@ -179,12 +181,12 @@ export default function LocationTransfer() {
                                         onChange={(newValue) => {
                                             setsampleOrderdate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>
                           
-                             
+                             </Card>
                         </Box>
                     </Card>
                 </Grid>             
@@ -198,8 +200,8 @@ export default function LocationTransfer() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            
-                            <RHFSelect name="transferType" label="Transfer Type" placeholder="Branch" size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <Card sx={{p:2}}> 
+                            <RHFSelect name="transferType" label="Transfer Type" placeholder="Branch" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -207,6 +209,7 @@ export default function LocationTransfer() {
                                     </option>
                                 ))}
                             </RHFSelect>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>
@@ -215,25 +218,23 @@ export default function LocationTransfer() {
             <Transferitems />
 {/*----------------3rd portion Detailing Code-------------------------------------------*/}
                   
-<Grid mt={3} ml={23} container spacing={1}>
-                <Grid item xs={12} sm={12} md={8}>
-                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
+        <Grid mt={3} ml={23} container spacing={1}>
+            <Grid item xs={12} sm={12} md={8}>
+                <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
                         
-           
-           <RHFTextField name="memo" label="MEMO" multiline rows={4}  sx={{alignItems:'center', mt: 1, background: 'white',borderRadius:1 }}/>
+                    <Card sx={{p:2}}> 
+                    <RHFTextField name="memo" label="MEMO" multiline rows={4}  sx={{alignItems:'center', mt: 1, mt:1 }}/>
                     <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
-                    
-                            <Box m={1}>
-                                <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                                    Process Transfer
-                                </LoadingButton>
-                            </Box>
-                           
-                      
-                    </Stack>                        
-                    </Card>
-                </Grid>
+                        <Box m={1}>
+                            <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                                Process Transfer
+                            </LoadingButton>
+                        </Box>
+                    </Stack> 
+                </Card>                       
+                </Card>
             </Grid>
-                   </FormProvider> 
+        </Grid>
+    </FormProvider> 
     );
 }

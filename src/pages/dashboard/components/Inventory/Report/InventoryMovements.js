@@ -3,27 +3,23 @@ import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
 import { useCallback } from 'react';
 // form
-import Avatar from '@mui/material/Avatar';
-
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Box, Grid, Card, Stack, Typography } from '@mui/material';
-import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
-
-import dayjs from 'dayjs';
+import { LoadingButton } from '@mui/lab';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // hooks
 import useAuth from 'src/hooks/useAuth';
-// utils
-import { fData } from 'src/utils/formatNumber';
+
+
 // _mock
 import { countries } from 'src/_mock';
+
+import { Icon } from '@iconify/react';
 // components
 import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from 'src/components/hook-form';
 // import SampleOrderItems from './SampleComponents/SampleOrderITems';
@@ -136,7 +132,8 @@ export default function InventoryMovements() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="items" label="Items" size='small' sx={{ background: 'white',borderColor:'#FF0000', borderRadius:1}}>
+                            <Card sx={{p:2}}> 
+                            <RHFSelect name="items" label="Items" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -144,7 +141,7 @@ export default function InventoryMovements() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="fromLocation" label="From Location"  size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <RHFSelect name="fromLocation" label="From Location"  size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -152,6 +149,7 @@ export default function InventoryMovements() {
                                     </option>
                                 ))}
                             </RHFSelect>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>
@@ -167,6 +165,7 @@ export default function InventoryMovements() {
                                 
                                 }}
                         > 
+                        <Card sx={{p:2}}> 
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <Stack spacing={3}>
                                     <DesktopDatePicker
@@ -177,7 +176,7 @@ export default function InventoryMovements() {
                                         onChange={(newValue) => {
                                             setsampleOrderdate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>
@@ -191,11 +190,11 @@ export default function InventoryMovements() {
                                         onChange={(newValue) => {
                                             setsampleOrderdate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>
-                             
+                             </Card>
                         </Box>
                     </Card>
                 </Grid>             
@@ -211,11 +210,14 @@ export default function InventoryMovements() {
                                 
                                 }}
                         > 
+                        <Card sx={{p:2}}> 
                             <Box m={1}>
                                 <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                                <Icon icon="dashicons:search" />
                                     Show MOVEMENTS
                                 </LoadingButton>
                             </Box>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>

@@ -3,30 +3,25 @@ import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
 import { useCallback } from 'react';
 // form
-import Avatar from '@mui/material/Avatar';
+
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Box, Grid, Card, Stack, Typography } from '@mui/material';
 import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
-import dayjs from 'dayjs';
+
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // hooks
 import useAuth from 'src/hooks/useAuth';
-// utils
-import { fData } from 'src/utils/formatNumber';
+
 // _mock
 import { countries } from 'src/_mock';
 // components
-import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from 'src/components/hook-form';
+import { FormProvider, RHFSelect, RHFTextField } from 'src/components/hook-form';
 import CashInvoiceItems from './cashComponents/CashInvoiceItems';
-import { whitespace } from 'stylis';
-import { red } from '@mui/material/colors';
 // ----------------------------------------------------------------------
 export default function CashInvoice() {
     const { enqueueSnackbar } = useSnackbar();
@@ -115,9 +110,9 @@ export default function CashInvoice() {
     );
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-            <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
+            <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600'}} >
                 <Grid item xs={12} sm={6}md={4} >
-                    <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
+                    <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)'}} >
                         <Box
                             sx={{
                                 display: 'grid',
@@ -126,7 +121,8 @@ export default function CashInvoice() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="customers" label="Customers" placeholder="Customers" size='small' sx={{ borderColor:'#FF0000', borderRadius:1}}>
+                            <Card sx={{p:3}}>
+                            <RHFSelect name="customers" label="Customers" placeholder="Customers" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -134,7 +130,7 @@ export default function CashInvoice() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="branch" label="Branch" placeholder="Branch" size='small' sx={{ borderRadius:1}}>
+                            <RHFSelect name="branch" label="Branch" placeholder="Branch" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -142,12 +138,13 @@ export default function CashInvoice() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFTextField name="reference" label="Reference" size='small' sx={{  borderRadius:1,}}/>
+                            <RHFTextField name="reference" label="Reference" size='small' sx={{  mt:1,}}/>
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>
                 <Grid item xs={12} sm={6}md={4}>
-                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
+                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)'}}>
                         <Box
                             sx={{
                                 display: 'grid',
@@ -158,9 +155,10 @@ export default function CashInvoice() {
                                 
                                 }}
                         >
-                            <RHFTextField name="currentcredit" label="Current Credit" size='small' sx={{ borderRadius:1 }}  />
-                            <RHFTextField name="customerdiscount" label="Customer Discount %" size='small' sx={{ borderRadius:1}}/>
-                            <RHFSelect name="pricelist" label="Price List" placeholder="Price List" size='small' sx={{ borderRadius:1}}>
+                            <Card sx={{p: 3}}>
+                            <RHFTextField name="currentcredit" label="Current Credit" size='small' sx={{ mt:1 }}  />
+                            <RHFTextField name="customerdiscount" label="Customer Discount %" size='small' sx={{ mt:1}}/>
+                            <RHFSelect name="pricelist" label="Price List" placeholder="Price List" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -168,11 +166,12 @@ export default function CashInvoice() {
                                     </option>
                                 ))}
                             </RHFSelect>
+                        </Card>
                         </Box>  
                     </Card>
                 </Grid>             
                 <Grid item xs={12} sm={6}md={4}>
-                    <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
+                    <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)'}}>
                         <Box
                             sx={{
                                 display: 'grid',
@@ -181,7 +180,8 @@ export default function CashInvoice() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="payment" label="Payment" placeholder="Payment" size='small'sx={{ borderRadius:1}}>
+                            <Card sx={{p: 3}}>
+                            <RHFSelect name="payment" label="Payment" placeholder="Payment" size='small'sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -189,7 +189,7 @@ export default function CashInvoice() {
                                     </option>
                                 ))}
                             </RHFSelect>
-                            <RHFSelect name="salesPerson" label="sales person" placeholder="sales person" size='small' sx={{ borderRadius:1}}>
+                            <RHFSelect name="salesPerson" label="sales person" placeholder="sales person" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
@@ -207,7 +207,7 @@ export default function CashInvoice() {
                                         onChange={(newValue) => {
                                             setOrderDate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>
@@ -219,6 +219,7 @@ export default function CashInvoice() {
                                     </option>
                                 ))}
                             </RHFSelect>*/}
+                        </Card>    
                         </Box>
                     </Card> 
                 </Grid>
@@ -228,8 +229,8 @@ export default function CashInvoice() {
 {/*----------------3rd portion Detailing Code -------------------------------------------*/}
             <Grid mt={3} container spacing={1}>
                 <Grid item xs={12} md={12}>
-                    <Card sx={{ p: 3, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
-                    <h4 style={{ textAlign:'center'}}>Cash Delivery Details  </h4>
+                    <Card sx={{ p: 3, background: 'rgba(145, 158, 171, 0.12)',mt:1 }}>
+                    <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}>Cash Delivery Details  </h4>
                     <Box
                         sx={{
                             display: 'grid',

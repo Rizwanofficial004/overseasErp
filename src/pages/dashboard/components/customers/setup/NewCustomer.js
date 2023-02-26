@@ -54,12 +54,12 @@ export default function NewCustomer() {
       const CURRENT_TABS = [
         {
           value: 'General Setting',
-          icon: <Iconify icon={'eva:heart-fill'} width={20} height={20} />,
+          icon: <Iconify icon={'mdi:home-edit'} width={20} height={20} />,
           component: <NewCustomeritems/>,
         },
         {
           value: 'Contacts',
-          icon: <Iconify icon={'eva:heart-fill'} width={20} height={20} />,
+          icon: <Iconify icon={'mdi:card-account-phone'} width={20} height={20} />,
           component: <Contact/>,
         },
         {

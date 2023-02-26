@@ -8,6 +8,7 @@ import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 import GuestGuard from '../guards/GuestGuard';
 import AuthGuard from '../guards/AuthGuard';
 // import RoleBasedGuard from '../guards/RoleBasedGuard';
+import { PATH_AUTH } from './paths';
 // config
 import { PATH_AFTER_LOGIN } from '../config';
 // components
@@ -25,31 +26,41 @@ const Loadable = (Component) => (props) => {
 
 export default function Router() {
   return useRoutes([
-    // {
-    //   path: 'auth',
-    //   children: [
-    //     {
-    //       path: 'login',
-    //       element: (
-    //         <GuestGuard>
-    //           <Login />
-    //         </GuestGuard>
-    //       ),
-    //     },
-    //     {
-    //       path: 'register',
-    //       element: (
-    //         <GuestGuard>
-    //           <Register />
-    //         </GuestGuard>
-    //       ),
-    //     },
-    //     { path: 'login-unprotected', element: <Login /> },
-    //     { path: 'register-unprotected', element: <Register /> },
-    //     { path: 'reset-password', element: <ResetPassword /> },
-    //     { path: 'verify', element: <VerifyCode /> },
-    //   ],
-    // },
+    {
+      path: '/',
+      children: [
+        { element: <Navigate to={'auth'} replace />, index: true },
+        {
+          path: 'auth',
+          children: [
+            { element: <Navigate to={'login'} replace />, index: true },
+            {
+              path: 'login',
+              // element: (
+              //   <GuestGuard>
+              //     <Login />
+              //   </GuestGuard>
+              // ),
+              element: <Login />
+            },
+            // {
+            //   path: 'register',
+            //   // element: (
+            //   //   <GuestGuard>
+            //   //     <Register />
+            //   //   </GuestGuard>
+            //   // ),
+            //   element: <Register />
+            // },
+            // { path: 'login-unprotected', element: <Login /> },
+            // { path: 'register-unprotected', element: <Register /> },
+            // { path: 'reset-password', element: <ResetPassword /> },
+            // { path: 'verify', element: <VerifyCode /> },
+          ]
+        }
+
+      ],
+    },
 
     // Dashboard Routes
     {
@@ -193,7 +204,7 @@ export default function Router() {
     //     { path: 'faqs', element: <Faqs /> },
     //   ],
     // },
-    { path: '*', element: <Navigate to="/404" replace /> },
+    // { path: '*', element: <Navigate to="/404" replace /> },
   ]);
 }
 

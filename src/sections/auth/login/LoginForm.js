@@ -15,6 +15,8 @@ import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // components
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
+import { dispatch } from 'src/redux/store';
+import { signIn, getUsers, signOut } from 'src/redux/slices/user';
 
 // ----------------------------------------------------------------------
 
@@ -50,7 +52,8 @@ export default function LoginForm() {
 
   const onSubmit = async (data) => {
     try {
-      await login(data.email, data.password);
+      await dispatch(signIn({email: data.email, password: data.password}));
+      // await login(data.email, data.password);
     } catch (error) {
       console.error(error);
       reset();
@@ -92,6 +95,13 @@ export default function LoginForm() {
 
       <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
         Login
+      </LoadingButton>
+      <LoadingButton onClick={async () => await dispatch(getUsers())} fullWidth size="large" variant="contained" loading={isSubmitting}>
+        get all users
+      </LoadingButton>
+
+      <LoadingButton onClick={async () => await dispatch(signOut())} fullWidth size="large" variant="contained" loading={isSubmitting}>
+        Logout
       </LoadingButton>
     </FormProvider>
   );

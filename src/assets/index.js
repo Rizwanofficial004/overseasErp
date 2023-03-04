@@ -1,7 +1,7 @@
 
-import companyLogo from './logos/comLogo.jpeg'
+// import companyLogo from './logos/comLogo.jpeg'
 // import companyLogo from './logos/1.png'
-
+import companyLogo from './images/jaris 2.png'
 
 export { default as DocIllustration } from './illustration_doc';
 export { default as SeoIllustration } from './illustration_seo';

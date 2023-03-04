@@ -35,6 +35,7 @@ import { AddBranchItemsForm, CalendarStyle, CalendarToolbar } from 'src/sections
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
+import BranchItemsForm from 'src/sections/@dashboard/calendar/customer/BranchItemsForm';
 // ----------------------------------------------------------------------
 
   let QItem = [..._BranchItems]
@@ -231,7 +232,7 @@ export default function AddBranchItems() {
                 </Card>
                 <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
                     <DialogTitle>{selectedBranch ? 'Edit Branch Details' : 'Add New Branch  '}</DialogTitle>
-                    <AddBranchItemsForm branchItems={branchItems} setBranchItems={setBranchItems} event={selectedBranch || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <BranchItemsForm branchItems={branchItems} setBranchItems={setBranchItems} event={selectedBranch || {}} range={selectedRange} onCancel={handleCloseModal} />
                 </DialogAnimate>
             </Container>
         </Page>

@@ -84,8 +84,11 @@ export default function Login() {
 
         {mdUp && (
           <SectionStyle>
-            <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              Hi, Welcome Back
+            <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5,color:'#FF5733' }}>
+              Hi, Welcome To 
+            </Typography>
+            <Typography variant="h3" sx={{ px: 5,  mb: 5,color:'#FF5733' }}>
+              Overseas Enterprises Erp Solutions
             </Typography>
             <Image
               alt="login"
@@ -99,7 +102,10 @@ export default function Login() {
             <Stack direction="row" alignItems="center" sx={{ mb: 5 }}>
               <Box sx={{ flexGrow: 1 }}>
                 <Typography variant="h4" gutterBottom>
-                  Sign in to Minimal
+                  Sign in to
+                </Typography>
+                <Typography variant="h4" gutterBottom>
+                  Overseas Enterprises ERP Solutions
                 </Typography>
                 <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
               </Box>

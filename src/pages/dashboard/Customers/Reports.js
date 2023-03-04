@@ -18,8 +18,7 @@ import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 
 import { CustomerAllocationDashboard, QuotationDashboard, SalesOrderDashboard, SampleDashboard,PrintReport } from '../components/customers/Reports';
 import CustomerTransDashboard from '../components/customers/Reports/CustomerTransDashboard';
-// import {SalesOrder} from '../components/customers/reports';
-// import {DeliveryNote} from '../components/customers/reports';
+
 // ----------------------------------------------------------------------
 const TabsWrapperStyle = styled('div')(({ theme }) => ({
   zIndex: 9,

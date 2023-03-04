@@ -22,7 +22,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _salespersonItems } from 'src/_mock';
+import { _userList, _paymentvocheritem} from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -31,28 +31,27 @@ import SearchNotFound from 'src/components/SearchNotFound';
 // sections
 import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/sections/@dashboard/user/list';
 import { DialogAnimate } from 'src/components/animate';
-import { SalesPersonForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
+import { CalendarForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
-import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/SalesPersonItemsForm';
+import PaymentVocherItemsForm from 'src/sections/@dashboard/calendar/generalledger/PaymentVocherItemsForm';
 // ----------------------------------------------------------------------
 
-
-    export default function SalesPersonitems() {
+ 
+export default function PaymentVocherItems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [salespersonItems, setsalespersonItems] = useState([..._salespersonItems]);
+    const [paymentvocheritem, setpaymentvocheritem] = useState([..._paymentvocheritem]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
     const [orderBy, setOrderBy] = useState('name');
     const [filterName, setFilterName] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selectedSalesperson, setSelectedSalesperson ] = useState(null)
-   
+    const [selectedpaymentvocheritem, setSelectedpaymentvocheritem] = useState(null)
     const AddButton = () => {
             return (
                 <Button
@@ -68,13 +67,12 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
             )
         }
         const TABLE_HEAD = [
-            { id: 'name', label: 'Sales Person Name', alignRight: false },
-            { id: 'company', label: 'TelePhone Number', alignRight: false },
-            { id: 'role', label: 'Fax Number', alignRight: false },
-            { id: 'name', label: 'E-mail', alignRight: false },
-            { id: 'company', label: 'Pervision', alignRight: false },
-            { id: 'role', label: 'Break PT..', alignRight: false },
-            { id: 'role', label: 'Pervision 2', alignRight: false },
+            { id: 'name', label: 'Account Code', alignRight: false },
+            { id: 'company', label: 'Account Description', alignRight: false },
+            { id: 'isVerified', label: '', alignRight: false },
+            { id: 'status', label: 'Amount ', alignRight: false },
+            { id: 'status', label: 'Memo ', alignRight: false },
+           
             { id: '', label: <AddButton />, alignRight: false },
         ];
         
@@ -153,7 +151,7 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
         setUserList(deleteUsers);
     };
     const handleEditEvent = (obj) => {
-        setSelectedSalesperson(obj)
+        setSelectedpaymentvocheritem(obj)
         dispatch(openModal());
     };  
 
@@ -170,7 +168,7 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>Sales Person Details </h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}>Payment Items </h4>
                         
                             <Table>
                                 
@@ -178,22 +176,19 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
                                     order={order}
                                     orderBy={orderBy}
                                     headLabel={TABLE_HEAD}
-                                    rowCount={salespersonItems.length}
+                                    rowCount={userList.length}
                                     numSelected={selected.length}
                                     onRequestSort={handleRequestSort}
                                     onSelectAllClick={handleSelectAllClick}
                                 />
                                 
                                 <TableBody >
-                                    {salespersonItems.map((row) => {
-                                        const { id, bold,  salespersonname,
-                                        Telephonenumber,
-                                        faxnumber,
-                                        provison2,
-                                        provision,
-                                        breakpt,
-                                        email} = row;
-                                        const isItemSelected = selected.indexOf(salespersonname) !== -1;
+                                    {paymentvocheritem.map((row) => {   
+                                        const { id, bold, memo,
+                                        amount,
+                                        accountDescription,
+                                        accountCode, } = row;
+                                        const isItemSelected = selected.indexOf(accountCode) !== -1;
 
                                         return (
                                             <TableRow
@@ -203,26 +198,23 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
                                                 role="checkbox"
                                                 selected={isItemSelected}
                                                 aria-checked={isItemSelected}
-                                            >
+                                            > 
                                                 {/* <TableCell padding="checkbox" >
                                                     <Checkbox checked={isItemSelected} onClick={() => handleClick(itemCode)} />
                                                 </TableCell> */}
                                                 <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
                                                     {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
                                                     <Typography variant="subtitle2" noWrap>
-                                                        {salespersonname}
+                                                        {accountCode}
                                                     </Typography>
                                                 </TableCell>
-                                                <TableCell align="left">{Telephonenumber}</TableCell>
-                                                <TableCell align="left">{faxnumber}</TableCell>
-                                                <TableCell align="left">{email}</TableCell>
-                                                <TableCell align="left">{provision}</TableCell>
-                                                <TableCell align="left">{breakpt}</TableCell>
-                                                <TableCell align="left">{provison2}</TableCell>
+                                                <TableCell align="left">{accountDescription}</TableCell>
+                                                <TableCell align="left">{amount}</TableCell>
+                                                <TableCell align="left">{memo}</TableCell>
                                                 <TableCell align="right">
-                                                <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={salespersonname} />
+                                                { bold ? null :  <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={accountCode} />}
                                                 </TableCell>
-                                            </TableRow>
+                                               </TableRow>
                                         );
                                     })}
                                     {emptyRows > 0 && (
@@ -245,8 +237,8 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
                     </Scrollbar>
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
-                    <DialogTitle>{selectedSalesperson ? 'Edit Sales Person' : 'Add Sales Person'}</DialogTitle>
-                    <SalesPersonItemsForm salespersonItems={salespersonItems} setsalespersonItems={setsalespersonItems} event={selectedSalesperson || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <DialogTitle>{selectedpaymentvocheritem ? 'Edit Sales paymentvocheritem Items' : 'Add Sales paymentvocheritem Items'}</DialogTitle>
+                    <PaymentVocherItemsForm paymentvocheritem={paymentvocheritem} setpaymentvocheritem={setpaymentvocheritem} event={selectedpaymentvocheritem || {}} range={selectedRange} onCancel={handleCloseModal} />
                 </DialogAnimate>
             </Container>
         </Page>

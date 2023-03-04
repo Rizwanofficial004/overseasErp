@@ -15,7 +15,7 @@ import {
     Container,
     Typography,
     TableContainer,
-    DialogTitle
+    DialogTitle,TablePagination
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
@@ -186,8 +186,7 @@ export default function InventoryMovementItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Adjustment Items </h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>Adjustment Items </h4>
                         
                             <Table>
                                 
@@ -195,10 +194,11 @@ export default function InventoryMovementItems() {
                                     order={order}
                                     orderBy={orderBy}
                                     headLabel={TABLE_HEAD}
-                                    rowCount={userList.length}
+                                    rowCount={salesReturns.length}
                                     numSelected={selected.length} 
                                     onRequestSort={handleRequestSort}
                                     onSelectAllClick={handleSelectAllClick}
+                                    sx={{color:'red'}}
                                 />
 
                                 <TableBody >
@@ -252,6 +252,15 @@ export default function InventoryMovementItems() {
                             </Table>
                         </TableContainer>
                     </Scrollbar>
+                    <TablePagination
+                            rowsPerPageOptions={[5, 10, 25]}
+                            component="div"
+                            count={salesReturns.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={(event, value) => setPage(value)}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
                     <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>

@@ -18,8 +18,8 @@ export default function Logo({ disabledLink = false, sx }) {
   const PRIMARY_DARK = theme.palette.primary.dark;
 
   const logo = (
-    <Box sx={{ width: 150, height: 50, ...sx }}>
-    <img src={LOGOS.companyLogo} width={200} height={65}/>
+    <Box sx={{ width: 210, height: 110, ...sx }}>
+    <img src={LOGOS.companyLogo} width={300} height={150}/>
    
       {/*<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 512 512">
         <defs>

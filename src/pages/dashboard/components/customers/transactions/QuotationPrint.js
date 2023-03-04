@@ -10,17 +10,17 @@ import { styled } from '@mui/material/styles';
 // import "./styles.css"
 
 export default function QuotationPrint() {
-//   const [page, setPage] = React.useState(0);
-//   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-//   const handleChangePage = (event, newPage) => {
-//     setPage(newPage);
-//   };
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-//   const handleChangeRowsPerPage = (event) => {
-//     setRowsPerPage(+event.target.value);
-//     setPage(0);
-//   };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   // Example data (invoice items)
 
 

@@ -11,12 +11,12 @@ import { Box,Card,Grid, Stack, Button, Tooltip, TextField, IconButton, DialogAct
 import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
 // redux
 import { countries } from 'src/_mock';
-import { useDispatch } from '../../../redux/store';
-import { createEvent, updateEvent, deleteEvent } from '../../../redux/slices/calendar';
+import { useDispatch } from 'src/redux/store';
+import { createEvent, updateEvent, deleteEvent } from 'src/redux/slices/calendar';
 // components
-import Iconify from '../../../components/Iconify';
-import { ColorSinglePicker } from '../../../components/color-utils';
-import { FormProvider, RHFTextField, RHFSelect,RHFSwitch } from '../../../components/hook-form';
+import Iconify from 'src/components/Iconify';
+import { ColorSinglePicker } from 'src/components/color-utils';
+import { FormProvider, RHFTextField, RHFSelect,RHFSwitch } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
@@ -59,13 +59,13 @@ const getInitialValues = (event) => {
 
 // ----------------------------------------------------------------------
 
-AddBranchItemsForm.propTypes = {
+BranchItemsForm.propTypes = {
   event: PropTypes.object,
   // range: PropTypes.object,
   onCancel: PropTypes.func,
 };
 
-export default function AddBranchItemsForm({ event, onCancel, branchItems, setBranchItems }) {
+export default function BranchItemsForm({ event, onCancel, branchItems, setBranchItems }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const dispatch = useDispatch();

@@ -15,14 +15,14 @@ import {
     Container,
     Typography,
     TableContainer,
-    DialogTitle
+       DialogTitle
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _salesReturns } from 'src/_mock';
+import { _userList, _recieptvocheritem } from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -35,39 +35,22 @@ import { CalendarForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dash
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
+import RecieptVocherItemsForm from 'src/sections/@dashboard/calendar/generalledger/RecieptVocherItemsForm';
 // ----------------------------------------------------------------------
-let data = [
-    {   id: '2332',
-        priceBeforeText: 'Sub-Total', 
-        discount: '0.00',
-        total: '' , bold: true
-    },
-    {   id: '3434',
-    priceBeforeText: 'Shipping', 
-    discount: '0.00',
-    total: ''  ,bold: true
-    },
-    {   
-    id: '2354',
-    priceBeforeText: 'Credit Note Total', 
-    discount: '0.00',
-    total: 'update' , bold: true
-    },
-  ]
-  let QItem = [..._salesReturns, ...data]
-export default function JournalEntryItems() {
+
+export default function ReceiptVoucherItems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [salesReturns, setsalesReturns] = useState([..._salesReturns, ...data]);
+    const [recieptvocheritem, setrecieptvocheritem] = useState([..._recieptvocheritem]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
     const [orderBy, setOrderBy] = useState('name');
     const [filterName, setFilterName] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selectedQuotation, setSelectedQuotation ] = useState(null)
+    const [selectedrecieptvocheritem, setSelectedrecieptvocheritem ] = useState(null)
     const AddButton = () => {
             return (
                 <Button
@@ -83,12 +66,12 @@ export default function JournalEntryItems() {
             )
         }
         const TABLE_HEAD = [
-            { id: 'name', label: 'Item Code', alignRight: false },
-            { id: 'company', label: 'Item Description', alignRight: false },
-            { id: 'isVerified', label: 'Quantity', alignRight: false },
-            { id: 'status', label: 'Unit', alignRight: false },
-            { id: 'status', label: 'Unit Cost ', alignRight: false },
-            { id: 'status', label: 'Total', alignRight: false },
+            { id: 'name', label: 'Account Code', alignRight: false },
+            { id: 'company', label: 'Account Description', alignRight: false },
+          
+            { id: 'status', label: '', alignRight: false },
+            { id: 'status', label: 'Amount ', alignRight: false },
+            { id: 'status', label: 'Memo', alignRight: false },
             { id: '', label: <AddButton />, alignRight: false },
         ];
         
@@ -167,7 +150,7 @@ export default function JournalEntryItems() {
         setUserList(deleteUsers);
     };
     const handleEditEvent = (obj) => {
-        setSelectedQuotation(obj)
+        setSelectedrecieptvocheritem(obj)
         dispatch(openModal());
     };  
 
@@ -184,8 +167,7 @@ export default function JournalEntryItems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Rows    </h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>Deposit Items </h4>
                         
                             <Table>
                                 
@@ -200,9 +182,12 @@ export default function JournalEntryItems() {
                                 />
                                 
                                 <TableBody >
-                                    {salesReturns.map((row) => {
-                                        const { id, bold, itemCode, itemDescription, longDescription, quantity, unit, priceBeforeText, discount, total } = row;
-                                        const isItemSelected = selected.indexOf(itemCode) !== -1;
+                                    {recieptvocheritem.map((row) => {
+                                        const { id, bold,  recietaccountCode,
+                                        recietaccountDescription,
+                                        recietamount,
+                                        recietmemo } = row;
+                                        const isItemSelected = selected.indexOf(recietaccountCode) !== -1;
 
                                         return (
                                             <TableRow
@@ -219,15 +204,15 @@ export default function JournalEntryItems() {
                                                 <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
                                                     {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
                                                     <Typography variant="subtitle2" noWrap>
-                                                        {itemCode}
+                                                        {recietaccountCode}
                                                     </Typography>
                                                 </TableCell>
-                                                <TableCell align="left">{itemDescription}</TableCell>
-                                                <TableCell align="left">{longDescription}</TableCell>
-                                                <TableCell align="left">{quantity}</TableCell>
-                                                <TableCell align="left">{unit}</TableCell>
+                                                <TableCell align="left">{recietaccountDescription}</TableCell>
+                                                <TableCell align="left">{recietamount}</TableCell>
+                                                <TableCell align="left">{recietmemo}</TableCell>
+                                                
                                                 <TableCell align="right">
-                                                { bold ? null :  <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={itemCode} />}
+                                                { bold ? null :  <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={recietaccountCode} />}
                                                 </TableCell>
                                                </TableRow>
                                         );
@@ -252,9 +237,9 @@ export default function JournalEntryItems() {
                     </Scrollbar>
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
-                    <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>
+                    <DialogTitle>{selectedrecieptvocheritem ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>
 
-                    <CalendarForm event={selectedQuotation || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <RecieptVocherItemsForm recieptvocheritem={recieptvocheritem} setrecieptvocheritem={setrecieptvocheritem} event={selectedrecieptvocheritem || {}} range={selectedRange} onCancel={handleCloseModal} />
                 </DialogAnimate>
             </Container>
         </Page>

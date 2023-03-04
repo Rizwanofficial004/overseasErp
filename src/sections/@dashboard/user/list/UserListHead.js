@@ -41,25 +41,29 @@ export default function UserListHead({
 
   return (
     <TableHead>
-      <TableRow>
-        {/* <TableCell padding="checkbox">
+      <TableRow >
+        
+        <TableCell padding="checkbox" >
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
+            sx={{color:'#ff6347'}}
           />
-        </TableCell> */}
+        </TableCell>
         {headLabel.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.alignRight ? 'right' : 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
+            sx={{color:'#ff6347'}}
           >
             <TableSortLabel
               hideSortIcon
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
+              
             >
               {headCell.label}
               {orderBy === headCell.id ? (

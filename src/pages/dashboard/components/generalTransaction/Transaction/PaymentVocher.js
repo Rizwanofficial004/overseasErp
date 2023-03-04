@@ -29,13 +29,12 @@ import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } fro
 // import SampleOrderItems from './SampleComponents/SampleOrderITems';
 import { whitespace } from 'stylis';
 import { red } from '@mui/material/colors';
-import { textAlign } from '@mui/system';
 // import OpeningBalanceItems from './OpeningComponents/OpeningBalanceItems';
-// import PaymentItems from './PaymentComponents/PaymentItems';
+import PaymentVocherItems from '../Transaction/PaymentVocherComponents/PaymentVocherItems';
 
 // ----------------------------------------------------------------------
 
-export default function BankAccountTransfer() {
+export default function PaymentVocher() {
     const { enqueueSnackbar } = useSnackbar();
     const [sampleOrderdate, setsampleOrderdate] = useState(new Date());
     const [requiredDeliveryDate, setrequiredDeliveryDate] = useState(new Date());
@@ -44,14 +43,14 @@ export default function BankAccountTransfer() {
     const { user } = useAuth();
 
     const UpdateUserSchema = Yup.object().shape({
-        customers: Yup.string().required('Name is required'),
-        branch: Yup.string().required('Branch Name is required'),
-        orderdate: Yup.string().required('Order Date is required'),
-        address: Yup.string().required('Address is required'),
-        typeOfPacking: Yup.string().required('Type of Packing is required'),
+        // customers: Yup.string().required('Name is required'),
+        // branch: Yup.string().required('Branch Name is required'),
+        // orderdate: Yup.string().required('Order Date is required'),
+        // address: Yup.string().required('Address is required'),
+        // typeOfPacking: Yup.string().required('Type of Packing is required'),
 
-        attn: Yup.string().required('Attention person is required'),
-        currency: Yup.string().required('Currency is required'),
+        // attn: Yup.string().required('Attention person is required'),
+        // currency: Yup.string().required('Currency is required'),
     });
 
     const defaultValues = {
@@ -126,9 +125,9 @@ export default function BankAccountTransfer() {
 
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-            <Grid  px={1} mt={10 } py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={6} md={6} >
-                    <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
+            <Grid  px={1} py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
+                <Grid item xs={3} md={3} >
+                    <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)'}} >
                         <Box
                             sx={{
                                 display: 'grid',
@@ -137,6 +136,7 @@ export default function BankAccountTransfer() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
+                            <Card sx={{ p: 3 }}>
                              <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <Stack spacing={3}>
                                     <DesktopDatePicker
@@ -147,32 +147,16 @@ export default function BankAccountTransfer() {
                                         onChange={(newValue) => {
                                             setsampleOrderdate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>
-                            <RHFTextField name="reference" label="Reference" size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFSelect name="fromaccount" label="From Account" placeholder="Branch" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFSelect name="toaccount" label="To Account" placeholder="Branch" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                            <RHFTextField name="bankbalance" label="Bank Balance" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                            <RHFTextField name="reference" label="Reference" size='small' sx={{ mt:1}}/>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={6} md={6}>
+                <Grid item xs={3} md={3}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -184,29 +168,69 @@ export default function BankAccountTransfer() {
                                 
                                 }}
                         >
-                             
-                            <RHFTextField name="amount" label="Amount " size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="bankcharges" label="Bank Charges " size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFTextField name="memo" label="MEMo " size='small' sx={{ background: 'white',borderRadius:1}}/>                         
+                             <Card sx={{ p: 3 }}>
+                            <RHFTextField name="bankbalance" label="Bank Balance " size='small' sx={{ mt:1}}/>
+                            <RHFSelect name="payto" label="Pay TO" placeholder="Branch" size='small' sx={{ mt:1}}>
+                                <option value="" />
+                                {countries.map((option) => (
+                                    <option key={option.code} value={option.label}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </RHFSelect>
                           
-                             
+                           </Card>  
                         </Box>
                     </Card>
                 </Grid>             
-                
+                <Grid item xs={6} md={6}>
+                    <Card sx={{  p: 1,background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                rowGap: 1,
+                                columnGap: 1,
+                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
+                            }}
+                        >
+                            <Card sx={{ p: 3 }}>
+                            <RHFTextField name="reference" label="To The Order Of" size='small' sx={{ mt:1}}/>
+                            <RHFSelect name="from" label="From" placeholder="Branch" size='small' sx={{ mt:1}}>
+                                <option value="" />
+                                {countries.map((option) => (
+                                    <option key={option.code} value={option.label}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </RHFSelect>
+                            </Card>
+                        </Box>
+                    </Card>
+                </Grid>
             </Grid>
 {/*----------------SALES TABLE CALLING-------------------------------------------*/}
-            {/* <PaymentItems /> */}
+            <PaymentVocherItems />
 {/*----------------3rd portion Detailing Code-------------------------------------------*/}
                   
-         
-            <Grid mt={10} sx={{textAlign:'center'}}>
-                <Box m={1} >
-                    <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                        Process Payment
-                    </LoadingButton>
-                </Box>
-            </Grid> 
+            <Grid mt={3} ml={23} container spacing={1}>
+                <Grid item xs={8} md={8}>
+                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
+                    <Card sx={{ p: 3 }}>
+                        <RHFTextField name="memo" label="MEMO" multiline rows={4}  sx={{alignItems:'center', mt:1 }}/>
+                        </Card>
+                        <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
+                        
+                                <Box m={1}>
+                                <Card sx={{ p: 3 }}>
+                                    <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                                        Process Payment
+                                    </LoadingButton>
+                                    </Card>
+                                </Box>
+                        </Stack>                         
+                    </Card>
+                </Grid>
+            </Grid>
         </FormProvider> 
     );
 }

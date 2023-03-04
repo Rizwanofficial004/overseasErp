@@ -13,15 +13,6 @@ import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
 import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import {
-  AccountGeneral,
-  AccountBilling,
-  AccountSocialLinks,
-  AccountNotifications,
-  AccountChangePassword,
-} from 'src/sections/@dashboard/user/account';
-//import {CashInvoice, SalesReturn,Allocation,CreditInvoice, Quotations, ReceivePayment, SampleOrder} from '../components/customers/transactions';
-//import {SalesOrder} from '../components/customers/transactions';
 import {GoodReceivedNote, PurchaseOrder,CreditBill,CashBill, Payment, PurchaseReturn,Allocations} from '../components/suppliers/transaction';
 
 // ----------------------------------------------------------------------
@@ -33,7 +24,7 @@ export default function Transaction() {
   const ACCOUNT_TABS = [
     {
       value: 'Purchase Order',
-      icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
+      icon: <Iconify icon={'fa6-solid:notes-medical'} color='#F2740B' width={23} height={40} />,
       component: <PurchaseOrder />,
     },
     {

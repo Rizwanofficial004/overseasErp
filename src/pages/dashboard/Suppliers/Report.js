@@ -34,7 +34,7 @@ export default function Report() {
   const ACCOUNT_TABS = [
     {
       value: 'Purchase Orders Dashboard',
-      icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
+      icon: <Iconify icon={'fa6-solid:notes-medical'} color='#F2740B' width={23} height={40} />,
       component: <PurchaseOrderDashboard />,
     },
     {

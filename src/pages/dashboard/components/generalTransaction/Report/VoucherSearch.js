@@ -32,6 +32,7 @@ import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } fro
 import { whitespace } from 'stylis';
 import { red } from '@mui/material/colors';
 import { textAlign } from '@mui/system';
+import VoucherSearchitems from './voucherSearchComponents/VoucherSearchitems';
 
 // ----------------------------------------------------------------------
 
@@ -55,35 +56,7 @@ export default function VoucherSearch() {
     });
 
     const defaultValues = {
-        customers: '',
-        branch: '',
-        reference: '',
-        customerdiscount: '',
-        currentCredit: '',
-        pricelist: '',
-        salesPerson: '',
-        payment: '',
-        sampleOrderdate: '',
-        requiredDeliveryDate: '',
-        TRDate: '',
-        purchaseOrderDate: '',
-        deliverFromLocation: '',
-        shippingTerms: '',
-        carrierReceiptNo: '',
-        delivery: '',
-        deliveryTo: '',
-        quantity: '',
-        address: '',
-        customerReference: '',
-        typeOfPacking: '',
-        purchaseOrder: '',
-        comments: '',
-        attn: '',
-        shippingCompany: '',
-        grn: '',
-        deliveryTerms: '',
-        gridNo: '',
-        currency: '',
+
        
     };
     const methods = useForm({
@@ -127,7 +100,7 @@ export default function VoucherSearch() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Grid  px={1} mt={10 } py={1}  container spacing={1}  sx={{ border:1,borderColor:'#FB7600',borderRadius:1}} >
-                <Grid item xs={6} md={6} >
+                <Grid item xs={4} md={4} >
                     <Card height={3} sx={{  p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }} >
                         <Box
                             sx={{
@@ -137,6 +110,7 @@ export default function VoucherSearch() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
+                            <Card sx={{p:3}}>
                              <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <Stack spacing={3}>
                                     <DesktopDatePicker
@@ -147,7 +121,7 @@ export default function VoucherSearch() {
                                         onChange={(newValue) => {
                                             setsampleOrderdate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>
@@ -161,14 +135,15 @@ export default function VoucherSearch() {
                                         onChange={(newValue) => {
                                             setsampleOrderdate(newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} size='small' sx={{background: 'white',borderRadius:1}}/>}
+                                        renderInput={(params) => <TextField {...params} size='small' sx={{mt:1}}/>}
                                     />
                                 </Stack>
                             </LocalizationProvider>
+                        </Card>
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={3} md={3}>
+                <Grid item xs={6} md={6}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -178,19 +153,21 @@ export default function VoucherSearch() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                                 }}
                         >
-                             <RHFSelect name="type" label="Type" placeholder="Branch" size='small' sx={{ background: 'white',borderRadius:1}}>
+                            <Card sx={{p:3}}>
+                            <RHFTextField name="refernce" label="Reference " size='small' sx={{ mt:1}}/> 
+                             <RHFSelect name="type" label="Type" placeholder="Type" size='small' sx={{ mt:1}}>
                                 <option value="" />
                                 {countries.map((option) => (
                                     <option key={option.code} value={option.label}>
                                         {option.label}
                                     </option>
                                 ))}
-                            </RHFSelect>
-                            <RHFTextField name="memo" label="MEMo " size='small' sx={{ background: 'white',borderRadius:1}}/>                       
+                            </RHFSelect>                   
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>             
-                 <Grid item xs={3} md={3}>
+                 <Grid item xs={2} md={2}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
                         <Box
                             sx={{
@@ -202,27 +179,48 @@ export default function VoucherSearch() {
                                 
                                 }}
                         >
-                            <FormControlLabel control={<Checkbox defaultChecked />} label="Reverse Transaction" />
-                            <Box m={1} >
-                                <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                                    Search
-                                </LoadingButton>
-                            </Box> 
+                            <Card sx={{p:2}}>
+                                <FormControlLabel control={<Checkbox defaultChecked />} label="Show Closed" />
+                                <Box m={1} >
+                                    <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{mt:1.5}}>
+                                        Search
+                                    </LoadingButton>
+                                </Box> 
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>  
+                <Grid item xs={12} md={12}>
+                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1}}>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                rowGap: 1,
+                                columnGap: 1,
+                                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
+                                }}
+                        >
+                            <Card sx={{p:3}}>
+                            <RHFTextField name="memo" label="Memo " size='small' sx={{ mt:1}}/> 
+                                              
+                            </Card>
+                        </Box>
+                    </Card>
+                </Grid>
             </Grid>
 {/*----------------SALES TABLE CALLING-------------------------------------------*/}
-            {/* <PaymentItems /> */}
+            <VoucherSearchitems /> 
 {/*----------------3rd portion Detailing Code-------------------------------------------*/}
                   
          
             <Grid mt={10} sx={{textAlign:'center'}}>
+            <Card sx={{p:3}}>
                 <Box m={1} >
                     <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                         Process Payment
                     </LoadingButton>
                 </Box>
+            </Card>
             </Grid> 
         </FormProvider> 
     );

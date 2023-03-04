@@ -18,6 +18,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 // hooks
 import useAuth from 'src/hooks/useAuth';
 // utils
@@ -29,12 +31,12 @@ import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } fro
 // import SampleOrderItems from './SampleComponents/SampleOrderITems';
 import { whitespace } from 'stylis';
 import { red } from '@mui/material/colors';
-import ReceiptVoucherItems from './ReceiptVoucherComponents/ReceiptVoucherItems';
+import JournalEntryItems from './JournalEntryComponents/JournalEntryItems';
 
 
 // ----------------------------------------------------------------------
 
-export default function ReceiptVoucher() {
+export default function JournalEntry() {
     const { enqueueSnackbar } = useSnackbar();
     const [sampleOrderdate, setsampleOrderdate] = useState(new Date());
     const [requiredDeliveryDate, setrequiredDeliveryDate] = useState(new Date());
@@ -136,7 +138,8 @@ export default function ReceiptVoucher() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                             <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <Card sx={{p:3}}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <Stack spacing={3}>
                                     <DesktopDatePicker
                                     container
@@ -150,7 +153,7 @@ export default function ReceiptVoucher() {
                                     />
                                 </Stack>
                             </LocalizationProvider>
-                            <RHFTextField name="reference" label="Reference" size='small' sx={{ background: 'white',borderRadius:1}}/>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>
@@ -166,18 +169,9 @@ export default function ReceiptVoucher() {
                                 
                                 }}
                         >
-                             
-                            <RHFTextField name="Name" label="Name " size='small' sx={{ background: 'white',borderRadius:1}}/>
-                            <RHFSelect name="from" label="From" placeholder="Branch" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
-                          
-                             
+                            <Card sx={{p:3}}>
+                            <RHFTextField name="reference" label="reference " size='small' sx={{ background: 'white',borderRadius:1}}/>
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>             
@@ -191,33 +185,33 @@ export default function ReceiptVoucher() {
                                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
                             }}
                         >
-                            <RHFSelect name="Into" label="In TO" placeholder="Branch" size='small' sx={{ background: 'white',borderRadius:1}}>
-                                <option value="" />
-                                {countries.map((option) => (
-                                    <option key={option.code} value={option.label}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </RHFSelect>
+                            <Card sx={{p:3}}>
+                            <FormControlLabel control={<Checkbox defaultChecked />} label="Reverse Transaction" />    
+                            </Card>
                         </Box>
                     </Card>
                 </Grid>
             </Grid>
 {/*----------------SALES TABLE CALLING-------------------------------------------*/}
-            <ReceiptVoucherItems />
+            <JournalEntryItems />
 {/*----------------3rd portion Detailing Code-------------------------------------------*/}
                   
             <Grid mt={3} ml={23} container spacing={1}>
                 <Grid item xs={8} md={8}>
                     <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
+                    <Card sx={{p:3}}>
+   
                         <RHFTextField name="memo" label="MEMO" multiline rows={4}  sx={{alignItems:'center', mt: 1, background: 'white',borderRadius:1 }}/>
+                        </Card>
                         <Stack spacing={1} alignItems="flex-end" sx={{ mt: 1,borderRadius: 1 }}>
+                            <Card sx={{p:3}}>
                         
                                 <Box m={1}>
                                     <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                                        Process Deposit
+                                        Process Journal Entry
                                     </LoadingButton>
                                 </Box>
+                            </Card>
                         </Stack>                         
                     </Card>
                 </Grid>

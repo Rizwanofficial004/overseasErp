@@ -32,16 +32,16 @@ export default function UserNewForm({ isEdit, currentUser }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().required('Email is required').email(),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    address: Yup.string().required('Address is required'),
-    country: Yup.string().required('country is required'),
-    company: Yup.string().required('Company is required'),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
-    role: Yup.string().required('Role Number is required'),
-    avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
+      name: Yup.string().required('Name is required'),
+      email: Yup.string().required('Email is required').email(),
+      phoneNumber: Yup.string().required('Phone number is required'),
+      address: Yup.string().required('Address is required'),
+      country: Yup.string().required('country is required'),
+      company: Yup.string().required('Company is required'),
+      state: Yup.string().required('State is required'),
+      city: Yup.string().required('City is required'),
+      role: Yup.string().required('Role Number is required'),
+      avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
   });
 
   const defaultValues = useMemo(

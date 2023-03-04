@@ -1,10 +1,19 @@
 import { sentenceCase } from 'change-case';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { FormProvider, RHFTextField, RHFSelect,RHFSwitch } from 'src/components/hook-form';
+import * as Yup from 'yup';
+import { useSnackbar } from 'notistack';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import useAuth from 'src/hooks/useAuth';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import {
+    Box, 
+    Grid,
     Card,
+    Stack,
     Table,
     Avatar,
     Button,
@@ -22,7 +31,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
 import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList, _salespersonItems } from 'src/_mock';
+import { _userList, _addbankaccountitems } from 'src/_mock';
 // components
 import Page from 'src/components/Page';
 import Iconify from 'src/components/Iconify';
@@ -31,27 +40,68 @@ import SearchNotFound from 'src/components/SearchNotFound';
 // sections
 import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/sections/@dashboard/user/list';
 import { DialogAnimate } from 'src/components/animate';
-import { SalesPersonForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
+
+
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
-import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/SalesPersonItemsForm';
+import AddBankAccountItemsForm from 'src/sections/@dashboard/calendar/generalledger/AddBankAccountItemsForm';
+
 // ----------------------------------------------------------------------
 
 
-    export default function SalesPersonitems() {
+    export default function AddBankAccount() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [salespersonItems, setsalespersonItems] = useState([..._salespersonItems]);
+    const [addbankaccountitems, setaddbankaccountitems] = useState([..._addbankaccountitems]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
     const [orderBy, setOrderBy] = useState('name');
     const [filterName, setFilterName] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selectedSalesperson, setSelectedSalesperson ] = useState(null)
+    const [selectedaddbankaccountitems, setSelectedaddbankaccountitems] = useState(null)
+    const { enqueueSnackbar } = useSnackbar();
+    // const [quotationDate, setQuotationDate] = useState(new Date());
+   
+    const {user} = useAuth();
+    const UpdateUserSchema = Yup.object().shape({
+        // purchaseOrder: Yup.string().required('purchase order is required'),
+        // customers: Yup.string().required('purchase order is required'),
+        // branch: Yup.string().required('purchase order is required'),
+        // exchangeRate: Yup.string().required('purchase order is required'),
+        // quotationDate: Yup.string().required('purchase order is required'),
+        // deliverFromLocation: Yup.string().required('purchase order is required'),
+        // quotationDeliveryDate: Yup.string().required('purchase order is required'),
+        // deliveryTo: Yup.string().required('purchase order is required'),
+    });
+    const defaultValues = {
+        item: '',
+        itemcode:'',
+    };
+    const methods = useForm({
+        resolver: yupResolver(UpdateUserSchema),
+        defaultValues,
+    });
+    const {
+        setValue,
+        handleSubmit,
+        formState: { isSubmitting },
+    } = methods;
+    const onSubmit = async (data) => {
+        // data.quotationDate = quotationDate
+        // data.quotationDeliveryDate = quotationDeliveryDate
+        // data.purchaseOrderDate = purchaseOrderDate
+        console.log("=======:::", data);
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            enqueueSnackbar('Update success!');
+        } catch (error) {
+            console.error(error);
+        }
+    };
    
     const AddButton = () => {
             return (
@@ -68,14 +118,16 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
             )
         }
         const TABLE_HEAD = [
-            { id: 'name', label: 'Sales Person Name', alignRight: false },
-            { id: 'company', label: 'TelePhone Number', alignRight: false },
-            { id: 'role', label: 'Fax Number', alignRight: false },
-            { id: 'name', label: 'E-mail', alignRight: false },
-            { id: 'company', label: 'Pervision', alignRight: false },
-            { id: 'role', label: 'Break PT..', alignRight: false },
-            { id: 'role', label: 'Pervision 2', alignRight: false },
-            { id: '', label: <AddButton />, alignRight: false },
+            { id: 'role', label: 'Account Name ', alignRight: false },
+            { id: 'name', label: 'Type', alignRight: false },
+            { id: 'company', label: 'Currency  ', alignRight: false },
+            { id: 'company', label: ' GL Account', alignRight: false },
+            { id: 'company', label: ' Bank', alignRight: false },
+            { id: 'company', label: 'Number', alignRight: false },
+            { id: 'company', label: ' Bank Address', alignRight: false },
+            { id: 'company', label: ' Default Currency', alignRight: false },
+           
+            { id: '', label: <AddButton />,  alignRight: false },
         ];
         
             const selectedEventSelector = (state) => {
@@ -153,7 +205,7 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
         setUserList(deleteUsers);
     };
     const handleEditEvent = (obj) => {
-        setSelectedSalesperson(obj)
+        setSelectedaddbankaccountitems(obj)
         dispatch(openModal());
     };  
 
@@ -165,36 +217,36 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
    
 
     return (
-        <Page title="User: List" padding='1.5rem'>
+        <Page title="User: List" padding='1rem'>
+            
             <Container  maxWidth={themeStretch ? false : 'lg'}>
-                <Card>
+                <Card mt={3}>
                     <Scrollbar>
-                        <TableContainer sx={{ minWidth: 800 }}>
-                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>Sales Person Details </h4>
-                        
+                        <TableContainer sx={{mt:3, minWidth: 1000 }}>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}> Bank Account Details</h4>
                             <Table>
-                                
                                 <UserListHead
                                     order={order}
                                     orderBy={orderBy}
                                     headLabel={TABLE_HEAD}
-                                    rowCount={salespersonItems.length}
+                                    rowCount={addbankaccountitems.length}
                                     numSelected={selected.length}
                                     onRequestSort={handleRequestSort}
                                     onSelectAllClick={handleSelectAllClick}
                                 />
-                                
                                 <TableBody >
-                                    {salespersonItems.map((row) => {
-                                        const { id, bold,  salespersonname,
-                                        Telephonenumber,
-                                        faxnumber,
-                                        provison2,
-                                        provision,
-                                        breakpt,
-                                        email} = row;
-                                        const isItemSelected = selected.indexOf(salespersonname) !== -1;
-
+                                    {addbankaccountitems.map((row) => {
+                                        const { id, bold, 
+                                            bankaccountname,
+                                            accounttype,
+                                            bankaccountcurrency,
+                                            defaultcurrencyaccount,
+                                            bankaccountGLcode,
+                                            bankname,
+                                            bankaccountnumber,
+                                            bankaddress,
+                                        } = row;
+                                        const isItemSelected = selected.indexOf(bankaccountname) !== -1;
                                         return (
                                             <TableRow
                                                 hover
@@ -210,17 +262,19 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
                                                 <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
                                                     {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
                                                     <Typography variant="subtitle2" noWrap>
-                                                        {salespersonname}
+                                                        {bankaccountname}
                                                     </Typography>
                                                 </TableCell>
-                                                <TableCell align="left">{Telephonenumber}</TableCell>
-                                                <TableCell align="left">{faxnumber}</TableCell>
-                                                <TableCell align="left">{email}</TableCell>
-                                                <TableCell align="left">{provision}</TableCell>
-                                                <TableCell align="left">{breakpt}</TableCell>
-                                                <TableCell align="left">{provison2}</TableCell>
+                                                <TableCell align="left">{accounttype}</TableCell>
+                                                <TableCell align="left">{bankaccountcurrency}</TableCell>
+                                                <TableCell align="left">{defaultcurrencyaccount}</TableCell>
+                                                <TableCell align="left">{bankaccountGLcode}</TableCell>
+                                                <TableCell align="left">{bankname}</TableCell>
+                                                <TableCell align="left">{bankaccountnumber}</TableCell> 
+                                                <TableCell align="left">{bankaddress}</TableCell>
+
                                                 <TableCell align="right">
-                                                <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={salespersonname} />
+                                                <UserMoreMenu onDelete={() => handleDeleteUser(id)} handleEditEvent={() => handleEditEvent(row)} userName={bankaccountname} />
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -245,8 +299,8 @@ import SalesPersonItemsForm from 'src/sections/@dashboard/calendar/customer/Sale
                     </Scrollbar>
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
-                    <DialogTitle>{selectedSalesperson ? 'Edit Sales Person' : 'Add Sales Person'}</DialogTitle>
-                    <SalesPersonItemsForm salespersonItems={salespersonItems} setsalespersonItems={setsalespersonItems} event={selectedSalesperson || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <DialogTitle>{selectedaddbankaccountitems? 'Edit Bank Account ' : 'New Bank Account'}</DialogTitle>
+                    <AddBankAccountItemsForm addbankaccountitems={addbankaccountitems} setaddbankaccountitems={setaddbankaccountitems} event={selectedaddbankaccountitems || {}} range={selectedRange} onCancel={handleCloseModal} />
                 </DialogAnimate>
             </Container>
         </Page>

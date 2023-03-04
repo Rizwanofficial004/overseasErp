@@ -1,21 +1,19 @@
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import merge from 'lodash/merge';
-import { isBefore } from 'date-fns';
 import { useSnackbar } from 'notistack';
 // form
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+
 // @mui
-import { Box, Stack, Button, Tooltip, TextField, IconButton, DialogActions } from '@mui/material';
-import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
+import { Box,Card,Grid, Button, DialogActions } from '@mui/material';
+
+import { LoadingButton } from '@mui/lab';
 // redux
-import { useDispatch } from '../../../redux/store';
-import { createEvent, updateEvent, deleteEvent } from '../../../redux/slices/calendar';
-// components
-import Iconify from '../../../components/Iconify';
-import { ColorSinglePicker } from '../../../components/color-utils';
-import { FormProvider, RHFTextField, RHFSwitch } from '../../../components/hook-form';
+import { useDispatch } from 'src/redux/store';
+import { FormProvider, RHFTextField } from 'src/components/hook-form';
+
+
 
 // ----------------------------------------------------------------------
 
@@ -31,14 +29,13 @@ const COLOR_OPTIONS = [
 
 const getInitialValues = (event) => {
     const _event = {
-        itemCode: '',
-        itemDescription: '',
-        longDescription: '',
-        quantity: 0,
-        unit: '',
-        priceBeforeTax: 0,
-        discount: 0,
-        total: 0,
+        salespersonname: '',
+        Telephonenumber: '',
+        faxnumber: '',
+        provison2: 0,
+        provision: 0,
+        breakpt: 0,
+        email: '',
         textColor: '#1890FF',
   };
 
@@ -51,13 +48,13 @@ const getInitialValues = (event) => {
 
 // ----------------------------------------------------------------------
 
-SampleOrderItemsForm.propTypes = {
+SalesPersonItemsForm.propTypes = {
   event: PropTypes.object,
   // range: PropTypes.object,
   onCancel: PropTypes.func,
 };
 
-export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems, setsampleOrderItems }) {
+export default function SalesPersonItemsForm({ event, onCancel, salespersonItems, setsalespersonItems }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const dispatch = useDispatch();
@@ -75,7 +72,7 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
   });
 
   const methods = useForm({
-    resolver: yupResolver(EventSchema),
+    // resolver: yupResolver(EventSchema),
     defaultValues: getInitialValues(event),
   });
 
@@ -89,7 +86,7 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
 
   const onSubmit = async (data) => {
     console.log(">>>>>>>>>>:::", data);
-    setsampleOrderItems([...sampleOrderItems, data])
+    setsalespersonItems([...salespersonItems, data])
     onCancel();
       reset();
     // try {
@@ -114,21 +111,45 @@ export default function SampleOrderItemsForm({ event, onCancel, sampleOrderItems
     //   console.error(error);
     // }
   };
+
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={3} sx={{ p: 3 }}>
-        <RHFTextField name="itemCode" label="Item Code " />
-        <RHFTextField name="itemDescription" label="Item Description" />
-        <RHFTextField name="longDescription" label="Long Description" />
-        <RHFTextField name="quantity" label="Quantity" />
-        <RHFTextField name="unit" label="Unit" />
-        <RHFTextField name="priceBeforeTax" label="Price Before Tax" />
-        <RHFTextField name="discount" label="Discount %" />
-        <RHFTextField name="total" label="Total" />
-      </Stack>
+      <Grid item xs={12} md={12}>
+        <Card sx={{ p: 5, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1  }}>
+          <Box
+            sx={{
+            display: 'grid',
+            columnGap: 2,
+            rowGap: 3,
+            gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+                }}
+          >
+          <Card sx={{p:3}}>
+            <RHFTextField name="salespersonname" label="Sales Person Name "sx={{mt:2}} />
+            <RHFTextField name="Telephonenumber" label="telephone Number" sx={{mt:2}}/>
+          </Card>
+          <Card sx={{p:3}}>
+            <RHFTextField name="faxnumber" label="Fax Number" sx={{mt:2}} />
+            <RHFTextField name="email" label="E-mail" sx={{mt:2}}/>
+          </Card>
+          <Card sx={{p:3}}>
+            <RHFTextField name="provision" label="Provision" />
+          </Card>
+          <Card sx={{p:3}}>
+            <RHFTextField name="breakpt" label="Break Pt" />
+          </Card>
+          </Box>
+          <Card sx={{p:3,mt:2}}>
+            <RHFTextField name="provison2" label="Provision 2" />
+          </Card>
+        </Card>
+      </Grid>
+      
 
       <DialogActions>
         <Box sx={{ flexGrow: 1 }} />
+
         <Button variant="outlined" color="inherit" onClick={onCancel}>
           Cancel
         </Button>

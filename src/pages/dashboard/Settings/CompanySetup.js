@@ -37,7 +37,7 @@ export default function CompanySetup() {
   const ACCOUNT_TABS = [
     {
       value: 'Company Details',
-      icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
+      icon: <Iconify icon={'fa6-solid:notes-medical'} color='#F2740B' width={23} height={40} />,
       component: <CompanyDetails />,
     },
     {

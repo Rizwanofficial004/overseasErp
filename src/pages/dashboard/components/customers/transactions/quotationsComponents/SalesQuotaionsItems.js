@@ -15,7 +15,7 @@ import {
     Container,
     Typography,
     TableContainer,
-    DialogTitle
+    DialogTitle,TablePagination
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
@@ -35,6 +35,7 @@ import { CalendarForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dash
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
+import QuotationItemsForm from 'src/sections/@dashboard/calendar/customer/QuotationItemsForm';
 // ----------------------------------------------------------------------
 
 export default function SalesQuotaionsItems() {
@@ -73,6 +74,7 @@ export default function SalesQuotaionsItems() {
             { id: 'status', label: 'Price Before Tex', alignRight: false },
             { id: 'status', label: 'Discount %', alignRight: false },
             { id: 'status', label: 'Total', alignRight: false },
+            { id: '' },
             { id: '', label: <AddButton />, alignRight: false },
         ];
             const selectedEventSelector = (state) => {
@@ -162,7 +164,7 @@ export default function SalesQuotaionsItems() {
    
 
     return (
-        <Page title="User: List" padding='1.5rem'>
+        <Page title="User: List" mt={10}>
             <Container  maxWidth={themeStretch ? false : 'lg'}>
                 <Card>
                     <Scrollbar>
@@ -173,7 +175,7 @@ export default function SalesQuotaionsItems() {
                                     order={order}
                                     orderBy={orderBy}
                                     headLabel={TABLE_HEAD}
-                                    rowCount={userList.length}
+                                    rowCount={quotationItems.length}
                                     numSelected={selected.length}
                                     onRequestSort={handleRequestSort}
                                     onSelectAllClick={handleSelectAllClick}
@@ -191,6 +193,7 @@ export default function SalesQuotaionsItems() {
                                                 selected={isItemSelected}
                                                 aria-checked={isItemSelected}
                                             > 
+                                            
                                                 <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
                                                     {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
                                                     <Typography variant="subtitle2" noWrap>
@@ -228,10 +231,19 @@ export default function SalesQuotaionsItems() {
                             </Table>
                         </TableContainer>
                     </Scrollbar>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={quotationItems.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={(event, value) => setPage(value)}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
                 </Card>
                 <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
                     <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>
-                    <CalendarForm quotationItems={quotationItems} setQuotationItems={setQuotationItems} event={selectedQuotation || {}} range={selectedRange} onCancel={handleCloseModal} />
+                    <QuotationItemsForm quotationItems={quotationItems} setQuotationItems={setQuotationItems} event={selectedQuotation || {}} range={selectedRange} onCancel={handleCloseModal} />
                 </DialogAnimate>
             </Container>
         </Page>

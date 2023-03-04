@@ -15,7 +15,7 @@ import {
     Container,
     Typography,
     TableContainer,
-    DialogTitle
+    DialogTitle,TablePagination
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
@@ -179,7 +179,7 @@ export default function DeliveryNoteItems() {
                                     order={order}
                                     orderBy={orderBy}
                                     headLabel={TABLE_HEAD}
-                                    rowCount={userList.length}
+                                    rowCount={deliveryitems.length}
                                     numSelected={selected.length}
                                     onRequestSort={handleRequestSort}
                                     onSelectAllClick={handleSelectAllClick}
@@ -244,6 +244,15 @@ export default function DeliveryNoteItems() {
                             </Table>
                         </TableContainer>
                     </Scrollbar>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={deliveryitems.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={(event, value) => setPage(value)}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
                     <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>

@@ -20,8 +20,9 @@ import {
   AccountNotifications,
   AccountChangePassword,
 } from 'src/sections/@dashboard/user/account';
-import { PaymentVoucher, ReceiptVoucher, BankAccountTransfer } from '../components/generalTransaction';
-import JournalEntry from '../components/generalTransaction/JournalEntry';
+// import JournalEntry from '../components/generalTransaction/Transaction/JournalEntry';
+// import {  ReceiptVoucher, BankAccountTransfer } from '../components/generalTransaction';
+import {PaymentVocher,ReceiptVoucher,BankAccountTransfer,JournalEntry} from '../components/generalTransaction/Transaction';
 
 // ----------------------------------------------------------------------
 
@@ -33,8 +34,8 @@ export default function GeneralTransaction() {
   const ACCOUNT_TABS = [
     {
       value: 'Payment Voucher',
-      icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
-      component: <PaymentVoucher />,
+      icon: <Iconify icon={'fa6-solid:notes-medical'} color='#F2740B' width={23} height={40} />,
+      component: <PaymentVocher />,
     },
     {
       value: 'Receipt Voucher',

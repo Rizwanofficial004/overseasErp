@@ -15,7 +15,7 @@ import {
     Container,
     Typography,
     TableContainer,
-    DialogTitle
+    DialogTitle,TablePagination
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
@@ -157,7 +157,7 @@ export default function CustomerDashboardItems() {
             <Container  maxWidth={themeStretch ? false : 'lg'}>
                 <Card>
                     <Scrollbar>
-                        <TableContainer sx={{ minWidth: 800 }}>
+                        <TableContainer sx={{ minWidth: 1000 }}>
                         <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>Customer Transaction Details</h4>
                         
                             <Table>
@@ -231,6 +231,15 @@ export default function CustomerDashboardItems() {
                             </Table>
                         </TableContainer>
                     </Scrollbar>
+                        <TablePagination
+                            rowsPerPageOptions={[5, 10, 25]}
+                            component="div"
+                            count={quoteItems.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={(event, value) => setPage(value)}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
                     <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>

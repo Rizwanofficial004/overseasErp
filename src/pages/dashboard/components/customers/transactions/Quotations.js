@@ -10,8 +10,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Box, Grid, Card, Stack, Typography } from '@mui/material';
 import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
-
-
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -19,7 +17,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // hooks
 import useAuth from 'src/hooks/useAuth';
-// utils
 
 // _mock
 import { countries } from 'src/_mock';
@@ -225,7 +222,7 @@ export default function Quotations() {
             {/*----------------3rd portion Detailing Code-------------------------------------------*/}
             <Grid mt={3} container spacing={1}>
                 <Grid item xs={12} md={12}>
-                    <Card sx={{ p: 1, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
+                    <Card sx={{ p: 3, background: 'rgba(145, 158, 171, 0.12)',borderRadius:1 }}>
                         <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:30}}> Quotation Delivery Details</h4>
                         <Box
                             sx={{
@@ -238,7 +235,7 @@ export default function Quotations() {
                             <Grid mt={3} container spacing={1}>
                                 <Grid item xs={12} md={12}>
                                     <Card sx={{ p: 3 }}>                       
-                                        <RHFSelect name="deliverFromLocation" label="Deliver from Location" placeholder="Deliver from Location"size='small' sx={{ mt: 1}}>
+                                        <RHFSelect name="deliverFromLocation" label="Deliver from Location" placeholder="Deliver from Location"size='small' sx={{ mt:2}}>
                                             <option value=""/>
                                             {countries.map((option) => (
                                                 <option key={option.code} value={option.label}>
@@ -247,7 +244,7 @@ export default function Quotations() {
                                             ))}
                                         </RHFSelect>
                                         <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                            <Stack spacing={3} sx={{ mt: 1 }}>
+                                            <Stack spacing={3} sx={{ mt:2 }}>
                                                 <DesktopDatePicker
                                                     label="Quotation Delivery Date"
                                                     value={quotationDeliveryDate}
@@ -265,24 +262,24 @@ export default function Quotations() {
                             <Grid mt={3} container spacing={1}>
                                 <Grid item xs={12} md={12}>
                                     <Card  sx={{ p: 3 }}>
-                                        <RHFTextField  name="deliveryTo" label="Delivery To" size="small" sx={{ mt: 1}}/>
-                                        <RHFTextField name="contactPhoneNumber" label="Contact Phone Number"size='small' sx={{ mt: 1}} />
+                                        <RHFTextField  name="deliveryTo" label="Delivery To" size="small" sx={{ mt:2}}/>
+                                        <RHFTextField name="contactPhoneNumber" label="Contact Phone Number"size='small' sx={{ mt:2}} />
                                     </Card>
                                 </Grid>
                             </Grid>
                             <Grid mt={3} container spacing={1}>
                                 <Grid item xs={12} md={12}>
                                     <Card  sx={{ p: 3 }}>
-                                    <RHFTextField name="comments" label="Comments" size='small' sx={{ mt: 1,borderRadius: 1}}/>
-                                    <RHFTextField name="attn" label="ATTN" size='small' sx={{ mt: 1 ,borderRadius: 1}}/>
+                                    <RHFTextField name="comments" label="Comments" size='small' sx={{ mt:2}}/>
+                                    <RHFTextField name="attn" label="ATTN" size='small' sx={{ mt:2 }}/>
                                     </Card>
                                 </Grid>
                             </Grid>
                             <Grid mt={1} container spacing={1}>
                                 <Grid item xs={12} md={12}>
                                     <Card  sx={{ p: 3 }}>
-                                    <RHFTextField name="shippingTerms" label="Shipping Terms" size="small" sx={{ mt: 1 }}/>
-                                    <RHFSelect name="currency" label="Currency"  size='small' sx={{ mt: 1, borderRadius: 1}}>
+                                    <RHFTextField name="shippingTerms" label="Shipping Terms" size="small" sx={{ mt:2 }}/>
+                                    <RHFSelect name="currency" label="Currency"  size='small' sx={{ mt:2}}>
                                             <option value="" />
                                             {countries.map((option) => (
                                                 <option key={option.code} value={option.label}>
@@ -297,7 +294,7 @@ export default function Quotations() {
                                 <Grid item xs={12} md={12}>
                                     <Card  sx={{ p: 3 }}>
                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                            <Stack spacing={3} sx={{ mt: 1}}>
+                                            <Stack spacing={3} sx={{ mt: 2}}>
                                             <DesktopDatePicker
                                                 label="Purchase Order Date"
                                                 value={purchaseOrderDate}
@@ -309,14 +306,14 @@ export default function Quotations() {
                                             />
                                             </Stack>
                                         </LocalizationProvider>
-                                        <RHFTextField name="deliveryTerms" label="Delivery Terms"size='small' sx={{ mt: 1,borderRadius: 1}} />
+                                        <RHFTextField name="deliveryTerms" label="Delivery Terms"size='small' sx={{ mt: 2,borderRadius: 1}} />
                                     </Card>
                                 </Grid>
                             </Grid>
                             <Grid mt={1} container spacing={1}>
                                 <Grid item xs={12} md={12}>
                                     <Card  sx={{ p: 3 }}>
-                                        <RHFSelect name="shippingCompany" label="Shipping Company" placeholder="Deliver from Location" size='small' sx={{ mt: 1,borderRadius: 1}}>
+                                        <RHFSelect name="shippingCompany" label="Shipping Company" placeholder="Deliver from Location" size='small' sx={{ mt: 2,borderRadius: 1}}>
                                             <option value="" />
                                             {countries.map((option) => (
                                                 <option key={option.code} value={option.label}>
@@ -324,7 +321,7 @@ export default function Quotations() {
                                                 </option>
                                             ))}
                                         </RHFSelect>
-                                        <RHFTextField name="purchaseOrder" label="Purchase Order" size='small' sx={{ mt: 1,borderRadius: 1}}/>
+                                        <RHFTextField name="purchaseOrder" label="Purchase Order" size='small' sx={{ mt: 2,borderRadius: 2}}/>
                                     </Card>
                                 </Grid>
                             </Grid>  
@@ -332,8 +329,8 @@ export default function Quotations() {
                         <Grid mt={5} ml={25} container spacing={1}>
                             <Grid item xs={8} sm={4} md={8}>
                                 <Card  sx={{ p: 3 }}>
-                                    <RHFTextField name="address" label="Address" size='small' sx={{ mt: 1}}/>
-                                    <RHFTextField name="customerReference" placeholderTextColor={'green'} label="Customer Reference" size='small' sx={{ mt: 1}} />
+                                    <RHFTextField name="address" label="Address" size='small' sx={{ mt: 2}}/>
+                                    <RHFTextField name="customerReference" placeholderTextColor={'green'} label="Customer Reference" size='small' sx={{ mt: 2}} />
                                 </Card>
                             </Grid>
                         </Grid>

@@ -260,6 +260,14 @@ export const _shippingItems = [...Array(0)].map((_, index) => ({
   shippingcontactperson:'',
   shippingaddress:'',
 }));
+export const _coaGroupItems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  groupid:'',
+  groupName:'',
+  subGroupOf:'',
+  classes:'',
+  
+}));
 export const _currencyItems = [...Array(0)].map((_, index) => ({
   id: _mock.id(index),
   currencyabbreviation:'',
@@ -268,6 +276,27 @@ export const _currencyItems = [...Array(0)].map((_, index) => ({
   hundredthsname:'',
   country:'',
   automaticexchangerateupdate:'',
+}));
+export const _chartofaccountitems = [...Array(0)].map((_, index) => ({
+    id: _mock.id(index),
+    accountCode:'',
+    accountCode2:'',
+    accountName:'',
+    accountGroup:'',
+    accountTags:'',
+    accountStatus:'',
+  
+}));
+export const _addbankaccountitems = [...Array(0)].map((_, index) => ({
+  id: _mock.id(index),
+  bankaccountname:'',
+      accounttype:'',
+      bankaccountcurrency:'',
+      defaultcurrencyaccount:'',
+      bankaccountGLcode:'',
+      bankname:'',
+      bankaccountnumber:'',
+      bankaddress:'',
 }));
 export const _exchangerate = [...Array(0)].map((_, index) => ({
   id: _mock.id(index),
@@ -341,6 +370,28 @@ export const _salesReturns = [...Array(3)].map((_, index) => ({
   priceBeforeText: 100000,
   discount: '10%',
   total: 1000000,
+}));
+export const _paymentvocheritem = [...Array(3)].map((_, index) => ({
+  id: _mock.id(index),
+  memo:'',
+  amount:'',
+  accountDescription:'',
+  accountCode:'',
+}));
+export const _recieptvocheritem = [...Array(3)].map((_, index) => ({
+  id: _mock.id(index),
+  recietaccountCode:'',
+  recietaccountDescription:'',
+  recietamount:'',
+  recietmemo:'',
+}));
+export const _journalentryitem = [...Array(3)].map((_, index) => ({
+  id: _mock.id(index),
+  journalaccountCode:'',
+  journalaccountDescription:'',
+  journalcredit:'',
+  journaldebit:'',
+  journalmemo:'',
 }));
 export const _allocations = [...Array(3)].map((_, index) => ({
   id: _mock.id(index),

@@ -15,7 +15,7 @@ import {
     Container,
     Typography,
     TableContainer,
-    DialogTitle
+    DialogTitle,TablePagination
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'src/routes/paths';
@@ -36,31 +36,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
 // ----------------------------------------------------------------------
-let data = [
-    {   id: '2332',
-        priceBeforeText: 'Shiping Charge', 
-        discount: '0.00',
-        total: '' , bold: true
-    },
-    {   id: '3434',
-    priceBeforeText: 'Sub Total', 
-    discount: '0.00',
-    total: ''  ,bold: true
-    },
-    {   
-    id: '2354',
-    priceBeforeText: 'Amount Total', 
-    discount: '0.00',
-    total: 'update' , bold: true
-    },
-  ]
-  let QItem = [..._cashInvoiceItems, ...data]
+
 export default function CashInvoiceItems() {
     
     const theme = useTheme();
     const { themeStretch } = useSettings();
     const [userList, setUserList] = useState(_userList);
-    const [cashInvoiceItems, setcashInvoiceItems] = useState([..._cashInvoiceItems, ...data]);
+    const [cashInvoiceItems, setcashInvoiceItems] = useState([..._cashInvoiceItems]);
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
     const [selected, setSelected] = useState([]);
@@ -194,7 +176,7 @@ export default function CashInvoiceItems() {
                                     order={order}
                                     orderBy={orderBy}
                                     headLabel={TABLE_HEAD}
-                                    rowCount={userList.length}
+                                    rowCount={cashInvoiceItems.length}
                                     numSelected={selected.length}
                                     onRequestSort={handleRequestSort}
                                     onSelectAllClick={handleSelectAllClick}
@@ -254,6 +236,15 @@ export default function CashInvoiceItems() {
                             </Table>
                         </TableContainer>
                     </Scrollbar>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={cashInvoiceItems.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={(event, value) => setPage(value)}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
                 </Card>
                  <DialogAnimate modalWidth='sm' open={isOpenModal} onClose={handleCloseModal}>
                     <DialogTitle>{selectedQuotation ? 'Edit Sales Quotation Items' : 'Add Sales Quotation Items'}</DialogTitle>

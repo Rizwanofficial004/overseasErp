@@ -33,10 +33,11 @@ import SearchNotFound from 'src/components/SearchNotFound';
 // sections
 import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/sections/@dashboard/user/list';
 import { DialogAnimate } from 'src/components/animate';
-import { CalendarForm, CalendarStyle, CalendarToolbar,SalesOrderItemsForm } from 'src/sections/@dashboard/calendar';
+import { CalendarForm, CalendarStyle, CalendarToolbar } from 'src/sections/@dashboard/calendar';
 import { useDispatch, useSelector } from 'react-redux';
 import useResponsive from 'src/hooks/useResponsive';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from 'src/redux/slices/calendar';
+import SalesOrderItemsForm from 'src/sections/@dashboard/calendar/customer/SalesOrderItemsForm';
 // ----------------------------------------------------------------------
 let data = [
     {   id: '2332',

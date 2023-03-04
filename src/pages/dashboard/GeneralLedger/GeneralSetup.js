@@ -21,7 +21,11 @@ import {
   AccountChangePassword,
 } from 'src/sections/@dashboard/user/account';
 import ExchangeRate from 'src/pages/dashboard/components/generalTransaction/Setup/ExchangeRate';
+import COAGroup from 'src/pages/dashboard/components/generalTransaction/Setup/COAGroup';
 import Currency from 'src/pages/dashboard/components/generalTransaction/Setup/Currency';
+import AddBankAccount from '../components/generalTransaction/Setup/AddBankAccount';
+import ChartofAccount from '../components/generalTransaction/Setup/ChartofAccount';
+
 
 
 
@@ -30,13 +34,13 @@ import Currency from 'src/pages/dashboard/components/generalTransaction/Setup/Cu
 export default function GeneralSetup() {
   const { themeStretch } = useSettings();
 
-  const [currentTab, setCurrentTab] = useState('Quotations');
+  const [currentTab, setCurrentTab] = useState('Add Bank Account');
 
   const ACCOUNT_TABS = [
     {
       value: 'Add Bank Account',
-      icon: <Iconify icon={'fa6-solid:notes-medical'} color='hsl(248, 53%, 58%)' width={23} height={40} />,
-    //   component: <Quotations />,
+      icon: <Iconify icon={'fa6-solid:notes-medical'} color='#F2740B' width={23} height={40} />,
+      component: <AddBankAccount />,
     },
     {
       value: 'Voucher Templates',
@@ -56,12 +60,12 @@ export default function GeneralSetup() {
     {
       value: 'Chart Of Accounts (COA)',
       icon: <Iconify icon={'bxs:credit-card'} color='#F2740B' width={23} height={40} />,
-    //   component: <CreditInvoice />,
+      component: <ChartofAccount />,
     },
     {
       value: 'COA Grouping',
       icon: <Iconify icon={'bi:cash'} color='#F2740B' width={23} height={40} />,
-    //   component: <CashInvoice />,
+      component: <COAGroup />,
     },
     {
       value: 'GL Account CLasses',

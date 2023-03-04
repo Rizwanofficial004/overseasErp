@@ -85,6 +85,8 @@ export default function Transferitems() {
         const TABLE_HEAD = [
             { id: 'name', label: 'Item Code', alignRight: false },
             { id: 'company', label: 'Item Description', alignRight: false },
+            { id: '' },
+            { id: '' },
             { id: 'isVerified', label: 'Quantity', alignRight: false },
             { id: 'status', label: 'Unit', alignRight: false },
             { id: '', label: <AddButton />, alignRight: false },
@@ -182,8 +184,7 @@ export default function Transferitems() {
                 <Card>
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
-                        <h4
-                        style={{ textAlign:'center', color:'black'}}>Items </h4>
+                        <h4 style={{marginBottom:15, marginTop:10, textAlign:'center', color:'#ff6347', fontSize:25}}>Items </h4>
                         
                             <Table>
                                 
@@ -221,6 +222,8 @@ export default function Transferitems() {
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">{itemDescription}</TableCell>
+                                                <TableCell align="left">{}</TableCell>
+                                                <TableCell align="left">{}</TableCell>
                                                 <TableCell align="left">{longDescription}</TableCell>
                                                 <TableCell align="left">{quantity}</TableCell>
                                                 <TableCell align="left">{unit}</TableCell>

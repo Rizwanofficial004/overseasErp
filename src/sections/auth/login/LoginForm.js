@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
+import { Grid,Card,Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // routes
 import { PATH_AUTH } from '../../../routes/paths';
@@ -92,17 +92,23 @@ export default function LoginForm() {
           Forgot password?
         </Link>
       </Stack>
-
-      <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-        Login
-      </LoadingButton>
-      <LoadingButton onClick={async () => await dispatch(getUsers())} fullWidth size="large" variant="contained" loading={isSubmitting}>
-        get all users
-      </LoadingButton>
-
-      <LoadingButton onClick={async () => await dispatch(signOut())} fullWidth size="large" variant="contained" loading={isSubmitting}>
-        Logout
-      </LoadingButton>
+    <Grid >
+      
+        <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+          Login
+        </LoadingButton>
+        <Grid pt={2}>
+          <LoadingButton onClick={async () => await dispatch(getUsers())} fullWidth size="large" variant="contained" loading={isSubmitting}>
+            get all users
+          </LoadingButton>
+        </Grid>
+        <Grid pt={2}>
+          <LoadingButton onClick={async () => await dispatch(signOut())} fullWidth size="large" variant="contained" loading={isSubmitting}>
+            Logout
+          </LoadingButton>
+        </Grid>
+      
+    </Grid>
     </FormProvider>
   );
 }
